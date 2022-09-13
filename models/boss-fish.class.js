@@ -1,0 +1,3 @@
+class BossFish extends MovableObject {
+    
+}
