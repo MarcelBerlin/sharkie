@@ -11,7 +11,9 @@ class World {
         new LightBeam(),
     ]
     backgroundObjects = [
-        new BackgroundObject('img/3. Background/Legacy/Layers/3.Fondo 1/D1.png', 0, 0)
+        new BackgroundLayerTwo('img/3. Background/Layers/4.Fondo 2/D1.png', 25),
+        new BackgroundObject('img/3. Background/Legacy/Layers/3.Fondo 1/D1.png', 0), 
+        new BackgroundLayerFront('img/3. Background/Layers/2. Floor/D1.png', 0)
     ];
     canvas;
     ctx;
@@ -26,10 +28,11 @@ class World {
     draw() {
 
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-        this.addToCanvas(this.character);
-        this.addObjectToCanvas(this.lights);
+        this.addObjectToCanvas(this.backgroundObjects);       
+        this.addToCanvas(this.character);        
         this.addObjectToCanvas(this.enemies);
-        this.addObjectToCanvas(this.backgroundObjects);
+        this.addObjectToCanvas(this.lights);
+        
         // Draw() wird immer und immer wieder aufgerufen
         let self = this;
         requestAnimationFrame(function () {
