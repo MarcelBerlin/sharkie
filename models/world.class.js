@@ -10,10 +10,12 @@ class World {
     lights = [
         new LightBeam(),
     ]
-    backgroundObjects = [
-        new BackgroundLayerTwo('img/3. Background/Layers/4.Fondo 2/D1.png', 25),
+    backgroundObjects = [     
+        new BackgroundObject('img/3. Background/Layers/5. Water/D1.png', 0),   
+        new BackgroundObject('img/3. Background/Layers/4.Fondo 2/D1.png', 25),
         new BackgroundObject('img/3. Background/Legacy/Layers/3.Fondo 1/D1.png', 0), 
-        new BackgroundLayerFront('img/3. Background/Layers/2. Floor/D1.png', 0)
+        new BackgroundObject('img/3. Background/Layers/2. Floor/D1.png', 0),
+        
     ];
     canvas;
     ctx;
