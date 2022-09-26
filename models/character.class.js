@@ -62,7 +62,7 @@ class Character extends MovableObject {
             if (this.world.keyboard.LEFT) {
                 this.x -= this.speed;
                 this.otherDirection = true;
-            }
+            }            
 
             if (this.world.keyboard.UP) {
                 this.y -= this.speed;
@@ -72,6 +72,8 @@ class Character extends MovableObject {
                 this.y += this.speed;
             }
 
+            this.world.camera_x = -this.x;
+            
         }, 1000 / 60);
 
         setInterval(() => {

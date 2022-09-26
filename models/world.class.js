@@ -20,6 +20,7 @@ class World {
     canvas;
     ctx;
     keyboard;
+    camera_x = 0;
 
 
     constructor(canvas, keyboard) {
@@ -37,10 +38,12 @@ class World {
 
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        this.ctx.translate(this.camera_x, 0);
         this.addObjectToCanvas(this.backgroundObjects);
         this.addToCanvas(this.character);
         this.addObjectToCanvas(this.enemies);
         this.addObjectToCanvas(this.lights);
+        this.ctx.translate(-this.camera_x, 0);
 
         // Draw() wird immer und immer wieder aufgerufen
         let self = this;
@@ -59,9 +62,11 @@ class World {
         if (mo.otherDirection) {
             this.flipImage(mo);
         }
+
         this.ctx.drawImage(mo.img, mo.x, mo.y, mo.width, mo.height);
+
         if (mo.otherDirection) {
-            this.resetImgDirection(mo);
+            this.flipImageBack(mo);
         }
     }
 
@@ -72,7 +77,7 @@ class World {
         mo.x = mo.x * -1;
     }
 
-    resetImgDirection(mo) {
+    flipImageBack(mo) {
         this.ctx.setTransform(1, 0, 0, 1, 0, 0);
         mo.x = mo.x * -1;
     }
