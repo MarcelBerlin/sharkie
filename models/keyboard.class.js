@@ -1,19 +1,13 @@
 class Keyboard {
 
-    LEFT = true;
+    LEFT = false;
     RIGHT = false;
     UP = false;
     DOWN = false;
     SPACE = false;
     BITE = false;
 
-    constructor() {
-
-    }
-
    
-
-
     checkKey(e) {
 
         e = e || window.event;
@@ -30,9 +24,6 @@ class Keyboard {
         else if (e.keyCode == '39') {
             // right arrow
         }
-
     }
-
-
 }
 
