@@ -28,16 +28,13 @@ class MovableObject {
         });
     }
 
-    swimRight() {
-        console.log('Swimming Right');
-    }
-
     swimLeft() {
         setInterval(() => {
             this.x -= this.speed;
         }, 1000 / 60);
-       
     }
 
+
+    
 }
 

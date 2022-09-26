@@ -20,7 +20,7 @@ class World {
     canvas;
     ctx;
     keyboard;
-    
+
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -56,17 +56,24 @@ class World {
     }
 
     addToCanvas(mo) {
-        if(mo.otherDirection) {
-            this.ctx.save();
-            this.ctx.translate(mo.width, 0);
-            this.ctx.scale(-1, 1);
-            mo.x = mo.x * -1;
+        if (mo.otherDirection) {
+            this.flipImage(mo);
         }
         this.ctx.drawImage(mo.img, mo.x, mo.y, mo.width, mo.height);
-        if(mo.otherDirection) {
-            this.ctx.setTransform(1,0,0,1,0,0);
-            mo.x = mo.x * -1;
+        if (mo.otherDirection) {
+            this.resetImgDirection(mo);
         }
     }
 
+    flipImage(mo) {
+        this.ctx.save();
+        this.ctx.translate(mo.width, 0);
+        this.ctx.scale(-1, 1);
+        mo.x = mo.x * -1;
+    }
+
+    resetImgDirection(mo) {
+        this.ctx.setTransform(1, 0, 0, 1, 0, 0);
+        mo.x = mo.x * -1;
+    }
 }
