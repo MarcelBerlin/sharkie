@@ -1,5 +1,5 @@
 class MovableObject {
-    x = 20;
+    x = 0;
     y = 100;
     img;
     height = 250;
@@ -14,7 +14,6 @@ class MovableObject {
         this.img = new Image(); // this.img = document.getElementById('image) <img id="image" src> <-- ist genau das gleiche!
         this.img.src = path;
     }
-
 
     /**
      * 

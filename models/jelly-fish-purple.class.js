@@ -1,4 +1,4 @@
-class JellyFish extends MovableObject {
+class JellyFishPurple extends MovableObject {
 
     height = 120;
     width = 90;
