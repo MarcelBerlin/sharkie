@@ -7,6 +7,7 @@ const level1 = new Level(
         new PufferFishRed(),
         new JellyFishYellow(),
         new PufferFishPurple(),
+        new EndBoss(),
     ],
     [
         new LightBeam(),
