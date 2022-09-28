@@ -50,7 +50,7 @@ class World {
         if (mo.otherDirection) {
             this.flipImage(mo);
         }
-
+        
         this.ctx.drawImage(mo.img, mo.x, mo.y, mo.width, mo.height);
 
         if (mo.otherDirection) {
@@ -66,7 +66,7 @@ class World {
     }
 
     flipImageBack(mo) {
-        this.ctx.setTransform(1, 0, 0, 1, 0, 0);
+        this.ctx.restore();
         mo.x = mo.x * -1;
     }
 }
