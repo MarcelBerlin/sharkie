@@ -6,7 +6,7 @@ class MovableObject {
     width = 200;
     imageCache = {};
     currentImage = 0;
-    speed = 0.10; 
+    speed = 0.10;     
     otherDirection = false;
 
 
@@ -31,6 +31,10 @@ class MovableObject {
         setInterval(() => {
             this.x -= this.speed;
         }, 1000 / 60);
+    }
+
+    gravitation() {
+        
     }
 
 

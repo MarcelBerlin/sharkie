@@ -1,7 +1,7 @@
 class EndBoss extends MovableObject {
-
-height = 600;
-width = 600;
+    
+    height = 600;
+    width = 600;
 
     IMAGES_INTRODUCE = [
         'img/2.Enemy/3 Final Enemy/1.Introduce/1.png',
@@ -31,25 +31,27 @@ width = 600;
         'img/2.Enemy/3 Final Enemy/2.floating/12.png',
         'img/2.Enemy/3 Final Enemy/2.floating/13.png'
     ];
+    world;
 
 
-    constructor() {        
+    constructor() {
         super().loadImage(this.IMAGES_INTRODUCE[0]);
-        this.loadImages(this.IMAGES_INTRODUCE);  
-        this.loadImages(this.IMAGES_FLOATING);           
-        this.x = 150;        
-        this.y = -100;     
-        this.animate();              
+        this.loadImages(this.IMAGES_INTRODUCE);
+        this.loadImages(this.IMAGES_FLOATING);
+        this.x = 150;
+        this.y = -100;
+        this.animate();
+
     }
-   
+
     animate() {
         setInterval(() => {
             let i = this.currentImage;
             let j = this.currentImage % this.IMAGES_FLOATING.length; // Das % Zeichen sorgt für ein wiederholtes itterieren.
             let path1 = this.IMAGES_INTRODUCE[i];
-            let path2 = this.IMAGES_FLOATING[j];           
+            let path2 = this.IMAGES_FLOATING[j];
             this.currentImage++;
-            if(this.currentImage <= this.IMAGES_INTRODUCE.length) {
+            if (this.currentImage <= this.IMAGES_INTRODUCE.length) {
                 this.img = this.imageCache[path1];
             } else {
                 this.img = this.imageCache[path2];
