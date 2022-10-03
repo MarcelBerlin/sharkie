@@ -68,12 +68,12 @@ class Character extends MovableObject {
                 this.swimming_sound.play();
             }                       
 
-            if (this.world.keyboard.UP) {
+            if (this.world.keyboard.UP && this.y >= -100) {
                 this.y -= this.speed;
                 this.swimming_sound.play();
             }
 
-            if (this.world.keyboard.DOWN) {
+            if (this.world.keyboard.DOWN && this.y <= 250) {
                 this.y += this.speed;
                 this.swimming_sound.play();
             }       
