@@ -1,7 +1,7 @@
 class EndBoss extends MovableObject {
     
-    height = 600;
-    width = 600;
+    height = 500;
+    width = 500;
 
     IMAGES_INTRODUCE = [
         'img/2.Enemy/3 Final Enemy/1.Introduce/1.png',
@@ -55,7 +55,7 @@ class EndBoss extends MovableObject {
                 this.img = this.imageCache[path1];
             } else {
                 this.img = this.imageCache[path2];
-            }
+            }            
         }, 100);
     }
 

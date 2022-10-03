@@ -10,4 +10,6 @@ class BackgroundObject extends MovableObject {
         
     }    
 
+    
+
 }
