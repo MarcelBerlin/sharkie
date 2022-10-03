@@ -14,7 +14,7 @@ class JellyFishPurple extends MovableObject {
         this.loadImages(this.IMAGES_SWIM);
         this.x = 600 + Math.random() * 700;
         this.y = 50 + Math.random() * 300;
-        this.speed = 0.75 + Math.random() * 0.25;
+        this.speed = 0.25 + Math.random() * 0.25;
         this.animate();
         
     };  
