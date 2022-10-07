@@ -1,26 +1,30 @@
 class World {
 
     character = new Character();
+    ambient_Sound = new Audio('audio/underwater.mp3');
     level = level1;    
     canvas;
     ctx;
     keyboard;
     camera_x = 0;
-
-    constructor(canvas, keyboard) {
+   
+    
+    constructor(canvas, keyboard) {        
         this.ctx = canvas.getContext('2d');
         this.keyboard = keyboard;
         this.canvas = canvas;
         this.draw();
-        this.setWorld();
+        this.setWorld();     
+        
     }
 
 
     setWorld() {
-        this.character.world = this;
+        this.character.world = this;          
     }
 
     draw() {
+        this.ambient_Sound.play(); 
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         
         this.ctx.translate(this.camera_x, 0);

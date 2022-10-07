@@ -30,15 +30,10 @@ class Character extends MovableObject {
         'img/1.Sharkie/3.Swim/6.png'
     ];
     speed = 5;
+    y = 100;
     world;
     swimming_sound = new Audio('audio/swim.mp3');
-    background = [
-        new BackgroundObject('img/3. Background/Layers/5. Water/D.png'),
-        new BackgroundObject('img/3. Background/Layers/4.Fondo 2/D.png'),
-        new BackgroundObject('img/3. Background/Layers/3.Fondo 1/D.png'),
-        new BackgroundObject('img/3. Background/Layers/2. Floor/D.png')
-    ];
-           
+   
 
     constructor() {
         super().loadImage('img/1.Sharkie/1.IDLE/1.png');
@@ -46,6 +41,7 @@ class Character extends MovableObject {
         this.loadImages(this.IMAGES_SWIM);
         this.animateIdle();
         this.swimAnimate();
+        this.applyGravity();
     }
 
 
@@ -80,7 +76,7 @@ class Character extends MovableObject {
                 this.swimming_sound.play();
             }
 
-            if (this.world.keyboard.DOWN && this.y <= 250) {
+            if (this.world.keyboard.DOWN && this.y <= this.max_Y) {
                 this.y += this.speed;
                 this.swimming_sound.play();
             }       
@@ -99,5 +95,5 @@ class Character extends MovableObject {
         }, 100);
     }
 
-    
+        
 }
