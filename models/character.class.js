@@ -59,8 +59,7 @@ class Character extends MovableObject {
         this.swimming_sound.pause();
         setInterval(() => {
             if (this.world.keyboard.RIGHT && this.x <= this.world.level.level_end_x) {
-                this.x += this.speed;
-                this.background[1]; 
+                this.x += this.speed;                
                 this.otherDirection = false;
                 this.swimming_sound.play();
             }
