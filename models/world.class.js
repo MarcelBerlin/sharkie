@@ -2,39 +2,39 @@ class World {
 
     character = new Character();
     ambient_Sound = new Audio('audio/underwater.mp3');
-    level = level1;    
+    level = level1;
     canvas;
     ctx;
     keyboard;
     camera_x = 0;
-   
-    
-    constructor(canvas, keyboard) {        
+
+
+    constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
         this.keyboard = keyboard;
         this.canvas = canvas;
         this.draw();
-        this.setWorld();     
-        
+        this.setWorld();
+
     }
 
 
     setWorld() {
-        this.character.world = this;          
+        this.character.world = this;
     }
 
     draw() {
-        this.ambient_Sound.play(); 
+        this.ambient_Sound.play();
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-        
+
         this.ctx.translate(this.camera_x, 0);
-        
+
         this.addObjectToCanvas(this.level.backgroundObjects);
-        
+
         this.addToCanvas(this.character);
         this.addObjectToCanvas(this.level.enemies);
         this.addObjectToCanvas(this.level.lights);
-        
+
         this.ctx.translate(-this.camera_x, 0);
 
         // Draw() wird immer und immer wieder aufgerufen
@@ -54,9 +54,9 @@ class World {
         if (mo.otherDirection) {
             this.flipImage(mo);
         }
-        
-        this.ctx.drawImage(mo.img, mo.x, mo.y, mo.width, mo.height);
 
+        this.ctx.drawImage(mo.img, mo.x, mo.y, mo.width, mo.height);
+        
         if (mo.otherDirection) {
             this.flipImageBack(mo);
         }

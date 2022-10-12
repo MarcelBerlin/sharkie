@@ -10,7 +10,7 @@ class MovableObject {
     otherDirection = false;
     min_Y = 0;
     max_Y = 275;
-    speedY = 5.5;
+    speedY = 0.5;
     acceleration = 0.25;
 
 
