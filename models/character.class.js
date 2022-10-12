@@ -21,6 +21,26 @@ class Character extends MovableObject {
         'img/1.Sharkie/1.IDLE/18.png'
     ];
 
+    IMAGES_LONGIDLE_INTRO = [
+        'img/1.Sharkie/2.Long_IDLE/i1.png',
+        'img/1.Sharkie/2.Long_IDLE/i2.png',
+        'img/1.Sharkie/2.Long_IDLE/i3.png',
+        'img/1.Sharkie/2.Long_IDLE/i4.png',
+        'img/1.Sharkie/2.Long_IDLE/i5.png',
+        'img/1.Sharkie/2.Long_IDLE/i6.png',
+        'img/1.Sharkie/2.Long_IDLE/i7.png',
+        'img/1.Sharkie/2.Long_IDLE/i8.png',
+        'img/1.Sharkie/2.Long_IDLE/i9.png'
+    ];
+
+    IMAGES_LONGIDLE = [
+        'img/1.Sharkie/2.Long_IDLE/i10.png',
+        'img/1.Sharkie/2.Long_IDLE/i11.png',
+        'img/1.Sharkie/2.Long_IDLE/i12.png',
+        'img/1.Sharkie/2.Long_IDLE/i13.png',
+        'img/1.Sharkie/2.Long_IDLE/i14.png'
+    ];
+
     IMAGES_SWIM = [
         'img/1.Sharkie/3.Swim/1.png',
         'img/1.Sharkie/3.Swim/2.png',
@@ -38,20 +58,37 @@ class Character extends MovableObject {
     constructor() {
         super().loadImage('img/1.Sharkie/1.IDLE/1.png');
         this.loadImages(this.IMAGES_IDLE);
+        this.loadImages(this.IMAGES_LONGIDLE_INTRO);
+        this.loadImages(this.IMAGES_LONGIDLE);       
         this.loadImages(this.IMAGES_SWIM);
         this.animateIdle();
-        this.swimAnimate();
-        this.applyGravity();
+        this.swimAnimate();        
     }
 
 
-    animateIdle() {
+    animateIdle() {      
         setInterval(() => {
+            if()
             let i = this.currentImage % this.IMAGES_IDLE.length; // let i = 0 % 6; => 0, Rest 1 // 0, 1, 2, 3, 4, 5, 6, 0, 1, 2... etc
             let path = this.IMAGES_IDLE[i];
             this.img = this.imageCache[path];
             this.currentImage++;
         }, 100);
+    }
+
+    animateLongIdle() {
+        setInterval(() => {
+            let i = this.currentImage;
+            let j = this.currentImage % this.IMAGES_LONGIDLE.length;
+            let path1 = this.IMAGES_LONGIDLE_INTRO[i];
+            let path2 = this.IMAGES_LONGIDLE[j];
+            this.currentImage++;
+            if(this.currentImage <= this.IMAGES_LONGIDLE_INTRO.length) {
+                this.img = this.imageCache[path1];
+            } else {
+                this.img = this.imageCache[path2];
+            }            
+        }, 200);
     }
 
 
