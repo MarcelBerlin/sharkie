@@ -68,7 +68,7 @@ class Character extends MovableObject {
 
     animateIdle() {      
         setInterval(() => {
-            if()
+            
             let i = this.currentImage % this.IMAGES_IDLE.length; // let i = 0 % 6; => 0, Rest 1 // 0, 1, 2, 3, 4, 5, 6, 0, 1, 2... etc
             let path = this.IMAGES_IDLE[i];
             this.img = this.imageCache[path];
