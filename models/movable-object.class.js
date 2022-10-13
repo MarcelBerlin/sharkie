@@ -45,9 +45,13 @@ class MovableObject {
     //########################################
 
     swimLeft() {
-        setInterval(() => {
-            this.x -= this.speed;
-        }, 1000 / 60);
+        this.x -= this.speed;
+        
+    }
+
+    swimRight() {
+        this.x += this.speed;
+           
     }
 
     swimUp() {

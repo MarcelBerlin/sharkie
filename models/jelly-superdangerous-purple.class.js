@@ -1,6 +1,6 @@
 class JellySuperdangerousPurple extends MovableObject {
 
-    height = 100;
+    height = 120;
     width = 100; 
     IMAGES_DANGEROUS = [
         'img/2.Enemy/2 Jelly fish/Súper dangerous/Pink 1.png',

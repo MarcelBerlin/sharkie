@@ -33,7 +33,7 @@ class PufferFishPurple extends MovableObject {
         this.loadImages(this.IMAGES_SWIM);
         this.x = 1500 + Math.random() * 500;
         this.y = 50 + Math.random() * 300;
-        this.speed = 0.15 + Math.random() * 0.35;
+        this.speed = 0.2 + Math.random() * 0.35;
         this.swimLeft(); 
         this.animate();
     } 
@@ -41,7 +41,9 @@ class PufferFishPurple extends MovableObject {
 
 
     animate() {
-        this.swimLeft();
+        setInterval(() => {
+            this.swimLeft();
+        }, 1000 / 60);
         setInterval(() => {
             this.playAnimation(this.IMAGES_SWIM);
         }, 100);
