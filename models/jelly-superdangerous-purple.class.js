@@ -24,10 +24,7 @@ class JellySuperdangerousPurple extends MovableObject {
     animate() { 
         this.swimUp();
             setInterval(() => {
-                let i = this.currentImage % this.IMAGES_DANGEROUS.length; // let i = 0 % 6; => 0, Rest 1 // 0, 1, 2, 3, 4, 5, 6, 0, 1, 2... etc
-                let path = this.IMAGES_DANGEROUS[i];
-                this.img = this.imageCache[path];
-                this.currentImage++; 
+                this.playAnimation(this.IMAGES_DANGEROUS); 
                 if(this.y <= this.min_Y) {
                     this.swimDown();
                 } if(this.y >= this.max_Y) {

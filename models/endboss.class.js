@@ -38,7 +38,7 @@ class EndBoss extends MovableObject {
         super().loadImage(this.IMAGES_INTRODUCE[0]);
         this.loadImages(this.IMAGES_INTRODUCE);
         this.loadImages(this.IMAGES_FLOATING);
-        this.x = 150;
+        this.x = 2350;
         this.y = -100;
         this.animate();
 

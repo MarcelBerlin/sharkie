@@ -14,14 +14,14 @@ class MovableObject {
     acceleration = 0.25;
 
 
-    applyGravity() {        
-            setInterval(() => {
-                if(this.y <= this.max_Y) {
-                    this.y += this.speedY;
-                } else {
-                    this.speedY = 0;
-                }                
-            }, 1000 / 25);       
+    applyGravity() {
+        setInterval(() => {
+            if (this.y <= this.max_Y) {
+                this.y += this.speedY;
+            } else {
+                this.speedY = 0;
+            }
+        }, 1000 / 25);
     }
 
 
@@ -62,7 +62,12 @@ class MovableObject {
         }, 1000 / 60);
     }
 
-
+    playAnimation(images) {
+        let i = this.currentImage % images.length; // let i = 0 % 6; => 0, Rest 1 // 0, 1, 2, 3, 4, 5, 6, 0, 1, 2... etc
+        let path = images[i];
+        this.img = this.imageCache[path];
+        this.currentImage++;
+    }
 
 }
 
