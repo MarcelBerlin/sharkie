@@ -55,8 +55,9 @@ class World {
             this.flipImage(mo);
         }
 
-        this.ctx.drawImage(mo.img, mo.x, mo.y, mo.width, mo.height);
-        
+        mo.drawImage(this.ctx);        
+        mo.drawOutlines(this.ctx);
+
         if (mo.otherDirection) {
             this.flipImageBack(mo);
         }
@@ -73,4 +74,6 @@ class World {
         this.ctx.restore();
         mo.x = mo.x * -1;
     }
+
+    
 }

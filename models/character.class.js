@@ -49,7 +49,7 @@ class Character extends MovableObject {
         'img/1.Sharkie/3.Swim/5.png',
         'img/1.Sharkie/3.Swim/6.png'
     ];
-    speed = 5;
+    speed = 3.5;
     y = 100;
     world;
     swimming_sound = new Audio('audio/swim.mp3');
