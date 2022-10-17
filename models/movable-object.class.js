@@ -1,7 +1,7 @@
 class MovableObject {
     x = 0;
     y = 100;
-    img;    
+    img;
     height = 250;
     width = 200;
     imageCache = {};
@@ -12,6 +12,8 @@ class MovableObject {
     max_Y = 275;
     speedY = 0.5;
     acceleration = 0.25;
+    energy = 100;
+    lastHit = 0;
 
 
     applyGravity() {
@@ -90,9 +92,32 @@ class MovableObject {
     // is colliding (enemy)
     isColliding(mo) {
         return this.x + this.width > mo.x &&
-        this.y + this.height > mo.y &&
-        this.x < mo.x &&
-        this.y < mo.y + mo.height
+            this.y + this.height > mo.y &&
+            this.x < mo.x &&
+            this.y < mo.y + mo.height
     }
+
+    hit() {
+        this.energy -= 5;
+        if (this.energy <= 0) {
+            this.energy = 0;
+        } else {
+            this.lastHit = new Date().getTime();
+        }
+    }
+
+    isHurt() {
+        let timepassed = new Date().getTime() - this.lastHit; // Differenz in ms
+        timepassed = timepassed / 1000; // Differenz in sek
+        return timepassed < 1;
+
+    }    
+
+    isDead() {       
+        return this.energy == 0;
+            
+    }
+
+   
 }
 
