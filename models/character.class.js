@@ -49,26 +49,27 @@ class Character extends MovableObject {
         'img/1.Sharkie/3.Swim/5.png',
         'img/1.Sharkie/3.Swim/6.png'
     ];
+
     speed = 3.5;
     y = 100;
     world;
     swimming_sound = new Audio('audio/swim.mp3');
-   
+
 
     constructor() {
         super().loadImage('img/1.Sharkie/1.IDLE/1.png');
         this.loadImages(this.IMAGES_IDLE);
         this.loadImages(this.IMAGES_LONGIDLE_INTRO);
-        this.loadImages(this.IMAGES_LONGIDLE);       
+        this.loadImages(this.IMAGES_LONGIDLE);
         this.loadImages(this.IMAGES_SWIM);
         this.animateIdle();
-        this.swimAnimate();        
+        this.swimAnimate();
     }
 
 
-    animateIdle() {      
+    animateIdle() {
         setInterval(() => {
-            
+
             let i = this.currentImage % this.IMAGES_IDLE.length; // let i = 0 % 6; => 0, Rest 1 // 0, 1, 2, 3, 4, 5, 6, 0, 1, 2... etc
             let path = this.IMAGES_IDLE[i];
             this.img = this.imageCache[path];
@@ -83,11 +84,11 @@ class Character extends MovableObject {
             let path1 = this.IMAGES_LONGIDLE_INTRO[i];
             let path2 = this.IMAGES_LONGIDLE[j];
             this.currentImage++;
-            if(this.currentImage <= this.IMAGES_LONGIDLE_INTRO.length) {
+            if (this.currentImage <= this.IMAGES_LONGIDLE_INTRO.length) {
                 this.img = this.imageCache[path1];
             } else {
                 this.img = this.imageCache[path2];
-            }            
+            }
         }, 200);
     }
 
@@ -102,10 +103,10 @@ class Character extends MovableObject {
             }
 
             if (this.world.keyboard.LEFT && this.x >= 50) {
-                this.swimLeft();            
-                this.otherDirection = true;    
+                this.swimLeft();
+                this.otherDirection = true;
                 this.swimming_sound.play();
-            }                       
+            }
 
             if (this.world.keyboard.UP && this.y >= -100) {
                 this.y -= this.speed;
@@ -115,10 +116,10 @@ class Character extends MovableObject {
             if (this.world.keyboard.DOWN && this.y <= this.max_Y) {
                 this.y += this.speed;
                 this.swimming_sound.play();
-            }       
-            this.world.camera_x = -this.x + 50 ;
-            
-            
+            }
+            this.world.camera_x = -this.x + 50;
+
+
         }, 1000 / 60);
 
         setInterval(() => {
@@ -128,5 +129,6 @@ class Character extends MovableObject {
         }, 100);
     }
 
-        
+    
+
 }

@@ -1,7 +1,7 @@
 class MovableObject {
     x = 0;
     y = 100;
-    img;
+    img;    
     height = 250;
     width = 200;
     imageCache = {};
@@ -49,9 +49,9 @@ class MovableObject {
     }
 
     drawOutlines(ctx) {
-        if (this.CharacterAndEnemies()) {
+        if (this instanceof Character || this instanceof PufferFishGreen || this instanceof PufferFishPurple || this instanceof PufferFishRed || this instanceof JellyFishPurple || this instanceof JellyFishYellow || this instanceof JellySuperdangerousGreen || this instanceof JellySuperdangerousPurple || this instanceof EndBoss) {
             ctx.beginPath();
-            ctx.lineWidth = '2';
+            ctx.lineWidth = '3';
             ctx.strokeStyle = 'blue';
             ctx.rect(this.x, this.y, this.width, this.height);
             ctx.stroke();
@@ -87,9 +87,12 @@ class MovableObject {
         this.currentImage++;
     }
 
-    CharacterAndEnemies() {
-        this instanceof Character || this instanceof PufferFishGreen || this instanceof PufferFishPurple || this instanceof PufferFishRed || this instanceof JellyFishPurple || this instanceof JellyFishYellow || this instanceof JellySuperdangerousGreen || this instanceof JellySuperdangerousPurple
+    // is colliding (enemy)
+    isColliding(mo) {
+        return this.x + this.width > mo.x &&
+        this.y + this.height > mo.y &&
+        this.x < mo.x &&
+        this.y < mo.y + mo.height
     }
-
 }
 

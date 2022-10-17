@@ -1,37 +1,48 @@
 class World {
 
     character = new Character();
-    ambient_Sound = new Audio('audio/underwater.mp3');
+    ambient_Sound = new Audio('audio/underwater.wav');
     level = level1;
     canvas;
     ctx;
     keyboard;
     camera_x = 0;
-
+ 
 
     constructor(canvas, keyboard) {
-        this.ctx = canvas.getContext('2d');
+        this.ctx = canvas.getContext('2d');        
         this.keyboard = keyboard;
         this.canvas = canvas;
-        this.draw();
-        this.setWorld();
-
+        this.draw();               
+        this.setWorld();     
+        this.CheckCollisions();
     }
-
+    
 
     setWorld() {
         this.character.world = this;
     }
 
-    draw() {
-        this.ambient_Sound.play();
+    CheckCollisions() {
+        setInterval(() => {
+            this.level.enemies.forEach((enemy) => {
+               if(this.character.isColliding(enemy)) {
+                console.log('Collision with Character', enemy);
+               }
+            })
+        }, 200)
+    }
+
+    draw() {        
+        this.ambient_Sound.play();  
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-
+        
         this.ctx.translate(this.camera_x, 0);
-
+        
         this.addObjectToCanvas(this.level.backgroundObjects);
 
         this.addToCanvas(this.character);
+        
         this.addObjectToCanvas(this.level.enemies);
         this.addObjectToCanvas(this.level.lights);
 
@@ -44,13 +55,16 @@ class World {
         });
     }
 
-    addObjectToCanvas(object) {
+       
+    
+
+    addObjectToCanvas(object) {        
         object.forEach(o => {
             this.addToCanvas(o);
         });
     }
 
-    addToCanvas(mo) {
+    addToCanvas(mo) {        
         if (mo.otherDirection) {
             this.flipImage(mo);
         }
