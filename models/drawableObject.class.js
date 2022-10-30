@@ -8,12 +8,16 @@ class DrawableObject {
     height = 140;
     width = 170;
 
+   
 
     loadImage(path) {
         this.img = new Image(); // this.img = document.getElementById('image) <img id="image" src> <-- ist genau das gleiche!
         this.img.src = path;
     }
 
+    drawImage(ctx) {
+        ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
+    }
 
     loadImages(arr) {
         arr.forEach((path) => {
@@ -25,9 +29,7 @@ class DrawableObject {
     }
 
 
-    drawImage(ctx) {
-        ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
-    }
+    
    
     drawOutlines(ctx) {
         if (this instanceof Character || this instanceof PufferFishGreen || this instanceof PufferFishPurple || this instanceof PufferFishRed || this instanceof JellyFishPurple || this instanceof JellyFishYellow || this instanceof JellySuperdangerousGreen || this instanceof JellySuperdangerousPurple || this instanceof EndBoss) {
