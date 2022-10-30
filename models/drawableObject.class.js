@@ -27,8 +27,6 @@ class DrawableObject {
             this.imageCache[path] = img;
         });
     }
-
-
     
    
     drawOutlines(ctx) {

@@ -1,12 +1,12 @@
 class StatusBar extends DrawableObject {
 
     IMAGE_STATUSBAR = [
-        'img/4. Marcadores/green/Life/100_  copia 2.png',
-        'img/4. Marcadores/green/Life/80_  copia 2.png',
-        'img/4. Marcadores/green/Life/60_  copia 2.png',
-        'img/4. Marcadores/green/Life/40_  copia 2.png',
-        'img/4. Marcadores/green/Life/20_  copia 2.png',
-        'img/4. Marcadores/green/Life/0_  copia 2.png',
+        'img/4. Marcadores/green/Life/100.png',
+        'img/4. Marcadores/green/Life/80.png',
+        'img/4. Marcadores/green/Life/60.png',
+        'img/4. Marcadores/green/Life/40.png',
+        'img/4. Marcadores/green/Life/20.png',
+        'img/4. Marcadores/green/Life/0.png',
     ];
 
 
