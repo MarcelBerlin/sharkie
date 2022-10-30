@@ -42,7 +42,11 @@ class World {
         this.ctx.translate(this.camera_x, 0);
         
         this.addObjectToCanvas(this.level.backgroundObjects);
+
+        this.ctx.translate(-this.camera_x, 0);
         this.addToMap(this.statusBar);
+        this.ctx.translate(this.camera_x, 0);
+
         this.addToMap(this.character);
         
         this.addObjectToCanvas(this.level.enemies);
