@@ -2,7 +2,7 @@ class MovableObject extends DrawableObject{
     x = 0;
     y = 100;
     img;
-    height = 250;
+    height = 200;
     width = 200;
     imageCache = {};
     currentImage = 0;
