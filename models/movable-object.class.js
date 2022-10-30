@@ -1,11 +1,5 @@
 class MovableObject extends DrawableObject{
-    x = 0;
-    y = 100;
-    img;
-    height = 140;
-    width = 170;
-    imageCache = {};
-    currentImage = 0;
+      
     speed = 0.1;
     otherDirection = false;
     min_Y = 0;
@@ -24,38 +18,8 @@ class MovableObject extends DrawableObject{
                 this.speedY = 0;
             }
         }, 1000 / 25);
-    }
-
-
-    //########################################
-    // loadImage(path) {
-    //     this.img = new Image(); // this.img = document.getElementById('image) <img id="image" src> <-- ist genau das gleiche!
-    //     this.img.src = path;
-    // }
-
-    /**
-     * 
-     * @param {Array} arr - ['img/image1.png', 'img/image2.png', ...] 
-     */
-    loadImages(arr) {
-        arr.forEach((path) => {
-            let img = new Image();
-            img.src = path;
-            this.imageCache[path] = img;
-        });
-    }
-    //########################################
-
-  
-    drawOutlines(ctx) {
-        if (this instanceof Character || this instanceof PufferFishGreen || this instanceof PufferFishPurple || this instanceof PufferFishRed || this instanceof JellyFishPurple || this instanceof JellyFishYellow || this instanceof JellySuperdangerousGreen || this instanceof JellySuperdangerousPurple || this instanceof EndBoss) {
-            ctx.beginPath();
-            ctx.lineWidth = '3';
-            ctx.strokeStyle = 'blue';
-            ctx.rect(this.x, this.y, this.width, this.height);
-            ctx.stroke();
-        }
-    }
+    }     
+ 
 
     swimLeft() {
         this.x -= this.speed;

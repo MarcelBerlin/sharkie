@@ -1,8 +1,12 @@
 class DrawableObject {
 
-    drawImage(ctx) {
-        ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
-    }
+    img;
+    imageCache = {};
+    currentImage = 0;
+    x = 0;
+    y = 100;    
+    height = 140;
+    width = 170;
 
 
     loadImage(path) {
@@ -10,4 +14,29 @@ class DrawableObject {
         this.img.src = path;
     }
 
+
+    loadImages(arr) {
+        arr.forEach((path) => {
+            let img = new Image();
+            img.src = path;
+            this.imageCache[path] = img;
+        });
+    }
+
+
+    drawImage(ctx) {
+        ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
+    }
+   
+    drawOutlines(ctx) {
+        if (this instanceof Character || this instanceof PufferFishGreen || this instanceof PufferFishPurple || this instanceof PufferFishRed || this instanceof JellyFishPurple || this instanceof JellyFishYellow || this instanceof JellySuperdangerousGreen || this instanceof JellySuperdangerousPurple || this instanceof EndBoss) {
+            ctx.beginPath();
+            ctx.lineWidth = '3';
+            ctx.strokeStyle = 'blue';
+            ctx.rect(this.x, this.y, this.width, this.height);
+            ctx.stroke();
+        }
+    }
+
+    
 }
