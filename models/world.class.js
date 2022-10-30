@@ -42,8 +42,8 @@ class World {
         this.ctx.translate(this.camera_x, 0);
         
         this.addObjectToCanvas(this.level.backgroundObjects);
-        this.addToCanvas(this.statusBar);
-        this.addToCanvas(this.character);
+        this.addToMap(this.statusBar);
+        this.addToMap(this.character);
         
         this.addObjectToCanvas(this.level.enemies);
         this.addObjectToCanvas(this.level.lights);
@@ -62,11 +62,11 @@ class World {
 
     addObjectToCanvas(object) {        
         object.forEach(o => {
-            this.addToCanvas(o);
+            this.addToMap(o);
         });
     }
 
-    addToCanvas(mo) {        
+    addToMap(mo) {        
         if (mo.otherDirection) {
             this.flipImage(mo);
         }
