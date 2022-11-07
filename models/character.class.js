@@ -113,17 +113,19 @@ class Character extends MovableObject {
         this.loadImages(this.IMAGES_DEAD_SHOCK);
         this.animateIdle();
         this.swimAnimate();
+        
+        
     }
 
 
     animateIdle() {
         setInterval(() => {
-
             let i = this.currentImage % this.IMAGES_IDLE.length; // let i = 0 % 6; => 0, Rest 1 // 0, 1, 2, 3, 4, 5, 6, 0, 1, 2... etc
             let path = this.IMAGES_IDLE[i];
             this.img = this.imageCache[path];
             this.currentImage++;
         }, 100);
+
     }
 
     animateLongIdle() {
@@ -138,7 +140,7 @@ class Character extends MovableObject {
             } else {
                 this.img = this.imageCache[path2];
             }
-        }, 200);
+        }, 150);
     }
 
 
@@ -172,8 +174,8 @@ class Character extends MovableObject {
         }, 1000 / 60);
 
         setInterval(() => {
-            if (this.isDead()) {                
-                this.playAnimation(this.IMAGES_DEAD_POISON);                               
+            if (this.isDead()) {
+                this.playAnimation(this.IMAGES_DEAD_POISON);
             } else if (this.isHurt()) {
                 this.playAnimation(this.IMAGES_HURT_POISONED);
             } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT || this.world.keyboard.UP || this.world.keyboard.DOWN) {
@@ -182,6 +184,6 @@ class Character extends MovableObject {
         }, 100);
     }
 
-    
+
 
 }
