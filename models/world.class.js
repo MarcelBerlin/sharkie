@@ -63,9 +63,7 @@ class World {
             self.draw();
         });
     }
-
        
-    
 
     addObjectToCanvas(object) {        
         object.forEach(o => {

@@ -30,11 +30,12 @@ class Character extends MovableObject {
         'img/1.Sharkie/2.Long_IDLE/i6.png',
         'img/1.Sharkie/2.Long_IDLE/i7.png',
         'img/1.Sharkie/2.Long_IDLE/i8.png',
-        'img/1.Sharkie/2.Long_IDLE/i9.png'
+        'img/1.Sharkie/2.Long_IDLE/i9.png',
+        'img/1.Sharkie/2.Long_IDLE/i10.png'
     ];
 
-    IMAGES_LONGIDLE = [
-        'img/1.Sharkie/2.Long_IDLE/i10.png',
+    IMAGES_LONGIDLE = [        
+        
         'img/1.Sharkie/2.Long_IDLE/i11.png',
         'img/1.Sharkie/2.Long_IDLE/i12.png',
         'img/1.Sharkie/2.Long_IDLE/i13.png',
@@ -129,20 +130,6 @@ class Character extends MovableObject {
 
     }
 
-    animateLongIdle() {
-        setInterval(() => {
-            let i = this.currentImage;
-            let j = this.currentImage % this.IMAGES_LONGIDLE.length;
-            let path1 = this.IMAGES_LONGIDLE_INTRO[i];
-            let path2 = this.IMAGES_LONGIDLE[j];
-            this.currentImage++;
-            if (this.currentImage <= this.IMAGES_LONGIDLE_INTRO.length) {
-                this.img = this.imageCache[path1];
-            } else {
-                this.img = this.imageCache[path2];
-            }
-        }, 150);
-    }
 
 
     swimAnimate() {
@@ -180,11 +167,29 @@ class Character extends MovableObject {
             } else if (this.isHurt()) {
                 this.playAnimation(this.IMAGES_HURT_POISONED);
             } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT || this.world.keyboard.UP || this.world.keyboard.DOWN) {
+                this.getMovementTimeStamp();
                 this.playAnimation(this.IMAGES_SWIM);
+            // } else if (this.characterLongIdle) {
+            //     this.characterSleepAnimation();
             }
         }, 100);
     }
 
+
+    getMovementTimeStamp() {
+        this.lastMovement = new Date().getTime();
+    }
+
+    characterLongIdle() {        
+        let timepassed = new Date().getTime() - this.lastMovement;
+        timepassed = timepassed / 1000;
+        return timepassed < 1;
+    }
+
+    characterSleepAnimation() {        
+        this.playAnimation(this.IMAGES_LONGIDLE);
+        
+    }
 
 
 }

@@ -1,5 +1,5 @@
-class MovableObject extends DrawableObject{
-      
+class MovableObject extends DrawableObject {
+
     speed = 0.1;
     otherDirection = false;
     min_Y = 0;
@@ -8,7 +8,7 @@ class MovableObject extends DrawableObject{
     acceleration = 0.25;
     energy = 100;
     lastHit = 0;
-    
+
 
 
     applyGravity() {
@@ -19,8 +19,8 @@ class MovableObject extends DrawableObject{
                 this.speedY = 0;
             }
         }, 1000 / 25);
-    }     
- 
+    }
+
 
     swimLeft() {
         this.x -= this.speed;
@@ -49,8 +49,9 @@ class MovableObject extends DrawableObject{
         let path = images[i];
         this.img = this.imageCache[path];
         this.currentImage++;
-    }
-   
+    }  
+
+
 
     // is colliding (enemy)
     isColliding(mo) {
@@ -74,13 +75,15 @@ class MovableObject extends DrawableObject{
         timepassed = timepassed / 1000; // Differenz in sek
         return timepassed < 1;
 
-    }    
-
-    isDead() {       
-        return this.energy == 0;
-            
     }
 
-   
+    isDead() {
+        return this.energy == 0;
+
+    }
+
+
+
+
 }
 
