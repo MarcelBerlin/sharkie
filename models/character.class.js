@@ -98,6 +98,7 @@ class Character extends MovableObject {
     height = 200;
     y = 100;
     world;
+    lastMovement = 0;
     swimming_sound = new Audio('audio/swim.mp3');
 
 

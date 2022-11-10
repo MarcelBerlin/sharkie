@@ -1,22 +1,22 @@
 class World {
 
     character = new Character();
+    healthbar = new HealthBar();
+    coinbar = new CoinBar();
+    poisonbar = new PoisonBar();
     ambient_Sound = new Audio('audio/underwater.wav');
     level = level1;
     canvas;
     ctx;
     keyboard;
     camera_x = 0;
-    healthbar = new HealthBar();
-    coinbar = new CoinBar();
-    poisonbar = new PoisonBar();
+    
  
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');        
         this.keyboard = keyboard;
-        this.canvas = canvas;
-          
+        this.canvas = canvas;                 
         this.draw();               
         this.setWorld();     
         this.CheckCollisions();
@@ -24,7 +24,7 @@ class World {
     
 
     setWorld() {
-        this.character.world = this;
+        this.character.world = this;        
     }
 
     CheckCollisions() {
@@ -39,7 +39,7 @@ class World {
     }
 
     draw() {        
-        this.ambient_Sound.play();
+        this.ambient_Sound.play(); 
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
         this.ctx.translate(this.camera_x, 0);        
