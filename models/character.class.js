@@ -101,7 +101,7 @@ class Character extends MovableObject {
     world;
     lastMovement = 0;
     swimming_sound = new Audio('audio/swim.mp3');
-    
+
 
     constructor() {
         super().loadImage('img/1.Sharkie/1.IDLE/1.png');
@@ -112,72 +112,64 @@ class Character extends MovableObject {
         this.loadImages(this.IMAGES_HURT_POISONED);
         this.loadImages(this.IMAGES_HURT_SHOCKED);
         this.loadImages(this.IMAGES_DEAD_POISON);
-        this.loadImages(this.IMAGES_DEAD_SHOCK);        
+        this.loadImages(this.IMAGES_DEAD_SHOCK);
         this.animateIdle();
-        this.swimAnimate();        
+        this.swimAnimate();
     }
+   
 
-
-    animateIdle() {
+    animateIdle() {        
         setInterval(() => {
             let i = this.currentImage % this.IMAGES_IDLE.length; // let i = 0 % 6; => 0, Rest 1 // 0, 1, 2, 3, 4, 5, 6, 0, 1, 2... etc
             let path = this.IMAGES_IDLE[i];
             this.img = this.imageCache[path];
             this.currentImage++;
         }, 100);
-
-        setInterval(() => {
-            if (this.characterLongIdle()) {      
-                this.playLongIdleAnimations();         
-            } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT || this.world.keyboard.UP || this.world.keyboard.DOWN) {
-                this.swimAnimate();                
-            }
-        }, 100);
     }
-
-
 
     swimAnimate() {
         this.swimming_sound.pause();
-        
+
         setInterval(() => {
-            if (this.world.keyboard.RIGHT && this.x <= this.world.level.level_end_x) {
-                this.swimRight();
+            if (this.world.keyboard.RIGHT && this.x <= this.world.level.level_end_x) {                
+                this.swimRight();                
                 this.otherDirection = false;
-                this.swimming_sound.play();
+                this.swimming_sound.play();                
             }
 
-            if (this.world.keyboard.LEFT && this.x >= 50) {
+            if (this.world.keyboard.LEFT && this.x >= 50) {                
                 this.swimLeft();
                 this.otherDirection = true;
-                this.swimming_sound.play();
+                this.swimming_sound.play();                
             }
 
-            if (this.world.keyboard.UP && this.y >= -25) {
+            if (this.world.keyboard.UP && this.y >= -25) {               
                 this.y -= this.speed;
-                this.swimming_sound.play();
+                this.swimming_sound.play();                
             }
 
-            if (this.world.keyboard.DOWN && this.y <= this.max_Y) {
-                this.y += this.speed;
-                this.swimming_sound.play();
+            if (this.world.keyboard.DOWN && this.y <= this.max_Y) {               
+                this.y += this.speed;                
+                this.swimming_sound.play();                
             }
+
             this.world.camera_x = -this.x + 50;
-
-
         }, 1000 / 60);
 
-        setInterval(() => {            
-           
-            if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT || this.world.keyboard.UP || this.world.keyboard.DOWN) {
+
+        setInterval(() => {
+            if (this.isHurt()) {
+                this.playAnimation(this.IMAGES_HURT_POISONED);
+            } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT || this.world.keyboard.UP || this.world.keyboard.DOWN) {  
+                this.getMovementTimeStamp();  
                 this.playAnimation(this.IMAGES_SWIM);
+            } else if (this.characterLongIdle()) {
+                this.playLongIdleAnimations();
             } else if (this.isDead()) {
                 this.playAnimation(this.IMAGES_DEAD_POISON);
-            } else if (this.isHurt()) {
-                this.playAnimation(this.IMAGES_HURT_POISONED);
-            } 
+            }
         }, 100);
-        this.getMovementTimeStamp();
+
     }
 
 
@@ -186,12 +178,12 @@ class Character extends MovableObject {
         console.log(this.lastMovement);
     }
 
-    characterLongIdle() {        
+    characterLongIdle() {
         let timepassed = new Date().getTime() - this.lastMovement;
         timepassed = timepassed / 1000;
-        return timepassed > 5;
+        return timepassed > 1.5;
     }
-  
+
 
     playLongIdleAnimations() {
         setInterval(() => {
