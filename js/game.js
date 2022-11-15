@@ -26,11 +26,11 @@ window.addEventListener('keydown', (e) => {
         keyboard.DOWN = true;
     }
 
-    if(e.key == 'Space') {
+    if(e.key == ' ') {
         keyboard.SPACE = true;
     }
 
-    if(e.key == 'KeyD') {
+    if(e.key == 'd') {
         keyboard.D = true;
     }
     console.log(e);
@@ -54,11 +54,11 @@ window.addEventListener('keyup', (e) => {
         keyboard.DOWN = false;
     }
 
-    if(e.key == 'Space') {
+    if(e.key == ' ') {
         keyboard.SPACE = false;
     }
 
-    if(e.key == 'KeyD') {
+    if(e.key == 'd') {
         keyboard.D = false;
     }
     console.log(e);

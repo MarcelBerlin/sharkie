@@ -4,7 +4,7 @@ class World {
     healthbar = new HealthBar();
     coinbar = new CoinBar();
     poisonbar = new PoisonBar();
-    throwableObject = [new ThrowableObject()];
+    throwableObject = [];
     ambient_Sound = new Audio('audio/underwater.wav');
     game_Sound = new Audio('audio/sharkie-loop_silent.wav');
     level = level1;
@@ -21,7 +21,7 @@ class World {
         this.canvas = canvas;                 
         this.draw();               
         this.setWorld();     
-        this.playing();
+        this.swimAndAttack();
     }
     
 
@@ -31,11 +31,19 @@ class World {
 
 
     
-    playing() {
+    swimAndAttack() {
         setInterval(() => {
-            this.CheckCollisions();
-            this.checkThrowObjects();
-        }, 200)
+            this.CheckCollisions(); 
+            this.checkThrowObjects();           
+        }, 200)       
+    }
+
+
+    checkThrowObjects() {
+        if(this.keyboard.D) {
+            let bubble = new ThrowableObject(this.character.x + 140, this.character.y + 120);
+            this.throwableObject.push(bubble);
+        }
     }
 
 
@@ -47,13 +55,7 @@ class World {
             }
          })
     }
-
-    checkThrowObjects() {
-        if(this.keyboard.D) {
-            let bubble = new ThrowableObject(this.character.x, this.character.y);
-            this.throwableObject.push(bubble);
-        }
-    }
+   
 
     draw() {        
         this.ambient_Sound.play(); 

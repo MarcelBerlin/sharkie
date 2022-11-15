@@ -12,22 +12,22 @@ class Keyboard {
 
         e = e || window.event;
 
-        if (e.keyCode == '38') {
+        if (e.keyCode == 'ArrowUp') {
             // up arrow
         }
-        else if (e.keyCode == '40') {
+        else if (e.keyCode == 'ArrowDown') {
             // down arrow
         }
-        else if (e.keyCode == '37') {
+        else if (e.keyCode == 'ArrowLeft') {
             // left arrow
         }
-        else if (e.keyCode == '39') {
+        else if (e.keyCode == 'ArrowRight') {
             // right arrow
         }
-        else if (e.keyCode == '32') {
+        else if (e.keyCode == 'Space') {
             // space
         } 
-        else if (e.keyCode == '68') {
+        else if (e.keyCode == 'KeyD') {
             // KeyD
         }
     }
