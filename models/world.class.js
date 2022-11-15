@@ -4,6 +4,7 @@ class World {
     healthbar = new HealthBar();
     coinbar = new CoinBar();
     poisonbar = new PoisonBar();
+    throwableObject = [new ThrowableObject()];
     ambient_Sound = new Audio('audio/underwater.wav');
     game_Sound = new Audio('audio/sharkie-loop_silent.wav');
     level = level1;
@@ -20,7 +21,7 @@ class World {
         this.canvas = canvas;                 
         this.draw();               
         this.setWorld();     
-        this.CheckCollisions();
+        this.playing();
     }
     
 
@@ -28,15 +29,30 @@ class World {
         this.character.world = this;        
     }
 
-    CheckCollisions() {
+
+    
+    playing() {
         setInterval(() => {
-            this.level.enemies.forEach((enemy) => {
-               if(this.character.isColliding(enemy)) {                
-                this.character.hit();
-                this.healthbar.setPercentage(this.character.energy);                
-               }
-            })
+            this.CheckCollisions();
+            this.checkThrowObjects();
         }, 200)
+    }
+
+
+    CheckCollisions() {
+        this.level.enemies.forEach((enemy) => {
+            if(this.character.isColliding(enemy)) {                
+             this.character.hit();
+             this.healthbar.setPercentage(this.character.energy);                
+            }
+         })
+    }
+
+    checkThrowObjects() {
+        if(this.keyboard.D) {
+            let bubble = new ThrowableObject(this.character.x, this.character.y);
+            this.throwableObject.push(bubble);
+        }
     }
 
     draw() {        
@@ -46,6 +62,7 @@ class World {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
         this.ctx.translate(this.camera_x, 0);        
+        
         this.addObjectToCanvas(this.level.backgroundObjects);
 
         this.ctx.translate(-this.camera_x, 0);
@@ -53,11 +70,11 @@ class World {
         this.addToMap(this.coinbar);
         this.addToMap(this.poisonbar);
         this.ctx.translate(this.camera_x, 0);
-
+        this.addObjectToCanvas(this.throwableObject);
         this.addToMap(this.character);        
         this.addObjectToCanvas(this.level.enemies);
         this.addObjectToCanvas(this.level.lights);
-
+        
         this.ctx.translate(-this.camera_x, 0);
 
         // Draw() wird immer und immer wieder aufgerufen

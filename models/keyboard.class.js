@@ -5,7 +5,7 @@ class Keyboard {
     UP = false;
     DOWN = false;
     SPACE = false;
-    BITE = false;
+    D = false;
 
    
     checkKey(e) {
@@ -23,6 +23,12 @@ class Keyboard {
         }
         else if (e.keyCode == '39') {
             // right arrow
+        }
+        else if (e.keyCode == '32') {
+            // space
+        } 
+        else if (e.keyCode == '68') {
+            // KeyD
         }
     }
 }

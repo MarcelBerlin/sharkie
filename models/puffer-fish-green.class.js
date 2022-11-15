@@ -50,7 +50,10 @@ class PufferFishGreen extends MovableObject {
             this.playAnimation(this.IMAGES_SWIM);
 
         }, 100);
-
-
     }
+
+        
+
+
+
 }
