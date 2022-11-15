@@ -32,6 +32,7 @@ class Character extends MovableObject {
         'img/1.Sharkie/2.Long_IDLE/i8.png',
         'img/1.Sharkie/2.Long_IDLE/i9.png',
         'img/1.Sharkie/2.Long_IDLE/i10.png'
+
     ];
 
     IMAGES_LONGIDLE = [
@@ -41,6 +42,7 @@ class Character extends MovableObject {
         'img/1.Sharkie/2.Long_IDLE/i13.png',
         'img/1.Sharkie/2.Long_IDLE/i14.png'
     ];
+
 
     IMAGES_SWIM = [
         'img/1.Sharkie/3.Swim/1.png',
@@ -113,17 +115,30 @@ class Character extends MovableObject {
         this.loadImages(this.IMAGES_HURT_SHOCKED);
         this.loadImages(this.IMAGES_DEAD_POISON);
         this.loadImages(this.IMAGES_DEAD_SHOCK);
-        this.animateIdle();
+        this.animateCharacter();
         this.swimAnimate();
     }
-   
 
-    animateIdle() {        
+
+    animateCharacter() {
         setInterval(() => {
             let i = this.currentImage % this.IMAGES_IDLE.length; // let i = 0 % 6; => 0, Rest 1 // 0, 1, 2, 3, 4, 5, 6, 0, 1, 2... etc
             let path = this.IMAGES_IDLE[i];
             this.img = this.imageCache[path];
             this.currentImage++;
+        }, 100);
+
+        setInterval(() => {
+            if (this.isHurt()) {
+                this.playAnimation(this.IMAGES_HURT_POISONED);
+            } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT || this.world.keyboard.UP || this.world.keyboard.DOWN) {                
+                this.playAnimation(this.IMAGES_SWIM);
+                this.getMovementTimeStamp();
+            } else if (this.isDead()) {
+                this.playAnimation(this.IMAGES_DEAD_POISON);
+            } else if (this.characterLongIdle()) {
+                this.playLongIdleAnimation();
+            }
         }, 100);
     }
 
@@ -131,44 +146,30 @@ class Character extends MovableObject {
         this.swimming_sound.pause();
 
         setInterval(() => {
-            if (this.world.keyboard.RIGHT && this.x <= this.world.level.level_end_x) {                
-                this.swimRight();                
+            if (this.world.keyboard.RIGHT && this.x <= this.world.level.level_end_x) {
+                this.swimRight();
                 this.otherDirection = false;
-                this.swimming_sound.play();                
+                this.swimming_sound.play();
             }
 
-            if (this.world.keyboard.LEFT && this.x >= 50) {                
+            if (this.world.keyboard.LEFT && this.x >= 50) {
                 this.swimLeft();
                 this.otherDirection = true;
-                this.swimming_sound.play();                
+                this.swimming_sound.play();
             }
 
-            if (this.world.keyboard.UP && this.y >= -25) {               
+            if (this.world.keyboard.UP && this.y >= -25) {
                 this.y -= this.speed;
-                this.swimming_sound.play();                
+                this.swimming_sound.play();
             }
 
-            if (this.world.keyboard.DOWN && this.y <= this.max_Y) {               
-                this.y += this.speed;                
-                this.swimming_sound.play();                
+            if (this.world.keyboard.DOWN && this.y <= this.max_Y) {
+                this.y += this.speed;
+                this.swimming_sound.play();
             }
 
             this.world.camera_x = -this.x + 50;
         }, 1000 / 60);
-
-
-        setInterval(() => {
-            if (this.isHurt()) {
-                this.playAnimation(this.IMAGES_HURT_POISONED);
-            } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT || this.world.keyboard.UP || this.world.keyboard.DOWN) {  
-                this.getMovementTimeStamp();  
-                this.playAnimation(this.IMAGES_SWIM);
-            } else if (this.characterLongIdle()) {
-                this.playLongIdleAnimations();
-            } else if (this.isDead()) {
-                this.playAnimation(this.IMAGES_DEAD_POISON);
-            }
-        }, 100);
 
     }
 
@@ -181,12 +182,10 @@ class Character extends MovableObject {
     characterLongIdle() {
         let timepassed = new Date().getTime() - this.lastMovement;
         timepassed = timepassed / 1000;
-        return timepassed > 1.5;
+        return timepassed > 5;
     }
 
-
-    playLongIdleAnimations() {
-        setInterval(() => {
+    playLongIdleAnimation() {        
             let i = this.currentImage;
             let j = this.currentImage % this.IMAGES_LONGIDLE.length; // Das % Zeichen sorgt für ein wiederholtes itterieren.
             let path1 = this.IMAGES_LONGIDLE_INTRO[i];
@@ -196,9 +195,11 @@ class Character extends MovableObject {
                 this.img = this.imageCache[path1];
             } else {
                 this.img = this.imageCache[path2];
-            }
-        }, 100);
+            }                  
+             
     }
+
+
 
 
 }

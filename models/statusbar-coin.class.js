@@ -3,12 +3,13 @@ class CoinBar extends StatusBar {
     x = 250;
 
     IMAGE_STATUSBAR = [
-        'img/4. Marcadores/green/Coin/0_coin.png',
-        'img/4. Marcadores/green/Coin/20_coin.png',
-        'img/4. Marcadores/green/Coin/40_coin.png',
-        'img/4. Marcadores/green/Coin/60_coin.png',
-        'img/4. Marcadores/green/Coin/80_coin.png',
-        'img/4. Marcadores/green/Coin/100_coin.png'
+        'img/4. Marcadores/Purple/0_coin_purple.png',
+        'img/4. Marcadores/Purple/20_coin_purple.png',
+        'img/4. Marcadores/Purple/40_coin_purple.png',
+        'img/4. Marcadores/Purple/60_coin_purple.png',
+        'img/4. Marcadores/Purple/80_coin_purple.png',
+        'img/4. Marcadores/Purple/100_coin_purple.png'
+        
     ];
 
 
