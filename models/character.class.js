@@ -195,9 +195,10 @@ class Character extends MovableObject {
                 this.img = this.imageCache[path1];
             } else {
                 this.img = this.imageCache[path2];
-            }                  
-             
+            }             
     }
+
+   
 
 
 

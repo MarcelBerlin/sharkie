@@ -5,6 +5,7 @@ class World {
     coinbar = new CoinBar();
     poisonbar = new PoisonBar();
     ambient_Sound = new Audio('audio/underwater.wav');
+    game_Sound = new Audio('audio/sharkie-loop_silent.wav');
     level = level1;
     canvas;
     ctx;
@@ -40,6 +41,8 @@ class World {
 
     draw() {        
         this.ambient_Sound.play(); 
+        this.game_Sound.play();
+        
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
         this.ctx.translate(this.camera_x, 0);        
