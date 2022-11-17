@@ -64,6 +64,18 @@ class Character extends MovableObject {
         'img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/8.png'
     ];
 
+    IMAGES_FINSLAP = [
+        'img/1.Sharkie/4.Attack/Fin slap/1.png',
+        'img/1.Sharkie/4.Attack/Fin slap/2.png',
+        'img/1.Sharkie/4.Attack/Fin slap/3.png',
+        'img/1.Sharkie/4.Attack/Fin slap/4.png',
+        'img/1.Sharkie/4.Attack/Fin slap/5.png',
+        'img/1.Sharkie/4.Attack/Fin slap/6.png',
+        'img/1.Sharkie/4.Attack/Fin slap/7.png',
+        'img/1.Sharkie/4.Attack/Fin slap/8.png'
+
+    ];
+
     IMAGES_HURT_POISONED = [
         'img/1.Sharkie/5.Hurt/1.Poisoned/1.png',
         'img/1.Sharkie/5.Hurt/1.Poisoned/2.png',
@@ -122,11 +134,13 @@ class Character extends MovableObject {
         this.loadImages(this.IMAGES_LONGIDLE_INTRO);
         this.loadImages(this.IMAGES_LONGIDLE);
         this.loadImages(this.IMAGES_SWIM);
+        this.loadImages(this.IMAGES_FINSLAP);
         this.loadImages(this.IMAGES_HURT_POISONED);
         this.loadImages(this.IMAGES_HURT_SHOCKED);
         this.loadImages(this.IMAGES_DEAD_POISON);
         this.loadImages(this.IMAGES_DEAD_SHOCK);
         this.animateCharacter();
+        this.applyGravity();
         this.swimAnimate();
     }
 
@@ -145,6 +159,8 @@ class Character extends MovableObject {
             } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT || this.world.keyboard.UP || this.world.keyboard.DOWN) {                
                 this.playAnimation(this.IMAGES_SWIM);
                 this.getMovementTimeStamp();
+            } else if (this.world.keyboard.SPACE) {
+                this.playAnimation(this.IMAGES_FINSLAP);
             } else if (this.isDead()) {
                 this.playAnimation(this.IMAGES_DEAD_POISON);
             } else if (this.characterLongIdle()) {
@@ -154,7 +170,6 @@ class Character extends MovableObject {
     }
 
     swimAnimate() {
-        this.swimming_sound.pause();
 
         setInterval(() => {
             if (this.world.keyboard.RIGHT && this.x <= this.world.level.level_end_x) {
@@ -209,7 +224,6 @@ class Character extends MovableObject {
             }             
     }
 
-   
 
 
 

@@ -4,7 +4,7 @@ class MovableObject extends DrawableObject {
     otherDirection = false;
     min_Y = 0;
     max_Y = 275;
-    speedY = 0.5;
+    speedY = 0.3;
     acceleration = 0.25;
     energy = 100;
     lastHit = 0;
@@ -15,9 +15,7 @@ class MovableObject extends DrawableObject {
         setInterval(() => {
             if (this.y <= this.max_Y) {
                 this.y += this.speedY;
-            } else {
-                this.speedY = 0;
-            }
+            }             
         }, 1000 / 25);
     }
 

@@ -2,6 +2,8 @@ class JellySuperdangerousPurple extends MovableObject {
 
     height = 120;
     width = 100; 
+    dead = false;
+
     IMAGES_DANGEROUS = [
         'img/2.Enemy/2 Jelly fish/Súper dangerous/Pink 1.png',
         'img/2.Enemy/2 Jelly fish/Súper dangerous/Pink 2.png',
@@ -15,7 +17,7 @@ class JellySuperdangerousPurple extends MovableObject {
         this.loadImages(this.IMAGES_DANGEROUS);
         this.x = 1600 + Math.random() * 700;
         this.y = 50 + Math.random() * 300;
-        this.speed = 0.25 + Math.random() * 0.25;
+        this.speed = 0.25 + Math.random() * 0.15;
         this.animate();
         
         

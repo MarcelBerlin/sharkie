@@ -29,6 +29,7 @@ const level1 = new Level(
         new BackgroundObject('img/3. Background/Layers/3.Fondo 1/D.png', 1439),
         new BackgroundObject('img/3. Background/Layers/2. Floor/D.png', 1439),       
 
+        
        
     ]
 );
