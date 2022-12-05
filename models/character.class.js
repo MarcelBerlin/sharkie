@@ -54,14 +54,14 @@ class Character extends MovableObject {
     ];
 
     IMAGES_BUBBLE_ATTACK = [
-        'img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/1.png',
-        'img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/2.png',
-        'img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/3.png',
-        'img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/4.png',
-        'img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/5.png',
-        'img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/6.png',
-        'img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/7.png',
-        'img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/8.png'
+        'img/1.Sharkie/4.Attack/Bubble trap/op1/1.png',
+        'img/1.Sharkie/4.Attack/Bubble trap/op1/2.png',
+        'img/1.Sharkie/4.Attack/Bubble trap/op1/3.png',
+        'img/1.Sharkie/4.Attack/Bubble trap/op1/4.png',
+        'img/1.Sharkie/4.Attack/Bubble trap/op1/5.png',
+        'img/1.Sharkie/4.Attack/Bubble trap/op1/6.png',
+        'img/1.Sharkie/4.Attack/Bubble trap/op1/7.png',
+        'img/1.Sharkie/4.Attack/Bubble trap/op1/8.png'
     ];
 
     IMAGES_FINSLAP = [
@@ -135,6 +135,7 @@ class Character extends MovableObject {
         this.loadImages(this.IMAGES_LONGIDLE);
         this.loadImages(this.IMAGES_SWIM);
         this.loadImages(this.IMAGES_FINSLAP);
+        this.loadImages(this.IMAGES_BUBBLE_ATTACK);
         this.loadImages(this.IMAGES_HURT_POISONED);
         this.loadImages(this.IMAGES_HURT_SHOCKED);
         this.loadImages(this.IMAGES_DEAD_POISON);
@@ -161,6 +162,8 @@ class Character extends MovableObject {
                 this.getMovementTimeStamp();
             } else if (this.world.keyboard.SPACE) {
                 this.playAnimation(this.IMAGES_FINSLAP);
+            } else if (this.world.keyboard.D) {
+                this.playAnimation(this.IMAGES_BUBBLE_ATTACK);
             } else if (this.isDead()) {
                 this.playAnimation(this.IMAGES_DEAD_POISON);
             } else if (this.characterLongIdle()) {

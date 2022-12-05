@@ -6,7 +6,7 @@ class World {
     poisonbar = new PoisonBar();
     throwableObject = [];
     ambient_Sound = new Audio('audio/underwater.wav');
-    game_Sound = new Audio('audio/sharkie-loop_silent.wav');
+    game_Sound = new Audio('audio/SharkieAnthem.mp3');
     level = level1;
     canvas;
     ctx;
@@ -43,7 +43,7 @@ class World {
         if(this.keyboard.D) {
             let bubble = new ThrowableObject(this.character.x + 140, this.character.y + 120);
             this.throwableObject.push(bubble);
-        }
+        }      
     }
 
 

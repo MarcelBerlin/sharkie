@@ -4,7 +4,7 @@ class MovableObject extends DrawableObject {
     otherDirection = false;
     min_Y = 0;
     max_Y = 275;
-    speedY = 0.3;
+    speedY = 0.15;
     acceleration = 0.25;
     energy = 100;
     lastHit = 0;
@@ -77,6 +77,7 @@ class MovableObject extends DrawableObject {
 
     isDead() {
         return this.energy == 0;
+        
 
     }
 
