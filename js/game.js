@@ -1,6 +1,10 @@
 let canvas;
 let world;
 let keyboard = new Keyboard();
+let gameSpeed = 10;
+
+
+
 
 
 function init() {

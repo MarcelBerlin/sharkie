@@ -1,5 +1,6 @@
 class MovableObject extends DrawableObject {
 
+    
     speed = 0.1;
     otherDirection = false;
     min_Y = 0;
@@ -8,6 +9,7 @@ class MovableObject extends DrawableObject {
     acceleration = 0.25;
     energy = 100;
     lastHit = 0;
+    
 
 
 
@@ -53,7 +55,7 @@ class MovableObject extends DrawableObject {
 
     // is colliding (enemy)
     isColliding(mo) {
-        return this.x + this.width > mo.x &&
+        return this.x + this.width -35 > mo.x &&
             this.y + this.height > mo.y &&
             this.x < mo.x &&
             this.y < mo.y + mo.height

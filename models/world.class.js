@@ -1,70 +1,73 @@
 class World {
 
     character = new Character();
+    pufferGreen = new PufferFishGreen();
+    pufferPurple = new PufferFishPurple();
+    pufferRed = new PufferFishRed();
     healthbar = new HealthBar();
     coinbar = new CoinBar();
     poisonbar = new PoisonBar();
     throwableObject = [];
     ambient_Sound = new Audio('audio/underwater.wav');
-    game_Sound = new Audio('audio/SharkieAnthem.mp3');
+    game_Sound = new Audio('audio/sharkieanthem_short.mp3');
     level = level1;
     canvas;
     ctx;
     keyboard;
     camera_x = 0;
-    
- 
+
+
 
     constructor(canvas, keyboard) {
-        this.ctx = canvas.getContext('2d');        
+        this.ctx = canvas.getContext('2d');
         this.keyboard = keyboard;
-        this.canvas = canvas;                 
-        this.draw();               
-        this.setWorld();     
+        this.canvas = canvas;
+        this.draw();
+        this.setWorld();
         this.swimAndAttack();
     }
-    
+
 
     setWorld() {
-        this.character.world = this;        
+        this.character.world = this;
     }
 
 
-    
     swimAndAttack() {
         setInterval(() => {
-            this.CheckCollisions(); 
-            this.checkThrowObjects();           
-        }, 200)       
+            this.CheckCollisions();
+            this.checkThrowObjects();
+        }, 200)
     }
 
 
     checkThrowObjects() {
-        if(this.keyboard.D) {
-            let bubble = new ThrowableObject(this.character.x + 140, this.character.y + 120);
+        if (this.keyboard.D) {
+            let bubble = new ThrowableObject(this.character.x + 140, this.character.y + 110);
             this.throwableObject.push(bubble);
-        }      
+        }
     }
 
 
     CheckCollisions() {
         this.level.enemies.forEach((enemy) => {
-            if(this.character.isColliding(enemy)) {                
-             this.character.hit();
-             this.healthbar.setPercentage(this.character.energy);                
+            if (this.character.isColliding(enemy)) {
+                this.character.hit();
+                this.healthbar.setPercentage(this.character.energy);
             }
-         })
+        })
     }
+
    
 
-    draw() {        
-        this.ambient_Sound.play(); 
+    draw() {
+        this.ambient_Sound.play();
         this.game_Sound.play();
-        
+
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
-        this.ctx.translate(this.camera_x, 0);        
-        
+        this.ctx.translate(this.camera_x, 0);
+
         this.addObjectToCanvas(this.level.backgroundObjects);
 
         this.ctx.translate(-this.camera_x, 0);
@@ -73,32 +76,35 @@ class World {
         this.addToMap(this.poisonbar);
         this.ctx.translate(this.camera_x, 0);
         this.addObjectToCanvas(this.throwableObject);
-        this.addToMap(this.character);        
+        this.addToMap(this.character);
         this.addObjectToCanvas(this.level.enemies);
         this.addObjectToCanvas(this.level.lights);
-        
+
         this.ctx.translate(-this.camera_x, 0);
 
         // Draw() wird immer und immer wieder aufgerufen
+
         let self = this;
         requestAnimationFrame(function () {
             self.draw();
         });
-    }
-       
 
-    addObjectToCanvas(object) {        
+        // #############################################
+    }
+
+
+    addObjectToCanvas(object) {
         object.forEach(o => {
             this.addToMap(o);
         });
     }
 
-    addToMap(mo) {        
+    addToMap(mo) {
         if (mo.otherDirection) {
             this.flipImage(mo);
         }
 
-        mo.drawImage(this.ctx);        
+        mo.drawImage(this.ctx);
         mo.drawOutlines(this.ctx);
 
         if (mo.otherDirection) {
@@ -118,5 +124,5 @@ class World {
         mo.x = mo.x * -1;
     }
 
-    
+
 }

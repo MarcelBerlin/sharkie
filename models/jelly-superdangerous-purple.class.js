@@ -15,9 +15,9 @@ class JellySuperdangerousPurple extends MovableObject {
     constructor() {
         super().loadImage('img/2.Enemy/2 Jelly fish/Súper dangerous/Pink 1.png');
         this.loadImages(this.IMAGES_DANGEROUS);
-        this.x = 1600 + Math.random() * 700;
+        this.x = 1400 + Math.random() * 700;
         this.y = 50 + Math.random() * 300;
-        this.speed = 0.25 + Math.random() * 0.15;
+        this.speed = 0.15 + Math.random() * 0.1;
         this.animate();
         
         

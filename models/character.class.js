@@ -66,8 +66,6 @@ class Character extends MovableObject {
 
     IMAGES_FINSLAP = [
         'img/1.Sharkie/4.Attack/Fin slap/1.png',
-        'img/1.Sharkie/4.Attack/Fin slap/2.png',
-        'img/1.Sharkie/4.Attack/Fin slap/3.png',
         'img/1.Sharkie/4.Attack/Fin slap/4.png',
         'img/1.Sharkie/4.Attack/Fin slap/5.png',
         'img/1.Sharkie/4.Attack/Fin slap/6.png',
@@ -155,15 +153,17 @@ class Character extends MovableObject {
         }, 100);
 
         setInterval(() => {
-            if (this.isHurt()) {
+            if (this.world.keyboard.SPACE) {
+                this.playAnimation(this.IMAGES_FINSLAP);
+                this.getMovementTimeStamp();
+            } else if (this.isHurt()) {
                 this.playAnimation(this.IMAGES_HURT_POISONED);
             } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT || this.world.keyboard.UP || this.world.keyboard.DOWN) {                
                 this.playAnimation(this.IMAGES_SWIM);
                 this.getMovementTimeStamp();
-            } else if (this.world.keyboard.SPACE) {
-                this.playAnimation(this.IMAGES_FINSLAP);
-            } else if (this.world.keyboard.D) {
+            }  else if (this.world.keyboard.D) {
                 this.playAnimation(this.IMAGES_BUBBLE_ATTACK);
+                this.getMovementTimeStamp();
             } else if (this.isDead()) {
                 this.playAnimation(this.IMAGES_DEAD_POISON);
             } else if (this.characterLongIdle()) {

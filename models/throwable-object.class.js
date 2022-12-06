@@ -18,18 +18,17 @@ class ThrowableObject extends MovableObject {
         this.y = y;
         this.width = 40;
         this.height = 40;
-        this.Throw();
+        this.BubbleBlow();
      
 
     }
 
-    Throw() {
-
-        setInterval(() => {
-            this.x += 10;
-        }, 25);     
-    }
-
-    
+    BubbleBlow() {
+        setTimeout(() => {
+            setInterval(() => {
+                this.x += 10;
+            }, 25);     
+        }, 150);       
+    }    
 
 }
