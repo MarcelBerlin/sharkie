@@ -138,8 +138,8 @@ class Character extends MovableObject {
         this.loadImages(this.IMAGES_HURT_SHOCKED);
         this.loadImages(this.IMAGES_DEAD_POISON);
         this.loadImages(this.IMAGES_DEAD_SHOCK);
-        this.animateCharacter();
-        this.applyGravity();
+        this.animateCharacter();   
+        this.applyGravity();     
         this.swimAnimate();
     }
 
@@ -224,7 +224,7 @@ class Character extends MovableObject {
                 this.img = this.imageCache[path1];
             } else {
                 this.img = this.imageCache[path2];
-            }             
+            }                   
     }
 
 

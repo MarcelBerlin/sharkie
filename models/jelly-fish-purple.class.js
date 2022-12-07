@@ -3,6 +3,7 @@ class JellyFishPurple extends MovableObject {
     height = 120;
     width = 90;
     dead = false;
+    world;
 
     IMAGES_SWIM = [
         'img/2.Enemy/2 Jelly fish/Regular damage/Lila 1.png',
@@ -13,8 +14,9 @@ class JellyFishPurple extends MovableObject {
 
 
 
-    constructor() {
+    constructor(world) {
         super().loadImage('img/2.Enemy/2 Jelly fish/Regular damage/Lila 1.png');
+        this.world = world;
         this.loadImages(this.IMAGES_SWIM);
         this.x = 600 + Math.random() * 700;
         this.y = 50 + Math.random() * 200;

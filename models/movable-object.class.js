@@ -9,6 +9,12 @@ class MovableObject extends DrawableObject {
     acceleration = 0.25;
     energy = 100;
     lastHit = 0;
+    offset = {
+        x: 0,
+        y: 0,
+        width: 0,
+        height: 0,
+    }
     
 
 
@@ -54,11 +60,11 @@ class MovableObject extends DrawableObject {
 
 
     // is colliding (enemy)
-    isColliding(mo) {
-        return this.x + this.width -35 > mo.x &&
-            this.y + this.height > mo.y &&
-            this.x < mo.x &&
-            this.y < mo.y + mo.height
+    isColliding(movableObject) {
+        return this.x + this.width - this.offset.width > movableObject.x + movableObject.offset.x &&
+            this.y + this.height - this.offset.height > movableObject.y + movableObject.offset.y &&
+            this.x + this.offset.x < movableObject.x + movableObject.width - movableObject.offset.width &&
+            this.y + this.offset.y < movableObject.y + movableObject.height - movableObject.offset.height;
     }
 
     hit() {

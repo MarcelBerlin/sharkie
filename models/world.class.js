@@ -1,9 +1,13 @@
 class World {
 
     character = new Character();
-    pufferGreen = new PufferFishGreen();
-    pufferPurple = new PufferFishPurple();
-    pufferRed = new PufferFishRed();
+    pufferGreen = new PufferFishGreen(this);
+    pufferPurple = new PufferFishPurple(this);
+    pufferRed = new PufferFishRed(this);
+    jellyPurple = new JellyFishPurple(this);
+    jellyYellow = new JellyFishYellow(this);
+    jellySuperGreen = new JellySuperdangerousGreen(this);
+    jellySuperYellow = new JellySuperdangerousPurple(this);
     healthbar = new HealthBar();
     coinbar = new CoinBar();
     poisonbar = new PoisonBar();
@@ -67,10 +71,9 @@ class World {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
         this.ctx.translate(this.camera_x, 0);
-
         this.addObjectToCanvas(this.level.backgroundObjects);
-
         this.ctx.translate(-this.camera_x, 0);
+        
         this.addToMap(this.healthbar);
         this.addToMap(this.coinbar);
         this.addToMap(this.poisonbar);
