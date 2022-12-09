@@ -63,7 +63,7 @@ class EndBoss extends MovableObject {
         this.x = 400;
         this.y = -50;
         this.animate();
-        this.attackCharacter();
+
 
     }
 
@@ -82,25 +82,31 @@ class EndBoss extends MovableObject {
                         this.splashJump.play();
                     } else {
                         this.playAnimation(this.IMAGES_FLOATING);
+                        setInterval(() => {
+                            this.attackCharacter();
+                        }, 100);
                     }
                     i++;
+
                 }, 100);
-            }            
-        }, 100);    
+            }
+        }, 100);
+
+
 
     }
 
     attackCharacter() {
+        let i = 0;
         setInterval(() => {
-            if (world.character.x + 200 > this.x) {
+            if (world.character.x + 300 > this.x) {
                 this.playAnimation(this.IMAGES_ATTACK);
-            
             }
-        }, 100);
+        }, 1000);
     }
 
-   
-    
+
+
 
 
 
