@@ -1,7 +1,4 @@
 class EndBoss extends MovableObject {
-    
-    height = 450;
-    width = 450;
 
     IMAGES_INTRODUCE = [
         'img/2.Enemy/3 Final Enemy/1.Introduce/1.png',
@@ -31,32 +28,81 @@ class EndBoss extends MovableObject {
         'img/2.Enemy/3 Final Enemy/2.floating/12.png',
         'img/2.Enemy/3 Final Enemy/2.floating/13.png'
     ];
+
+    IMAGES_ATTACK = [
+        'img/2.Enemy/3 Final Enemy/Attack/1.png',
+        'img/2.Enemy/3 Final Enemy/Attack/2.png',
+        'img/2.Enemy/3 Final Enemy/Attack/3.png',
+        'img/2.Enemy/3 Final Enemy/Attack/4.png',
+        'img/2.Enemy/3 Final Enemy/Attack/5.png',
+        'img/2.Enemy/3 Final Enemy/Attack/6.png'
+    ];
+
+    height = 450;
+    width = 450;
+    offset = {
+        top: 175,
+        bottom: 30,
+        left: 30,
+        right: 30
+    }
     world;
+    hadFirstContact = false;
+    biteAttack = new Audio('audio/bite.wav');
+    splashJump = new Audio('audio/splash.wav');
 
 
-    constructor() {
+
+
+    constructor(world) {
         super().loadImage(this.IMAGES_INTRODUCE[0]);
+        this.world = world;
         this.loadImages(this.IMAGES_INTRODUCE);
         this.loadImages(this.IMAGES_FLOATING);
-        this.x = 2350;
+        this.loadImages(this.IMAGES_ATTACK);
+        this.x = 400;
         this.y = -50;
         this.animate();
+        this.attackCharacter();
 
     }
+
 
     animate() {
+        let i = 0
+
         setInterval(() => {
-            let i = this.currentImage;
-            let j = this.currentImage % this.IMAGES_FLOATING.length; // Das % Zeichen sorgt für ein wiederholtes itterieren.
-            let path1 = this.IMAGES_INTRODUCE[i];
-            let path2 = this.IMAGES_FLOATING[j];
-            this.currentImage++;
-            if (this.currentImage <= this.IMAGES_INTRODUCE.length) {
-                this.img = this.imageCache[path1];
-            } else {
-                this.img = this.imageCache[path2];
+            if (world.character.x > 150 && !this.hadFirstContact) {
+                i = 0;
+                this.hadFirstContact = true;
+
+                setInterval(() => {
+                    if (i < 10) {
+                        this.playAnimation(this.IMAGES_INTRODUCE);
+                        this.splashJump.play();
+                    } else {
+                        this.playAnimation(this.IMAGES_FLOATING);
+                    }
+                    i++;
+                }, 100);
             }            
+        }, 100);    
+
+    }
+
+    attackCharacter() {
+        setInterval(() => {
+            if (world.character.x + 200 > this.x) {
+                this.playAnimation(this.IMAGES_ATTACK);
+            
+            }
         }, 100);
     }
+
+   
+    
+
+
+
 
 }

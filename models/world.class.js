@@ -8,12 +8,14 @@ class World {
     jellyYellow = new JellyFishYellow(this);
     jellySuperGreen = new JellySuperdangerousGreen(this);
     jellySuperYellow = new JellySuperdangerousPurple(this);
+    endBoss = new EndBoss(this);
     healthbar = new HealthBar();
     coinbar = new CoinBar();
     poisonbar = new PoisonBar();
     throwableObject = [];
     ambient_Sound = new Audio('audio/underwater.wav');
     game_Sound = new Audio('audio/sharkieanthem_short.mp3');
+    bossAnthem = new Audio('audio/bossanthem.mp3');
     level = level1;
     canvas;
     ctx;
@@ -25,10 +27,10 @@ class World {
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
         this.keyboard = keyboard;
-        this.canvas = canvas;
+        this.canvas = canvas;        
         this.draw();
         this.setWorld();
-        this.swimAndAttack();
+        this.swimAndAttack();        
     }
 
 
@@ -67,6 +69,7 @@ class World {
     draw() {
         this.ambient_Sound.play();
         this.game_Sound.play();
+        
 
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
@@ -84,6 +87,7 @@ class World {
         this.addObjectToCanvas(this.level.lights);
 
         this.ctx.translate(-this.camera_x, 0);
+       
 
         // Draw() wird immer und immer wieder aufgerufen
 
@@ -126,6 +130,16 @@ class World {
         this.ctx.restore();
         mo.x = mo.x * -1;
     }
+
+    bossSpawn() {
+        setInterval(() => {
+            if(this.endBoss.animate) {
+                this.bossAnthem.play();
+            }   
+       }, 100);        
+    }
+
+    
 
 
 }

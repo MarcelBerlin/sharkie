@@ -4,20 +4,25 @@ class DrawableObject {
     imageCache = {};
     currentImage = 0;
     x = 0;
-    y = 100;    
+    y = 100;
     height = 140;
     width = 170;
 
-   
+
 
     loadImage(path) {
         this.img = new Image(); // this.img = document.getElementById('image) <img id="image" src> <-- ist genau das gleiche!
         this.img.src = path;
     }
-    
+
 
     drawImage(ctx) {
-        ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
+        try {
+            ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
+        } catch (error) {
+            console.log(error);
+        }
+        
     }
 
     loadImages(arr) {
@@ -28,8 +33,8 @@ class DrawableObject {
             this.imageCache[path] = img;
         });
     }
-    
-   
+
+
     drawOutlines(ctx) {
         if (this instanceof Character || this instanceof PufferFishGreen || this instanceof PufferFishPurple || this instanceof PufferFishRed || this instanceof JellyFishPurple || this instanceof JellyFishYellow || this instanceof JellySuperdangerousGreen || this instanceof JellySuperdangerousPurple || this instanceof EndBoss) {
             ctx.beginPath();
@@ -40,5 +45,5 @@ class DrawableObject {
         }
     }
 
-    
+
 }

@@ -4,7 +4,6 @@ class PufferFishGreen extends MovableObject {
     width = 100;
     world;
 
-
     IMAGES_SWIM = [
         'img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim1.png',
         'img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim2.png',
@@ -46,6 +45,8 @@ class PufferFishGreen extends MovableObject {
 
 
     animate() {
+        let i = 0;
+
         setInterval(() => {
             this.swimLeft();            
         }, 1000 / 60);
@@ -53,7 +54,12 @@ class PufferFishGreen extends MovableObject {
         setInterval(() => {
             this.playAnimation(this.IMAGES_SWIM);
             if (world.character.x + 200 > this.x) {
-                this.playAnimation(this.IMAGES_BUBBLESWIM);
+                if (i < 5) {
+                    this.playAnimation(this.IMAGES_TRANSITION);
+                } else {
+                    this.playAnimation(this.IMAGES_BUBBLESWIM);
+                }         
+                i++;                       
             } else this.playAnimation(this.IMAGES_SWIM);
         }, 100);
     }

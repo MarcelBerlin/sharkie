@@ -123,6 +123,14 @@ class Character extends MovableObject {
     y = 100;
     world;
     lastMovement = 0;
+
+    offset = {
+        top: 120,
+        bottom: 30,
+        left: 40,
+        right: 30       
+    }
+
     swimming_sound = new Audio('audio/swim.mp3');
 
 
@@ -227,6 +235,7 @@ class Character extends MovableObject {
             }                   
     }
 
+   
 
 
 
