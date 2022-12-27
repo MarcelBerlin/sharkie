@@ -27,8 +27,8 @@ class ThrowableObject extends MovableObject {
         setTimeout(() => {
             setInterval(() => {
                 this.x += 10;
-            }, 30);     
-        }, 200);       
+            }, 20);     
+        }, 150);       
     }    
 
 }
