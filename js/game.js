@@ -9,8 +9,13 @@ let gameSpeed = 10;
 
 function init() {
     canvas = document.getElementById('canvas');
-    world = new World(canvas, keyboard);
-          
+    world = new World(canvas, keyboard);    
+    DisplayShowHidden();
+}
+
+function DisplayShowHidden() {
+    document.getElementById('startscreen').style.display = 'none';
+    document.getElementById('canvas').style.display = 'block';
 }
 
 
