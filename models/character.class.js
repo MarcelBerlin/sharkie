@@ -128,11 +128,10 @@ class Character extends MovableObject {
         top: 120,
         bottom: 30,
         left: 40,
-        right: 30       
+        right: 30
     }
 
-    swimming_sound = new Audio('audio/swim.mp3');
-
+    swimming_sound = new Audio('audio/swim.mp3');    
 
     constructor() {
         super().loadImage('img/1.Sharkie/1.IDLE/1.png');
@@ -146,13 +145,14 @@ class Character extends MovableObject {
         this.loadImages(this.IMAGES_HURT_SHOCKED);
         this.loadImages(this.IMAGES_DEAD_POISON);
         this.loadImages(this.IMAGES_DEAD_SHOCK);
-        this.animateCharacter();   
-        this.applyGravity();     
+        this.animateCharacter();
+        this.applyGravity();
         this.swimAnimate();
     }
 
 
     animateCharacter() {
+
         setInterval(() => {
             let i = this.currentImage % this.IMAGES_IDLE.length; // let i = 0 % 6; => 0, Rest 1 // 0, 1, 2, 3, 4, 5, 6, 0, 1, 2... etc
             let path = this.IMAGES_IDLE[i];
@@ -166,14 +166,15 @@ class Character extends MovableObject {
                 this.getMovementTimeStamp();
             } else if (this.isHurt()) {
                 this.playAnimation(this.IMAGES_HURT_POISONED);
-            } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT || this.world.keyboard.UP || this.world.keyboard.DOWN) {                
+            } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT || this.world.keyboard.UP || this.world.keyboard.DOWN) {
                 this.playAnimation(this.IMAGES_SWIM);
                 this.getMovementTimeStamp();
-            }  else if (this.world.keyboard.D) {
+            } else if (this.world.keyboard.D) {
                 this.playAnimation(this.IMAGES_BUBBLE_ATTACK);
                 this.getMovementTimeStamp();
             } else if (this.isDead()) {
-                this.playAnimation(this.IMAGES_DEAD_POISON);
+                this.playAnimation(this.IMAGES_DEAD_POISON);   
+                this.clearAllIntervals();                         
             } else if (this.characterLongIdle()) {
                 this.playLongIdleAnimation();
             }
@@ -222,21 +223,28 @@ class Character extends MovableObject {
         return timepassed > 5;
     }
 
-    playLongIdleAnimation() {        
-            let i = this.currentImage;
-            let j = this.currentImage % this.IMAGES_LONGIDLE.length; // Das % Zeichen sorgt für ein wiederholtes itterieren.
-            let path1 = this.IMAGES_LONGIDLE_INTRO[i];
-            let path2 = this.IMAGES_LONGIDLE[j];
-            this.currentImage++;
-            if (this.currentImage <= this.IMAGES_LONGIDLE_INTRO.length) {
-                this.img = this.imageCache[path1];
-            } else {
-                this.img = this.imageCache[path2];
-            }                   
+    playLongIdleAnimation() {
+        let i = this.currentImage;
+        let j = this.currentImage % this.IMAGES_LONGIDLE.length; // Das % Zeichen sorgt für ein wiederholtes itterieren.
+        let path1 = this.IMAGES_LONGIDLE_INTRO[i];
+        let path2 = this.IMAGES_LONGIDLE[j];
+        this.currentImage++;
+        if (this.currentImage <= this.IMAGES_LONGIDLE_INTRO.length) {
+            this.img = this.imageCache[path1];
+        } else {
+            this.img = this.imageCache[path2];
+        }
     }
 
-   
+    clearAllIntervals() {
+        setTimeout(() => {
+            for (let i = 1; i < 9999; i++) window.clearInterval(i);
 
+        }, 500);
+        world.ambient_Sound.pause();
+        world.game_Sound.pause();
+        world.bossAnthem.pause();        
+    }
 
 
 

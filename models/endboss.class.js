@@ -60,45 +60,53 @@ class EndBoss extends MovableObject {
         this.loadImages(this.IMAGES_INTRODUCE);
         this.loadImages(this.IMAGES_FLOATING);
         this.loadImages(this.IMAGES_ATTACK);
-        this.x = 400;
+        this.x = 2200;
         this.y = -50;
-        this.animate();        
+        this.animate();
 
     }
 
 
     animate() {
         let i = 0
-
         setInterval(() => {
-            if (world.character.x > 150 && !this.hadFirstContact) {
+            if (world.character.x > 1800 && !this.hadFirstContact) {
                 i = 0;
                 this.hadFirstContact = true;
                 setInterval(() => {
+                    world.game_Sound.pause();
+                    world.bossAnthem.play();
                     if (i < 10) {
                         this.playAnimation(this.IMAGES_INTRODUCE);
                         this.splashJump.play();
                     } else {
-                        this.playAnimation(this.IMAGES_FLOATING);                        
-                        this.attackCharacter();                     
+                        this.playAnimation(this.IMAGES_FLOATING);
+                        this.attackCharacter();
                     }
                     i++;
-                }, 100);       
+                }, 100);
             }
         }, 100);
-
-
-
     }
 
-    attackCharacter() {              
+    attackCharacter() {
+        
         setInterval(() => {
-            if (world.character.x + 250 > this.x) {
+            if (world.character.x + 275 > this.x) {
                 this.playAnimation(this.IMAGES_ATTACK);
-            }        
+                this.biteAttack.play();
+                this.swimAttack();
+            }
         }, 100);
         
     }
+
+    swimAttack() {
+        this.x -= 0.15;        
+    }
+
+
+
 
 
 

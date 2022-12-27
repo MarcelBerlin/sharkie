@@ -12,25 +12,27 @@ class World {
     healthbar = new HealthBar();
     coinbar = new CoinBar();
     poisonbar = new PoisonBar();
-    throwableObject = [];
-    ambient_Sound = new Audio('audio/underwater.wav');
-    game_Sound = new Audio('audio/sharkieanthem_short.mp3');
-    bossAnthem = new Audio('audio/bossanthem.mp3');
+    throwableObject = [];    
     level = level1;
     canvas;
     ctx;
     keyboard;
     camera_x = 0;
-
+    ambient_Sound = new Audio('audio/underwater.wav');
+    game_Sound = new Audio('audio/sharkieanthem_short.mp3');  
+    bossAnthem = new Audio('audio/bossanthem.mp3'); 
 
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
         this.keyboard = keyboard;
-        this.canvas = canvas;        
+        this.canvas = canvas;
         this.draw();
         this.setWorld();
-        this.swimAndAttack();        
+        this.swimAndAttack();
+        this.ambient_Sound.play();
+        this.game_Sound.play();
+        
     }
 
 
@@ -64,19 +66,16 @@ class World {
         })
     }
 
-   
 
-    draw() {
-        this.ambient_Sound.play();
-        this.game_Sound.play();
+
+    draw() {       
         
-
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
         this.ctx.translate(this.camera_x, 0);
         this.addObjectToCanvas(this.level.backgroundObjects);
         this.ctx.translate(-this.camera_x, 0);
-        
+
         this.addToMap(this.healthbar);
         this.addToMap(this.coinbar);
         this.addToMap(this.poisonbar);
@@ -87,7 +86,7 @@ class World {
         this.addObjectToCanvas(this.level.lights);
 
         this.ctx.translate(-this.camera_x, 0);
-       
+
 
         // Draw() wird immer und immer wieder aufgerufen
 
@@ -129,17 +128,10 @@ class World {
     flipImageBack(mo) {
         this.ctx.restore();
         mo.x = mo.x * -1;
-    }
+    }  
 
-    bossSpawn() {
-        setInterval(() => {
-            if(this.endBoss.animate) {
-                this.bossAnthem.play();
-            }   
-       }, 100);        
-    }
+
 
     
-
 
 }
