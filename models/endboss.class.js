@@ -74,7 +74,7 @@ class EndBoss extends MovableObject {
                 i = 0;
                 this.hadFirstContact = true;
                 setInterval(() => {
-                    world.game_Sound.pause();
+                    // world.game_Sound.pause();
                     world.bossAnthem.play();
                     if (i < 10) {
                         this.playAnimation(this.IMAGES_INTRODUCE);
@@ -82,6 +82,7 @@ class EndBoss extends MovableObject {
                     } else {
                         this.playAnimation(this.IMAGES_FLOATING);
                         this.attackCharacter();
+                        this.swimLeft();
                     }
                     i++;
                 }, 100);
@@ -90,19 +91,19 @@ class EndBoss extends MovableObject {
     }
 
     attackCharacter() {
-        
         setInterval(() => {
-            if (world.character.x + 275 > this.x) {
-                this.playAnimation(this.IMAGES_ATTACK);
-                this.biteAttack.play();
-                this.swimAttack();
+            if (world.character.x + 250 > this.x) {
+                    this.playAnimation(this.IMAGES_ATTACK);
+                    this.biteAttack.play();                 
             }
         }, 100);
-        
+
     }
 
-    swimAttack() {
-        this.x -= 0.15;        
+    swimLeft() {
+        setTimeout(() => {
+            this.x -= 2.5;
+        }, 500);
     }
 
 
