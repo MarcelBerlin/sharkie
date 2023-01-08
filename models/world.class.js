@@ -44,7 +44,7 @@ class World {
     swimAndAttack() {
         setInterval(() => {
             this.CheckCollisions();
-            this.CheckBubbleCollision();
+            this.checkThrowObjects();
         }, 200)
     }
 
@@ -54,6 +54,11 @@ class World {
             let bubble = new ThrowableObject(this.character.x + 140, this.character.y + 110);
             this.throwableObject.push(bubble);
         }
+        this.level.enemies.forEach((enemy) => {
+            if (this.bubble.isColliding(enemy)) {
+                console.log(enemy);
+            }
+        })        
     }
 
 
@@ -66,14 +71,7 @@ class World {
         })
     }
 
-    CheckBubbleCollision() {
-        this.checkThrowObjects();
-        this.level.enemies.forEach((enemy) => {
-            if (this.bubble.isColliding(enemy)) {
-                console.log(enemy);
-            }
-        })        
-    }
+   
 
 
 
