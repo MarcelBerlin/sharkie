@@ -6,6 +6,7 @@ class Keyboard {
     DOWN = false;
     SPACE = false;
     D = false;
+    F = false;
 
    
     checkKey(e) {
@@ -29,6 +30,9 @@ class Keyboard {
         } 
         else if (e.keyCode == 'KeyD') {
             // KeyD
+        }
+        else if (e.keyCode == 'KeyF') {
+            // KeyF
         }
     }
 }

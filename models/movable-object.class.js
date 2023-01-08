@@ -8,7 +8,7 @@ class MovableObject extends DrawableObject {
     speedY = 0.15;
     acceleration = 0.25;
     energy = 100;
-    pufferFishEnergy = 20;
+    pufferFishEnergy = 10;
     jellyFishEnergy = 10;
     bossEnergy = 50;
     lastHit = 0;

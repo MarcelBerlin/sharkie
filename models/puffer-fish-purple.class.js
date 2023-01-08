@@ -30,8 +30,7 @@ class PufferFishPurple extends MovableObject {
 
     IMAGES_DEAD = [
         'img/2.Enemy/1.Puffer fish (3 color options)/4.DIE/3.png',
-        'img/2.Enemy/1.Puffer fish (3 color options)/4.DIE/3.3.png',
-        'img/2.Enemy/1.Puffer fish (3 color options)/4.DIE/3.2.png'
+        
     ]
 
 
@@ -72,7 +71,7 @@ class PufferFishPurple extends MovableObject {
         setInterval(() => {
             if (this.pufferFishEnergy == 0) {
                 this.speed = 0;
-                this.y -= 0.5;
+                this.y -= 7.5;
                 this.playAnimation(this.IMAGES_DEAD);
             }
             else this.playAnimation(this.IMAGES_SWIM);
