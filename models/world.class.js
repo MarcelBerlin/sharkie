@@ -29,7 +29,7 @@ class World {
         this.canvas = canvas;
         this.draw();
         this.setWorld();
-        this.swimAndAttack();
+        this.swimCollectAndAttack();
         this.ambient_Sound.play();
         this.game_Sound.play();
         
@@ -41,10 +41,11 @@ class World {
     }
 
 
-    swimAndAttack() {
+    swimCollectAndAttack() {
         setInterval(() => {
             this.CheckCollisions();
             this.checkThrowObjects();
+            this.bubbleHit();
         }, 200)
     }
 
@@ -54,11 +55,7 @@ class World {
             let bubble = new ThrowableObject(this.character.x + 140, this.character.y + 110);
             this.throwableObject.push(bubble);
         }
-        this.level.enemies.forEach((enemy) => {
-            if (this.bubble.isColliding(enemy)) {
-                console.log(enemy);
-            }
-        })        
+        
     }
 
 
@@ -71,6 +68,26 @@ class World {
         })
     }
 
+    bubbleHit() {
+        this.level.enemies.forEach((enemy, i) => {
+            this.throwableObject.forEach((throwableObject) => {
+                if (throwableObject.isColliding(enemy)) {
+                    console.log(enemy);
+                    setTimeout(() => {
+                        this.level.enemies.splice(i, 1);
+                    }, 500);
+                }
+            })
+        })
+    }
+
+    finSlapHit() {
+        this.level.enemies.forEach((enemy, i) => {
+           if (this.character.isColliding(enemy) && this.keyboard.SPACE) {
+                console.log(enemy);
+           }
+        })
+    }
    
 
 

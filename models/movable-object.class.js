@@ -8,6 +8,8 @@ class MovableObject extends DrawableObject {
     speedY = 0.15;
     acceleration = 0.25;
     energy = 100;
+    enemyEnergy = 10;
+    bossEnergy = 50;
     lastHit = 0;      
     
     offset = {
