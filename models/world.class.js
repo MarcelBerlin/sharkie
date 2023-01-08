@@ -46,7 +46,8 @@ class World {
             this.CheckCollisions();
             this.checkThrowObjects();
             this.bubbleHit();
-        }, 200)
+            this.finSlapHit();
+        }, 300)
     }
 
 
@@ -58,10 +59,33 @@ class World {
         
     }
 
-
     CheckCollisions() {
-        this.level.enemies.forEach((enemy) => {
-            if (this.character.isColliding(enemy)) {
+        this.CheckCollisionPufferFish();
+        this.CheckCollisionJellyFish();
+        this.CheckCollisionEndboss();
+    }
+
+    CheckCollisionPufferFish() {
+        this.level.pufferFish.forEach((pufferFish) => {
+            if (this.character.isColliding(pufferFish)) {
+                this.character.hit();
+                this.healthbar.setPercentage(this.character.energy);
+            }
+        })
+    }
+
+    CheckCollisionJellyFish() {
+        this.level.jellyFish.forEach((jellyFish) => {
+            if (this.character.isColliding(jellyFish)) {
+                this.character.hit();
+                this.healthbar.setPercentage(this.character.energy);
+            }
+        })
+    }
+
+    CheckCollisionEndboss() {
+        this.level.endBoss.forEach((endBoss) => {
+            if (this.character.isColliding(endBoss)) {
                 this.character.hit();
                 this.healthbar.setPercentage(this.character.energy);
             }
@@ -69,28 +93,28 @@ class World {
     }
 
     bubbleHit() {
-        this.level.enemies.forEach((enemy, i) => {
+        this.level.jellyFish.forEach((jellyFish) => {
             this.throwableObject.forEach((throwableObject) => {
-                if (throwableObject.isColliding(enemy)) {
-                    console.log(enemy);
-                    setTimeout(() => {
-                        this.level.enemies.splice(i, 1);
-                    }, 500);
+                if (throwableObject.isColliding(jellyFish)) {
+                    jellyFish.hitJellyFish();
+                    jellyFish.jellyFishIsDead();
+                    console.log(jellyFish);                    
+                   
                 }
             })
         })
     }
 
     finSlapHit() {
-        this.level.enemies.forEach((enemy, i) => {
-           if (this.character.isColliding(enemy) && this.keyboard.SPACE) {
-                console.log(enemy);
+        this.level.pufferFish.forEach((pufferFish, i) => {
+           if (this.character.attackWithFinslap(pufferFish) && this.keyboard.SPACE) {
+                pufferFish.hitPufferFish();
+                pufferFish.pufferFishIsDead();
+                console.log(pufferFish);
            }
         })
     }
    
-
-
 
     draw() {       
         
@@ -106,8 +130,12 @@ class World {
         this.ctx.translate(this.camera_x, 0);
         this.addObjectToCanvas(this.throwableObject);
         this.addToMap(this.character);
-        this.addObjectToCanvas(this.level.enemies);
+        this.addObjectToCanvas(this.level.pufferFish);
+        this.addObjectToCanvas(this.level.jellyFish);
+        this.addObjectToCanvas(this.level.endBoss);
         this.addObjectToCanvas(this.level.lights);
+        this.addObjectToCanvas(this.level.coins);
+        this.addObjectToCanvas(this.level.flasks);
 
         this.ctx.translate(-this.camera_x, 0);
 

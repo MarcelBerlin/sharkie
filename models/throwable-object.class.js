@@ -16,9 +16,6 @@ class ThrowableObject extends MovableObject {
 
     BubbleBlow() {
         setTimeout(() => {
-            if (world.character.x <= this.x) {
-                world.keyboard.D = false;
-            }
             this.BubbleBlowRight();
         }, 150);
 

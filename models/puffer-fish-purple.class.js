@@ -28,12 +28,20 @@ class PufferFishPurple extends MovableObject {
         'img/2.Enemy/1.Puffer fish (3 color options)/3.Bubbleeswim/3.bubbleswim5.png',
     ];
 
+    IMAGES_DEAD = [
+        'img/2.Enemy/1.Puffer fish (3 color options)/4.DIE/3.png',
+        'img/2.Enemy/1.Puffer fish (3 color options)/4.DIE/3.3.png',
+        'img/2.Enemy/1.Puffer fish (3 color options)/4.DIE/3.2.png'
+    ]
+
 
     constructor(world) {
         super().loadImage('img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/3.swim1.png');
         this.world = world;
         this.loadImages(this.IMAGES_SWIM);
+        this.loadImages(this.IMAGES_TRANSITION);
         this.loadImages(this.IMAGES_BUBBLESWIM);
+        this.loadImages(this.IMAGES_DEAD);
         this.x = 1500 + Math.random() * 500;
         this.y = 50 + Math.random() * 300;
         this.speed = 0.2 + Math.random() * 0.35;
@@ -43,6 +51,8 @@ class PufferFishPurple extends MovableObject {
 
 
     animate() {
+        let i = 0;
+
         setInterval(() => {
             this.swimLeft();
         }, 1000 / 60);
@@ -50,8 +60,22 @@ class PufferFishPurple extends MovableObject {
         setInterval(() => {
             this.playAnimation(this.IMAGES_SWIM);
             if (world.character.x + 200 > this.x) {
-                this.playAnimation(this.IMAGES_BUBBLESWIM);
+                if (i < 5) {
+                    this.playAnimation(this.IMAGES_TRANSITION);
+                } else {
+                    this.playAnimation(this.IMAGES_BUBBLESWIM);                    
+                }         
+                i++;                       
             } else this.playAnimation(this.IMAGES_SWIM);
+        }, 100);
+
+        setInterval(() => {
+            if (this.pufferFishEnergy == 0) {
+                this.speed = 0;
+                this.y -= 0.5;
+                this.playAnimation(this.IMAGES_DEAD);
+            }
+            else this.playAnimation(this.IMAGES_SWIM);
         }, 100);
     }
 }

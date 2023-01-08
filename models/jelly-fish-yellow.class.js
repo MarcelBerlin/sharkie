@@ -12,7 +12,7 @@ class JellyFishYellow extends MovableObject {
         'img/2.Enemy/2 Jelly fish/Regular damage/Yellow 4.png',
     ];
 
-    constructor() {
+    constructor(world) {
         super().loadImage('img/2.Enemy/2 Jelly fish/Regular damage/Yellow 1.png');
         this.world = world;
         this.loadImages(this.IMAGES_SWIM);

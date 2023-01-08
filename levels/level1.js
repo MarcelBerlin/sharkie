@@ -2,11 +2,15 @@
 const level1 = new Level(
 
         [
-            new PufferFishGreen(),
+            new PufferFishGreen(),            
+            new PufferFishRed(),                  
+        ],
+        [
             new JellyFishPurple(),
-            new PufferFishRed(),
             new JellySuperdangerousGreen(),
-            new EndBoss(),
+        ],
+        [
+            new EndBoss(), 
         ],
         [
             new LightBeam(),
@@ -27,6 +31,24 @@ const level1 = new Level(
             new BackgroundObject('img/3. Background/Layers/3.Fondo 1/D.png', 1439),
             new BackgroundObject('img/3. Background/Layers/2. Floor/D.png', 1439),
 
-        ]
+        ],
+        [
+            new Poisonflask(),
+            new Poisonflask(),
+            new Poisonflask(),
+        ],
+        [
+            new Coin(),
+            new Coin(),
+            new Coin(),
+            new Coin(),
+            new Coin(),
+            new Coin(),
+            new Coin(),
+            new Coin(),
+            new Coin(),
+        ],
+        
+
     );
 

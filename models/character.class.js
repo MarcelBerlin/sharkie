@@ -128,7 +128,7 @@ class Character extends MovableObject {
         top: 120,
         bottom: 30,
         left: 40,
-        right: 30
+        right: 40
     }
 
     swimming_sound = new Audio('audio/swim.mp3');
@@ -174,6 +174,7 @@ class Character extends MovableObject {
                 this.getMovementTimeStamp();
             } else if (this.isDead()) {
                 this.playAnimation(this.IMAGES_DEAD_POISON);
+                this.clearAllIntervals();
             } else if (this.characterLongIdle()) {
                 this.playLongIdleAnimation();
             }
