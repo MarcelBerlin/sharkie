@@ -129,13 +129,13 @@ class World {
         this.addToMap(this.poisonbar);
         this.ctx.translate(this.camera_x, 0);
         this.addObjectToCanvas(this.throwableObject);
+        this.addObjectToCanvas(this.level.flasks);
+        this.addObjectToCanvas(this.level.coins);
         this.addToMap(this.character);
         this.addObjectToCanvas(this.level.pufferFish);
         this.addObjectToCanvas(this.level.jellyFish);
         this.addObjectToCanvas(this.level.endBoss);
-        this.addObjectToCanvas(this.level.lights);
-        this.addObjectToCanvas(this.level.coins);
-        this.addObjectToCanvas(this.level.flasks);
+        this.addObjectToCanvas(this.level.lights);        
 
         this.ctx.translate(-this.camera_x, 0);
 

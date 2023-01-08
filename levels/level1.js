@@ -3,7 +3,8 @@ const level1 = new Level(
 
         [
             new PufferFishGreen(),            
-            new PufferFishRed(),                  
+            new PufferFishRed(),        
+            new PufferFishPurple(),          
         ],
         [
             new JellyFishPurple(),
@@ -33,9 +34,11 @@ const level1 = new Level(
 
         ],
         [
-            new Poisonflask(),
-            new Poisonflask(),
-            new Poisonflask(),
+            new PoisonflaskGround(),
+            new PoisonflaskAnimated(),
+            new PoisonflaskGround(),
+            new PoisonflaskAnimated(),
+            new PoisonflaskGround(),
         ],
         [
             new Coin(),
@@ -43,10 +46,7 @@ const level1 = new Level(
             new Coin(),
             new Coin(),
             new Coin(),
-            new Coin(),
-            new Coin(),
-            new Coin(),
-            new Coin(),
+            
         ],
         
 

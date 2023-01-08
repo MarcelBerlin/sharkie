@@ -1,26 +1,27 @@
-class Coin extends DrawableObject {
+class Coin extends MovableObject {
 
-    COIN_IMAGES = [
+    IMAGES_COINS = [
         'img/4. Marcadores/1. Coins/1.png',
         'img/4. Marcadores/1. Coins/2.png',
         'img/4. Marcadores/1. Coins/3.png',
         'img/4. Marcadores/1. Coins/4.png',
 
     ];
-
-    width = 150;
-    height = 150;
+    world;
+    width = 50;
+    height = 50;
 
     constructor() {
         super().loadImage('img/4. Marcadores/1. Coins/1.png');
-        this.x = 500 + Math.random() * 10;
-        this.y = 300 + Math.random() * 5;
+        this.loadImages(this.IMAGES_COINS);
+        this.x = 300 + Math.random() * 1500
+        this.y = 0 + Math.random() * 380;
         this.animate();
     }
 
     animate() {
         setInterval(() => {
-            this.playAnimation(this.COIN_IMAGES);
+            this.playAnimation(this.IMAGES_COINS);
         }, 100);
     }
 

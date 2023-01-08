@@ -75,7 +75,7 @@ class EndBoss extends MovableObject {
                 i = 0;
                 this.hadFirstContact = true;
                 setInterval(() => {
-                    // world.game_Sound.pause();
+                    world.game_Sound.pause();
                     world.bossAnthem.play();
                     if (i < 10) {
                         this.playAnimation(this.IMAGES_INTRODUCE);
