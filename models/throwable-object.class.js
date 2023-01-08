@@ -1,10 +1,12 @@
 class ThrowableObject extends MovableObject {
 
+    world;
 
-    constructor(x, y) {
+    constructor(x, y, world) {
         super().loadImage('img/1.Sharkie/4.Attack/Bubble trap/Bubble.png');
         this.x = x;
         this.y = y;
+        this.world = world;
         this.width = 40;
         this.height = 40;
         this.BubbleBlow();
@@ -14,6 +16,9 @@ class ThrowableObject extends MovableObject {
 
     BubbleBlow() {
         setTimeout(() => {
+            if (world.character.x <= this.x) {
+                world.keyboard.D = false;
+            }
             this.BubbleBlowRight();
         }, 150);
 
@@ -26,6 +31,8 @@ class ThrowableObject extends MovableObject {
         }, 20);
     }
 
+
+    
 
 
 

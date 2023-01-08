@@ -44,7 +44,7 @@ class World {
     swimAndAttack() {
         setInterval(() => {
             this.CheckCollisions();
-            this.checkThrowObjects();
+            this.CheckBubbleCollision();
         }, 200)
     }
 
@@ -64,6 +64,15 @@ class World {
                 this.healthbar.setPercentage(this.character.energy);
             }
         })
+    }
+
+    CheckBubbleCollision() {
+        this.checkThrowObjects();
+        this.level.enemies.forEach((enemy) => {
+            if (this.bubble.isColliding(enemy)) {
+                console.log(enemy);
+            }
+        })        
     }
 
 
