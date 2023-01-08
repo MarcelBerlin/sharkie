@@ -1,34 +1,39 @@
 class ThrowableObject extends MovableObject {
 
-    IMAGES_POISON_FLASK = [
-        'img/4. Marcadores/Posión/Animada/1.png',
-        'img/4. Marcadores/Posión/Animada/2.png',
-        'img/4. Marcadores/Posión/Animada/3.png',
-        'img/4. Marcadores/Posión/Animada/4.png',
-        'img/4. Marcadores/Posión/Animada/5.png',
-        'img/4. Marcadores/Posión/Animada/6.png',
-        'img/4. Marcadores/Posión/Animada/7.png',
-        'img/4. Marcadores/Posión/Animada/8.png'
-    ];
+    world;
 
-
-    constructor(x, y) {
+    constructor(x, y, world) {
         super().loadImage('img/1.Sharkie/4.Attack/Bubble trap/Bubble.png');
         this.x = x;
         this.y = y;
+        this.world = world;
         this.width = 40;
         this.height = 40;
         this.BubbleBlow();
-     
+
 
     }
 
     BubbleBlow() {
         setTimeout(() => {
-            setInterval(() => {
-                this.x += 10;
-            }, 20);     
-        }, 150);       
-    }    
+            if (world.character.x <= this.x) {
+                world.keyboard.D = false;
+            }
+            this.BubbleBlowRight();
+        }, 150);
+
+    }
+
+
+    BubbleBlowRight() {
+        setInterval(() => {
+            this.x += 10;
+        }, 20);
+    }
+
+
+    
+
+
 
 }

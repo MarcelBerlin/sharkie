@@ -131,7 +131,7 @@ class Character extends MovableObject {
         right: 30
     }
 
-    swimming_sound = new Audio('audio/swim.mp3');    
+    swimming_sound = new Audio('audio/swim.mp3');
 
     constructor() {
         super().loadImage('img/1.Sharkie/1.IDLE/1.png');
@@ -173,8 +173,7 @@ class Character extends MovableObject {
                 this.playAnimation(this.IMAGES_BUBBLE_ATTACK);
                 this.getMovementTimeStamp();
             } else if (this.isDead()) {
-                this.playAnimation(this.IMAGES_DEAD_POISON);   
-                this.clearAllIntervals();                         
+                this.playAnimation(this.IMAGES_DEAD_POISON);
             } else if (this.characterLongIdle()) {
                 this.playLongIdleAnimation();
             }
@@ -192,7 +191,8 @@ class Character extends MovableObject {
 
             if (this.world.keyboard.LEFT && this.x >= 50) {
                 this.swimLeft();
-                this.otherDirection = true;
+                this.otherDirection = true
+                this.world.keyboard.D = false;
                 this.swimming_sound.play();
             }
 
@@ -236,6 +236,7 @@ class Character extends MovableObject {
         }
     }
 
+
     clearAllIntervals() {
         setTimeout(() => {
             for (let i = 1; i < 9999; i++) window.clearInterval(i);
@@ -243,7 +244,7 @@ class Character extends MovableObject {
         }, 500);
         world.ambient_Sound.pause();
         world.game_Sound.pause();
-        world.bossAnthem.pause();        
+        world.bossAnthem.pause();
     }
 
 
