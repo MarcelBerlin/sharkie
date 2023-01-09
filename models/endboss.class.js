@@ -38,6 +38,23 @@ class EndBoss extends MovableObject {
         'img/2.Enemy/3 Final Enemy/Attack/6.png'
     ];
 
+    IMAGES_HURT = [
+        'img/2.Enemy/3 Final Enemy/Hurt/1.png',
+        'img/2.Enemy/3 Final Enemy/Hurt/2.png',
+        'img/2.Enemy/3 Final Enemy/Hurt/3.png',
+        'img/2.Enemy/3 Final Enemy/Hurt/4.png',
+
+    ];
+
+    IMAGES_DEAD = [
+        'img/2.Enemy/3 Final Enemy/Dead/1.png',
+        'img/2.Enemy/3 Final Enemy/Dead/2.png',
+        'img/2.Enemy/3 Final Enemy/Dead/3.png',
+        'img/2.Enemy/3 Final Enemy/Dead/4.png',
+        'img/2.Enemy/3 Final Enemy/Dead/5.png',
+        'img/2.Enemy/3 Final Enemy/Dead/6.png'
+    ];
+
     height = 450;
     width = 450;
     offset = {
@@ -60,10 +77,14 @@ class EndBoss extends MovableObject {
         this.loadImages(this.IMAGES_INTRODUCE);
         this.loadImages(this.IMAGES_FLOATING);
         this.loadImages(this.IMAGES_ATTACK);
+        this.loadImages(this.IMAGES_HURT);
+        this.loadImages(this.IMAGES_DEAD);
         this.x = 2200;
         this.y = -50;
         this.speed = 30;
         this.animate();
+        this.isHittenByBubble();
+        this.isDefeated();
 
     }
 
@@ -91,20 +112,44 @@ class EndBoss extends MovableObject {
         }, 100);
     }
 
+    // world - funktioniert hier !! #######################
+
     attackCharacter() {
         setInterval(() => {
             if (world.character.x + 250 > this.x) {
-                    this.playAnimation(this.IMAGES_ATTACK);
-                    this.biteAttack.play();                 
+                this.playAnimation(this.IMAGES_ATTACK);
+                this.biteAttack.play();
             }
         }, 100);
-
     }
 
     swimLeft() {
         setTimeout(() => {
             this.x -= 2.5;
         }, 500);
+    }
+
+    // world - funktioniert hier NICHT!!! ##################
+
+    isHittenByBubble() {
+        if (world.throwingPoisonBubble == this.x) {
+            setInterval(() => {
+                this.playAnimation(this.IMAGES_HURT);
+            }, 100);
+        }
+    }
+    // ####################################
+
+    isDefeated() {
+        if (this.bossEnergy == 0) {
+            setInterval(() => {
+                this.playAnimation(this.IMAGES_DEAD);
+            }, 100);
+
+            setTimeout(() => {
+                world.character.clearAllIntervals();
+            }, 500);
+        }
     }
 
 

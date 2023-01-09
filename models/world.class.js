@@ -12,15 +12,16 @@ class World {
     healthbar = new HealthBar();
     coinbar = new CoinBar();
     poisonbar = new PoisonBar();
-    throwableObject = [];    
+    throwingBubble = [];
+    throwingPoisonBubble = [];
     level = level1;
     canvas;
     ctx;
     keyboard;
     camera_x = 0;
     ambient_Sound = new Audio('audio/underwater.wav');
-    game_Sound = new Audio('audio/sharkieanthem_short.mp3');  
-    bossAnthem = new Audio('audio/bossanthem.mp3'); 
+    game_Sound = new Audio('audio/sharkieanthem_short.mp3');
+    bossAnthem = new Audio('audio/bossanthem.mp3');
 
 
     constructor(canvas, keyboard) {
@@ -32,7 +33,7 @@ class World {
         this.swimCollectAndAttack();
         this.ambient_Sound.play();
         this.game_Sound.play();
-        
+
     }
 
 
@@ -47,16 +48,22 @@ class World {
             this.checkThrowObjects();
             this.bubbleHit();
             this.finSlapHit();
+            this.poisonBubbleHit();
         }, 300)
     }
 
 
     checkThrowObjects() {
-        if (this.keyboard.D) {
-            let bubble = new ThrowableObject(this.character.x + 140, this.character.y + 110);
-            this.throwableObject.push(bubble);
-        }
+
+            if (this.keyboard.D) {
+                let bubble = new ThrowableObject(this.character.x + 140, this.character.y + 110);
+                this.throwingBubble.push(bubble);
+            }
         
+            if (this.keyboard.F) {
+                let poisonBubble = new ThrowableObject(this.character.x + 140, this.character.y + 110);
+                this.throwingPoisonBubble.push(poisonBubble);
+            }      
     }
 
     CheckCollisions() {
@@ -93,13 +100,17 @@ class World {
     }
 
     bubbleHit() {
-        this.level.jellyFish.forEach((jellyFish) => {
-            this.throwableObject.forEach((throwableObject) => {
-                if (throwableObject.isColliding(jellyFish)) {
+        let i = 0;
+
+        this.level.jellyFish.forEach((jellyFish, su) => {
+            this.throwingBubble.forEach((bubble) => {
+                if (bubble.isColliding(jellyFish)) {
                     jellyFish.hitJellyFish();
+                    jellyFish.hitSuperJellyFish();
                     jellyFish.jellyFishIsDead();
-                    console.log(jellyFish);                    
-                   
+                    jellyFish.superJellyFishIsDead();
+                    console.log(jellyFish);
+                    this.throwingBubble.splice(i, 1);
                 }
             })
         })
@@ -107,17 +118,30 @@ class World {
 
     finSlapHit() {
         this.level.pufferFish.forEach((pufferFish, i) => {
-           if (this.character.attackWithFinslap(pufferFish) && this.keyboard.SPACE) {
+            if (this.character.attackWithFinslap(pufferFish) && this.keyboard.SPACE) {
                 pufferFish.hitPufferFish();
                 pufferFish.pufferFishIsDead();
                 console.log(pufferFish);
-           }
+            }
         })
     }
-   
 
-    draw() {       
-        
+    poisonBubbleHit() {
+        this.level.endBoss.forEach((endBoss) => {
+            this.throwingPoisonBubble.forEach((poisonBubble) => {
+                if (poisonBubble.isColliding(endBoss)) {
+                    endBoss.hitEndboss();
+                    endBoss.endBossIsDead();
+                    console.log(endBoss);
+
+                }
+            })
+        })
+    }
+
+
+    draw() {
+
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
         this.ctx.translate(this.camera_x, 0);
@@ -128,14 +152,15 @@ class World {
         this.addToMap(this.coinbar);
         this.addToMap(this.poisonbar);
         this.ctx.translate(this.camera_x, 0);
-        this.addObjectToCanvas(this.throwableObject);
+        this.addObjectToCanvas(this.throwingBubble);
+        this.addObjectToCanvas(this.throwingPoisonBubble);    
         this.addObjectToCanvas(this.level.flasks);
         this.addObjectToCanvas(this.level.coins);
         this.addToMap(this.character);
         this.addObjectToCanvas(this.level.pufferFish);
         this.addObjectToCanvas(this.level.jellyFish);
         this.addObjectToCanvas(this.level.endBoss);
-        this.addObjectToCanvas(this.level.lights);        
+        this.addObjectToCanvas(this.level.lights);
 
         this.ctx.translate(-this.camera_x, 0);
 
@@ -180,10 +205,10 @@ class World {
     flipImageBack(mo) {
         this.ctx.restore();
         mo.x = mo.x * -1;
-    }  
+    }
 
 
 
-    
+
 
 }

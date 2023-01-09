@@ -39,6 +39,8 @@ const level1 = new Level(
             new PoisonflaskGround(),
             new PoisonflaskAnimated(),
             new PoisonflaskGround(),
+            new PoisonflaskAnimated(),
+
         ],
         [
             new Coin(),

@@ -42,7 +42,11 @@ window.addEventListener('keydown', (e) => {
     if(e.key == 'd') {
         keyboard.D = true;
     }
-    console.log(e);
+
+    if(e.key == 'f') {
+        keyboard.F = true;
+    }
+    // console.log(e);
 
 });
 
@@ -70,6 +74,10 @@ window.addEventListener('keyup', (e) => {
     if(e.key == 'd') {
         keyboard.D = false;
     }
-    console.log(e);
+
+    if(e.key == 'f') {
+        keyboard.F = false;
+    }
+    // console.log(e);
 
 });

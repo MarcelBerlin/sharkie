@@ -10,6 +10,7 @@ class MovableObject extends DrawableObject {
     energy = 100;
     pufferFishEnergy = 10;
     jellyFishEnergy = 10;
+    superJellyFishEnergy = 20;
     bossEnergy = 50;
     lastHit = 0;
 
@@ -120,6 +121,19 @@ class MovableObject extends DrawableObject {
 
     jellyFishIsDead() {
         return this.jellyFishEnergy == 0;
+    }
+
+    hitSuperJellyFish() {
+        this.superJellyFishEnergy -= 10;
+        if (this.superJellyFishEnergy <= 0) {
+            this.superJellyFishEnergy = 0;
+        } else {
+            this.lastHit = new Date().getTime();
+        }
+    }
+
+    superJellyFishIsDead() {
+        return this.superJellyFishEnergy == 0;
     }
 
 

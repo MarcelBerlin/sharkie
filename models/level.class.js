@@ -17,7 +17,6 @@ class Level {
         this.backgroundObjects = backgroundObjects;
         this.flasks = flasks;
         this.coins = coins;
-        
     }
 
 }

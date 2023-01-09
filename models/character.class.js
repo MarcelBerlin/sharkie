@@ -64,6 +64,18 @@ class Character extends MovableObject {
         'img/1.Sharkie/4.Attack/Bubble trap/op1/8.png'
     ];
 
+    IMAGES_POISON_BUBBLE = [
+        'img/1.Sharkie/4.Attack/Bubble trap/For Whale/1.png',
+        'img/1.Sharkie/4.Attack/Bubble trap/For Whale/2.png',
+        'img/1.Sharkie/4.Attack/Bubble trap/For Whale/3.png',
+        'img/1.Sharkie/4.Attack/Bubble trap/For Whale/4.png',
+        'img/1.Sharkie/4.Attack/Bubble trap/For Whale/5.png',
+        'img/1.Sharkie/4.Attack/Bubble trap/For Whale/6.png',
+        'img/1.Sharkie/4.Attack/Bubble trap/For Whale/7.png',
+        'img/1.Sharkie/4.Attack/Bubble trap/For Whale/8.png',
+
+    ];
+
     IMAGES_FINSLAP = [
         'img/1.Sharkie/4.Attack/Fin slap/1.png',
         'img/1.Sharkie/4.Attack/Fin slap/4.png',
@@ -141,6 +153,7 @@ class Character extends MovableObject {
         this.loadImages(this.IMAGES_SWIM);
         this.loadImages(this.IMAGES_FINSLAP);
         this.loadImages(this.IMAGES_BUBBLE_ATTACK);
+        this.loadImages(this.IMAGES_POISON_BUBBLE);
         this.loadImages(this.IMAGES_HURT_POISONED);
         this.loadImages(this.IMAGES_HURT_SHOCKED);
         this.loadImages(this.IMAGES_DEAD_POISON);
@@ -165,12 +178,15 @@ class Character extends MovableObject {
                 this.playAnimation(this.IMAGES_FINSLAP);
                 this.getMovementTimeStamp();
             } else if (this.isHurt()) {
-                this.playAnimation(this.IMAGES_HURT_POISONED);
+                this.playAnimation(this.IMAGES_HURT_SHOCKED);
             } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT || this.world.keyboard.UP || this.world.keyboard.DOWN) {
                 this.playAnimation(this.IMAGES_SWIM);
                 this.getMovementTimeStamp();
             } else if (this.world.keyboard.D) {
                 this.playAnimation(this.IMAGES_BUBBLE_ATTACK);
+                this.getMovementTimeStamp();
+            } else if (this.world.keyboard.F) {
+                this.playAnimation(this.IMAGES_POISON_BUBBLE);
                 this.getMovementTimeStamp();
             } else if (this.isDead()) {
                 this.playAnimation(this.IMAGES_DEAD_POISON);
@@ -215,7 +231,7 @@ class Character extends MovableObject {
 
     getMovementTimeStamp() {
         this.lastMovement = new Date().getTime();
-        console.log(this.lastMovement);
+        // console.log(this.lastMovement);
     }
 
     characterLongIdle() {
