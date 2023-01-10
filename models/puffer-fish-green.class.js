@@ -35,12 +35,12 @@ class PufferFishGreen extends MovableObject {
     ];
 
     constructor(world) {
-        super().loadImage('img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim1.png');
-        this.world = world;
+        super().loadImage('img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim1.png'); 
+        this.world = world;       
         this.loadImages(this.IMAGES_SWIM);
         this.loadImages(this.IMAGES_TRANSITION);
         this.loadImages(this.IMAGES_BUBBLESWIM);
-        this.loadImages(this.IMAGES_DEAD);
+        this.loadImages(this.IMAGES_DEAD);        
         this.x = 300 + Math.random() * 500;
         this.y = 30 + Math.random() * 300;
         this.speed = 0.2 + Math.random() * 0.35;
@@ -56,11 +56,10 @@ class PufferFishGreen extends MovableObject {
             this.swimLeft();
         }, 1000 / 60);
 
-        // world - funktioniert hier NICHT !! ########################
-
+       
         setInterval(() => {
             this.playAnimation(this.IMAGES_SWIM);
-            if (world.character.x + 200 > this.x && world.character.y + 200 > this.y && world.character.x - 200 < this.x && world.character.y - 50 < this.y) {
+            if (world.character.x + 100 > this.x && world.character.y + 200 > this.y && world.character.x - 200 < this.x && world.character.y - 50 < this.y) {
                 if (i < 5) {
                     this.playAnimation(this.IMAGES_TRANSITION);
                 } else {
@@ -70,7 +69,7 @@ class PufferFishGreen extends MovableObject {
             }
         }, 100);
         
-        // #################################
+        
 
         setInterval(() => {
             if (this.pufferFishEnergy == 0) {

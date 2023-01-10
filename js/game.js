@@ -7,6 +7,7 @@ let gameSpeed = 10;
 function init() {
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);    
+    level1 = createLevel1(world);
     DisplayShowHidden();
 }
 

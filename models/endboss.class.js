@@ -83,8 +83,8 @@ class EndBoss extends MovableObject {
         this.y = -50;
         this.speed = 30;
         this.animate();
-        this.isHittenByBubble();
-        this.isDefeated();
+        // this.isHittenByBubble();
+        // this.isDefeated();
 
     }
 
@@ -108,8 +108,11 @@ class EndBoss extends MovableObject {
                     }
                     i++;
                 }, 100);
+
+
             }
         }, 100);
+
     }
 
     // world - funktioniert hier !! #######################
@@ -120,6 +123,7 @@ class EndBoss extends MovableObject {
                 this.playAnimation(this.IMAGES_ATTACK);
                 this.biteAttack.play();
             }
+           
         }, 100);
     }
 
@@ -132,11 +136,11 @@ class EndBoss extends MovableObject {
     // world - funktioniert hier NICHT!!! ##################
 
     isHittenByBubble() {
-        if (world.throwingPoisonBubble == this.x) {
-            setInterval(() => {
+        setInterval(() => {
+            if (this.bossEnergy < 50) {
                 this.playAnimation(this.IMAGES_HURT);
-            }, 100);
-        }
+            }
+        }, 100)
     }
     // ####################################
 
@@ -156,8 +160,7 @@ class EndBoss extends MovableObject {
 
 
 
-
-
+   
 
 
 

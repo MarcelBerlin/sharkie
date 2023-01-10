@@ -1,20 +1,12 @@
 class World {
 
-    character = new Character();
-    pufferGreen = new PufferFishGreen(this);
-    pufferPurple = new PufferFishPurple(this);
-    pufferRed = new PufferFishRed(this);
-    jellyPurple = new JellyFishPurple(this);
-    jellyYellow = new JellyFishYellow(this);
-    jellySuperGreen = new JellySuperdangerousGreen(this);
-    jellySuperYellow = new JellySuperdangerousPurple(this);
-    endBoss = new EndBoss(this);
+    character = new Character();    
     healthbar = new HealthBar();
     coinbar = new CoinBar();
     poisonbar = new PoisonBar();
     throwingBubble = [];
     throwingPoisonBubble = [];
-    level = level1;
+    level = createLevel1(world);
     canvas;
     ctx;
     keyboard;
@@ -27,18 +19,17 @@ class World {
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
         this.keyboard = keyboard;
-        this.canvas = canvas;
-        this.draw();
-        this.setWorld();
-        this.swimCollectAndAttack();
+        this.canvas = canvas;              
         this.ambient_Sound.play();
         this.game_Sound.play();
-
+        this.setWorld();
+        this.swimCollectAndAttack();
+        this.draw();
     }
 
 
     setWorld() {
-        this.character.world = this;
+        this.character.world = this;        
     }
 
 

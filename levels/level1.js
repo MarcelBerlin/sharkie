@@ -1,20 +1,24 @@
 
-const level1 = new Level(
+let level1;
+
+function createLevel1(world) {
+
+    return new Level(
 
         [
-            new PufferFishGreen(),            
-            new PufferFishRed(),        
-            new PufferFishPurple(),          
+            new PufferFishGreen(world),
+            new PufferFishRed(world),
+            new PufferFishPurple(world),
         ],
         [
-            new JellyFishPurple(),
-            new JellySuperdangerousGreen(),
+            new JellyFishPurple(world),
+            new JellySuperdangerousGreen(world),
         ],
         [
-            new EndBoss(), 
+            new EndBoss(world),
         ],
         [
-            new LightBeam(),
+            new LightBeam(world),
         ],
         [
             new BackgroundObject('img/3. Background/Layers/5. Water/D.png', -1439),
@@ -34,23 +38,24 @@ const level1 = new Level(
 
         ],
         [
-            new PoisonflaskGround(),
-            new PoisonflaskAnimated(),
-            new PoisonflaskGround(),
-            new PoisonflaskAnimated(),
-            new PoisonflaskGround(),
-            new PoisonflaskAnimated(),
+            new PoisonflaskGround(world),
+            new PoisonflaskAnimated(world),
+            new PoisonflaskGround(world),
+            new PoisonflaskAnimated(world),
+            new PoisonflaskGround(world),
+            new PoisonflaskAnimated(world),
 
         ],
         [
-            new Coin(),
-            new Coin(),
-            new Coin(),
-            new Coin(),
-            new Coin(),
-            
-        ],
-        
+            new Coin(world),
+            new Coin(world),
+            new Coin(world),
+            new Coin(world),
+            new Coin(world),
 
+        ],
     );
+};
+
+
 
