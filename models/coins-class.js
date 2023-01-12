@@ -27,4 +27,6 @@ class Coin extends MovableObject {
 
 
 
+
+
 }

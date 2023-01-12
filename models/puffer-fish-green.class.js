@@ -35,31 +35,30 @@ class PufferFishGreen extends MovableObject {
     ];
 
     constructor(world) {
-        super().loadImage('img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim1.png'); 
-        this.world = world;       
+        super().loadImage('img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim1.png');
         this.loadImages(this.IMAGES_SWIM);
         this.loadImages(this.IMAGES_TRANSITION);
         this.loadImages(this.IMAGES_BUBBLESWIM);
-        this.loadImages(this.IMAGES_DEAD);        
+        this.loadImages(this.IMAGES_DEAD);
+        this.world = world;
         this.x = 300 + Math.random() * 500;
         this.y = 30 + Math.random() * 300;
         this.speed = 0.2 + Math.random() * 0.35;
         this.animate();
-
+        
     }
 
 
-    animate() {
-        let i = 0;
-
+    animate() {        
+        
         setInterval(() => {
             this.swimLeft();
-        }, 1000 / 60);
+        }, 1000 / 60);        
 
-       
+        let i = 0;
         setInterval(() => {
             this.playAnimation(this.IMAGES_SWIM);
-            if (world.character.x + 100 > this.x && world.character.y + 200 > this.y && world.character.x - 200 < this.x && world.character.y - 50 < this.y) {
+            if (world.character.x + 200 > this.x && world.character.y + 200 > this.y && world.character.x - 200 < this.x && world.character.y - 50 < this.y) {
                 if (i < 5) {
                     this.playAnimation(this.IMAGES_TRANSITION);
                 } else {
@@ -67,10 +66,8 @@ class PufferFishGreen extends MovableObject {
                 }
                 i++;
             }
-        }, 100);
-        
-        
-
+        }, 150);
+       
         setInterval(() => {
             if (this.pufferFishEnergy == 0) {
                 this.speed = 0;
@@ -79,12 +76,13 @@ class PufferFishGreen extends MovableObject {
 
             }
             else this.playAnimation(this.IMAGES_SWIM);
-        }, 100);
+        }, 100);   
+
     }
 
 
-
-
+        
+    
 
 
 

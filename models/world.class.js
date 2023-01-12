@@ -7,6 +7,7 @@ class World {
     throwingBubble = [];
     throwingPoisonBubble = [];
     level = createLevel1(world);
+    percentage = 20;
     canvas;
     ctx;
     keyboard;
@@ -36,6 +37,8 @@ class World {
     swimCollectAndAttack() {
         setInterval(() => {
             this.CheckCollisions();
+            this.grabCoins();
+            this.grabPoison();
             this.checkThrowObjects();
             this.bubbleHit();
             this.finSlapHit();
@@ -93,7 +96,7 @@ class World {
     bubbleHit() {
         let i = 0;
 
-        this.level.jellyFish.forEach((jellyFish, su) => {
+        this.level.jellyFish.forEach((jellyFish) => {
             this.throwingBubble.forEach((bubble) => {
                 if (bubble.isColliding(jellyFish)) {
                     jellyFish.hitJellyFish();
@@ -108,7 +111,7 @@ class World {
     }
 
     finSlapHit() {
-        this.level.pufferFish.forEach((pufferFish, i) => {
+        this.level.pufferFish.forEach((pufferFish) => {
             if (this.character.attackWithFinslap(pufferFish) && this.keyboard.SPACE) {
                 pufferFish.hitPufferFish();
                 pufferFish.pufferFishIsDead();
@@ -127,6 +130,30 @@ class World {
 
                 }
             })
+        })
+    }
+
+    grabCoins() {
+        let i = 0;
+        this.level.coins.forEach((coin, i) => {
+            if (this.character.isColliding(coin)) {
+                this.character.coinHit();
+                this.coinbar.setPercentage(this.character.coin);
+                this.level.coins.splice(i, 1);
+                console.log(coin);
+            }
+        })
+    }
+
+    grabPoison() {
+        let i = 0;
+        this.level.flasks.forEach((poison, i) => {
+            if (this.character.isColliding(poison)) {
+                this.character.flaskHit();
+                this.poisonbar.setPercentage(this.character.poison);
+                this.level.flasks.splice(i, 1);
+                console.log(poison);
+            }
         })
     }
 

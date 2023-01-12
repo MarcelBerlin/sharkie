@@ -38,7 +38,7 @@ function createLevel1(world) {
 
         ],
         [
-            new PoisonflaskGround(world),
+            
             new PoisonflaskAnimated(world),
             new PoisonflaskGround(world),
             new PoisonflaskAnimated(world),

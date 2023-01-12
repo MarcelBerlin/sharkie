@@ -8,6 +8,8 @@ class MovableObject extends DrawableObject {
     speedY = 0.15;
     acceleration = 0.25;
     energy = 100;
+    coin = 0;
+    poison = 0;
     pufferFishEnergy = 10;
     jellyFishEnergy = 10;
     superJellyFishEnergy = 20;
@@ -74,6 +76,19 @@ class MovableObject extends DrawableObject {
         return this.x + this.width > movableObject.x && this.x < movableObject.x + movableObject.width;
     }
 
+    coinHit() {
+        this.coin += 1;
+        if (this.coin <= 0) {
+            this.coin = 0
+        } 
+    }
+
+    flaskHit() {
+        this.poison += 1;
+        if (this.poison <= 0) {
+            this.poison = 0;
+        } 
+    }
 
     hit() {
         this.energy -= 5;
@@ -150,7 +165,7 @@ class MovableObject extends DrawableObject {
         return this.bossEnergy == 0;
     }
 
-
+    
 
 }
 
