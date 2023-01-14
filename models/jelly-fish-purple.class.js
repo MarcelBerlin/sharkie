@@ -53,7 +53,7 @@ class JellyFishPurple extends MovableObject {
         setInterval(() => {
             if (this.jellyFishEnergy == 0) {
                 this.speed = 0;
-                this.y -= 7.5;
+                this.y -= 15;
                 this.playAnimation(this.IMAGES_DEAD);
             }
         }, 100);

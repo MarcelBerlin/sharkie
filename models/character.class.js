@@ -161,6 +161,7 @@ class Character extends MovableObject {
         this.animateCharacter();
         this.applyGravity();
         this.swimAnimate();
+        this.checkStatusBars();
     }
 
 
@@ -264,6 +265,28 @@ class Character extends MovableObject {
         world.bossAnthem.pause();
     }
 
+    checkStatusBars() {
+        this.checkIfCoinBarIsZero();
+        this.checkIfPoisonBarIsZero();
+    }
+
+    checkIfPoisonBarIsZero() {
+        setInterval(() => {
+            if (this.poison == 0) {
+                this.world.keyboard.F = false;
+            }
+        }, 1);
+        
+    }
+
+    checkIfCoinBarIsZero() {
+        setInterval(() => {
+            if (this.coin == 0) {
+                this.world.keyboard.D = false;
+            }
+        }, 1);
+        
+    }
 
 
 }

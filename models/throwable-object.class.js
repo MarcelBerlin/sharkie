@@ -11,7 +11,7 @@ class ThrowableObject extends MovableObject {
     ];
 
     constructor(x, y, world) {
-        super();
+        super().loadImage('img/1.Sharkie/4.Attack/Bubble trap/Bubble.png');
         this.loadImages(this.IMAGE_BUBBLE);
         this.loadImages(this.IMAGE_BOSS_BUBBLE);
         this.x = x;
@@ -34,19 +34,19 @@ class ThrowableObject extends MovableObject {
                     this.x += 10;
                 }, 20);
 
-            }, 150);           
+            }, 200);           
         }
     }
 
     PoisonBubbleBlow() {
-        if(world.keyboard.F == true) {
+        if(world.keyboard.F == true ) {
             setTimeout(() => {
                 setInterval(() => {
                     this.playAnimation(this.IMAGE_BOSS_BUBBLE);
                     this.x += 10;
                 }, 20);
 
-            }, 150);    
+            }, 200);    
         }
     }
 

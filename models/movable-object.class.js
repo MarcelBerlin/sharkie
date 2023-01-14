@@ -3,6 +3,7 @@ class MovableObject extends DrawableObject {
 
     speed = 0.1;
     otherDirection = false;
+    hadFirstContact = false;
     min_Y = 0;
     max_Y = 275;
     speedY = 0.15;
@@ -164,7 +165,7 @@ class MovableObject extends DrawableObject {
     endBossIsDead() {
         return this.bossEnergy == 0;
     }
-
+   
     
 
 }

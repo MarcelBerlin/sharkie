@@ -58,23 +58,19 @@ class PufferFishPurple extends MovableObject {
         let i = 0;
         setInterval(() => {
             this.playAnimation(this.IMAGES_SWIM);
-            if (world.character.x + 200 > this.x && world.character.y + 200 > this.y && world.character.x - 200 < this.x && world.character.y - 50 < this.y) {
+            if (this.pufferFishEnergy == 0) {
+                this.speed = 0;
+                this.y -= 10;
+                this.playAnimation(this.IMAGES_DEAD);
+            } else if(world.character.x + 200 > this.x && world.character.y + 200 > this.y && world.character.x - 200 < this.x && world.character.y - 50 < this.y) {
                 if (i < 5) {
-                    this.playAnimation(this.IMAGES_TRANSITION);
+                    this.playAnimation(this.IMAGES_TRANSITION);               
                 } else {
                     this.playAnimation(this.IMAGES_BUBBLESWIM);
                 }
                 i++;
-            }
-        }, 150);
-
-        setInterval(() => {
-            if (this.pufferFishEnergy == 0) {
-                this.speed = 0;
-                this.y -= 7.5;
-                this.playAnimation(this.IMAGES_DEAD);
-            }
-            else this.playAnimation(this.IMAGES_SWIM);
-        }, 100);
+            }    
+        }, 100); 
+       
     }
 }

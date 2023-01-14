@@ -64,7 +64,7 @@ class EndBoss extends MovableObject {
         right: 30
     }
     world;
-    hadFirstContact = false;
+    hadFirstContact = false;    
     biteAttack = new Audio('audio/bite.wav');
     splashJump = new Audio('audio/splash.wav');
 
