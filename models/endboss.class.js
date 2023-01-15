@@ -64,7 +64,7 @@ class EndBoss extends MovableObject {
         right: 30
     }
     world;
-    hadFirstContact = false;    
+    hadFirstContact = false;
     biteAttack = new Audio('audio/bite.wav');
     splashJump = new Audio('audio/splash.wav');
 
@@ -83,8 +83,7 @@ class EndBoss extends MovableObject {
         this.y = -50;
         this.speed = 30;
         this.animate();
-        // this.isHittenByBubble();
-        // this.isDefeated();
+
 
     }
 
@@ -105,6 +104,8 @@ class EndBoss extends MovableObject {
                         this.playAnimation(this.IMAGES_FLOATING);
                         this.attackCharacter();
                         this.swimLeft();
+                        this.isHittenByBubble();
+                        this.isDefeated();
                     }
                     i++;
                 }, 100);
@@ -123,13 +124,13 @@ class EndBoss extends MovableObject {
                 this.playAnimation(this.IMAGES_ATTACK);
                 this.biteAttack.play();
             }
-           
+
         }, 100);
     }
 
     swimLeft() {
         setTimeout(() => {
-            this.x -= 2.5;
+            this.x -= 7.5;
         }, 500);
     }
 
@@ -137,30 +138,30 @@ class EndBoss extends MovableObject {
 
     isHittenByBubble() {
         setInterval(() => {
-            if (this.bossEnergy < 50) {
+            if (this.bossEnergy < 50 && this.isHurt()) {
                 this.playAnimation(this.IMAGES_HURT);
-            }
+            } 
         }, 100)
+        
     }
     // ####################################
 
     isDefeated() {
-        if (this.bossEnergy == 0) {
-            setInterval(() => {
+        setInterval(() => {
+            if (this.bossEnergy == 0) {
                 this.playAnimation(this.IMAGES_DEAD);
-            }, 100);
-
-            setTimeout(() => {
-                world.character.clearAllIntervals();
-            }, 500);
-        }
+                setTimeout(() => {
+                    world.character.clearAllIntervals();
+                }, 500);
+            }
+        }, 100);
     }
 
 
 
 
 
-   
+
 
 
 

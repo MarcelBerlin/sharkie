@@ -39,7 +39,7 @@ class JellyFishYellow extends MovableObject {
             this.playAnimation(this.IMAGES_SWIM);
             if(this.y <= this.min_Y) {
                 this.swimDown();
-            } if(this.y >= this.max_Y) {
+            } if(this.y >= this.max_Y - 100) {
                 this.swimUp();
             }           
         }, 100);

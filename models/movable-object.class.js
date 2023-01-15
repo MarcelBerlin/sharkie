@@ -2,10 +2,9 @@ class MovableObject extends DrawableObject {
 
 
     speed = 0.1;
-    otherDirection = false;
-    hadFirstContact = false;
+    otherDirection = false;    
     min_Y = 0;
-    max_Y = 275;
+    max_Y = 375;
     speedY = 0.15;
     acceleration = 0.25;
     energy = 100;
@@ -89,6 +88,10 @@ class MovableObject extends DrawableObject {
         if (this.poison <= 0) {
             this.poison = 0;
         } 
+    }
+
+    poisonBubbleShoot() {
+        this.poison -= 1;        
     }
 
     hit() {

@@ -64,7 +64,7 @@ class PufferFishGreen extends MovableObject {
                 this.speed = 0;
                 this.y -= 10;
                 this.playAnimation(this.IMAGES_DEAD);
-            } else if(world.character.x + 200 > this.x && world.character.y + 200 > this.y && world.character.x - 200 < this.x && world.character.y - 50 < this.y) {
+            } else if (world.character.x + 200 > this.x && world.character.y + 200 > this.y && world.character.x - 200 < this.x && world.character.y - 50 < this.y) {
                 if (i < 5) {
                     this.playAnimation(this.IMAGES_TRANSITION);               
                 } else {

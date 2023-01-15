@@ -27,27 +27,35 @@ class ThrowableObject extends MovableObject {
 
 
     BubbleBlow() {
+       
         if (world.keyboard.D == true) {
+            
             setTimeout(() => {
                 setInterval(() => {
                     this.playAnimation(this.IMAGE_BUBBLE);
                     this.x += 10;
-                }, 20);
-
-            }, 200);           
+                    this.applyGravity();
+                    
+                }, 20);       
+                
+            }, 150);           
         }
     }
 
-    PoisonBubbleBlow() {
-        if(world.keyboard.F == true ) {
+    PoisonBubbleBlow() {        
+
+        if(world.keyboard.F == true) {
             setTimeout(() => {
                 setInterval(() => {
                     this.playAnimation(this.IMAGE_BOSS_BUBBLE);
                     this.x += 10;
-                }, 20);
+                    this.applyGravity();
 
-            }, 200);    
+                }, 20);
+            }, 200);       
+                                               
         }
     }
+
 
 }

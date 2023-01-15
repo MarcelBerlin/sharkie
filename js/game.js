@@ -46,8 +46,9 @@ window.addEventListener('keydown', (e) => {
 
     if(e.key == 'f') {
         keyboard.F = true;
+       
     }
-    // console.log(e);
+    console.log(e);
 
 });
 

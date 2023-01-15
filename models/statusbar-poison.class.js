@@ -18,6 +18,7 @@ class PoisonBar extends DrawableObject {
         this.y = 0;
         this.x = 475;
         this.setPercentage(0);
+       
     }
 
 
@@ -44,6 +45,8 @@ class PoisonBar extends DrawableObject {
             return 0;
         }
     }
+
+       
 
 }
 

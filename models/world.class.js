@@ -1,6 +1,6 @@
 class World {
 
-    character = new Character();    
+    character = new Character();
     healthbar = new HealthBar();
     coinbar = new CoinBar();
     poisonbar = new PoisonBar();
@@ -15,12 +15,16 @@ class World {
     ambient_Sound = new Audio('audio/underwater.wav');
     game_Sound = new Audio('audio/sharkieanthem_short.mp3');
     bossAnthem = new Audio('audio/bossanthem.mp3');
+    coin_sound = new Audio('audio/coins.wav');
+    slap_sound = new Audio('audio/slap.wav');
+    bubble_sound = new Audio('audio/bubble.wav');
+    bottle_sound = new Audio('audio/bottle.wav');
 
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
         this.keyboard = keyboard;
-        this.canvas = canvas;              
+        this.canvas = canvas;
         this.ambient_Sound.play();
         this.game_Sound.play();
         this.setWorld();
@@ -30,7 +34,7 @@ class World {
 
 
     setWorld() {
-        this.character.world = this;        
+        this.character.world = this;
     }
 
 
@@ -39,6 +43,7 @@ class World {
             this.CheckCollisions();
             this.grabCoins();
             this.grabPoison();
+            // this.shootPoisonBubble();
             this.checkThrowObjects();
             this.bubbleHit();
             this.finSlapHit();
@@ -49,15 +54,15 @@ class World {
 
     checkThrowObjects() {
 
-            if (this.keyboard.D) {
-                let bubble = new ThrowableObject(this.character.x + 140, this.character.y + 110);
-                this.throwingBubble.push(bubble);
-            }
-        
-            if (this.keyboard.F) {
-                let poisonBubble = new ThrowableObject(this.character.x + 140, this.character.y + 110);
-                this.throwingPoisonBubble.push(poisonBubble);
-            }      
+        if (this.keyboard.D) {
+            let bubble = new ThrowableObject(this.character.x + 140, this.character.y + 110);
+            this.throwingBubble.push(bubble);
+        }
+
+        if (this.keyboard.F) {
+            let poisonBubble = new ThrowableObject(this.character.x + 140, this.character.y + 110);
+            this.throwingPoisonBubble.push(poisonBubble);
+        }
     }
 
     CheckCollisions() {
@@ -99,6 +104,7 @@ class World {
         this.level.jellyFish.forEach((jellyFish) => {
             this.throwingBubble.forEach((bubble) => {
                 if (bubble.isColliding(jellyFish)) {
+                    this.bubble_sound.play();
                     jellyFish.hitJellyFish();
                     jellyFish.hitSuperJellyFish();
                     jellyFish.jellyFishIsDead();
@@ -113,6 +119,7 @@ class World {
     finSlapHit() {
         this.level.pufferFish.forEach((pufferFish) => {
             if (this.character.attackWithFinslap(pufferFish) && this.keyboard.SPACE) {
+                this.slap_sound.play();
                 pufferFish.hitPufferFish();
                 pufferFish.pufferFishIsDead();
                 console.log(pufferFish);
@@ -121,22 +128,26 @@ class World {
     }
 
     poisonBubbleHit() {
+        let i = 0;
+
         this.level.endBoss.forEach((endBoss) => {
             this.throwingPoisonBubble.forEach((poisonBubble) => {
                 if (poisonBubble.isColliding(endBoss)) {
+                    this.bubble_sound.play();
                     endBoss.hitEndboss();
                     endBoss.endBossIsDead();
                     console.log(endBoss);
-
+                    this.throwingPoisonBubble.splice(i, 1);
                 }
             })
         })
     }
 
     grabCoins() {
-        let i = 0;
+
         this.level.coins.forEach((coin, i) => {
             if (this.character.isColliding(coin)) {
+                this.coin_sound.play();
                 this.character.coinHit();
                 this.coinbar.setPercentage(this.character.coin);
                 this.level.coins.splice(i, 1);
@@ -146,16 +157,30 @@ class World {
     }
 
     grabPoison() {
-        let i = 0;
+
         this.level.flasks.forEach((poison, i) => {
             if (this.character.isColliding(poison)) {
+                this.bottle_sound.play();
                 this.character.flaskHit();
                 this.poisonbar.setPercentage(this.character.poison);
-                this.level.flasks.splice(i, 1);
+                this.level.flasks.splice(i, 1);                         
                 console.log(poison);
             }
         })
     }
+
+    // shootPoisonBubble() {
+
+    //     let i = this.character.poison;
+
+    //     if (this.keyboard.F == true && i > 0) {
+    //         this.poisonbar.setPercentage(this.character.poison);
+    //         i--;
+    //         setInterval(() => {
+    //             this.character.poisonBubbleShoot();                              
+    //         }, 150);            
+    //     }
+    // }
 
 
     draw() {
@@ -171,7 +196,7 @@ class World {
         this.addToMap(this.poisonbar);
         this.ctx.translate(this.camera_x, 0);
         this.addObjectToCanvas(this.throwingBubble);
-        this.addObjectToCanvas(this.throwingPoisonBubble);    
+        this.addObjectToCanvas(this.throwingPoisonBubble);
         this.addObjectToCanvas(this.level.flasks);
         this.addObjectToCanvas(this.level.coins);
         this.addToMap(this.character);

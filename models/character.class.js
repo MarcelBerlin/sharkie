@@ -158,10 +158,18 @@ class Character extends MovableObject {
         this.loadImages(this.IMAGES_HURT_SHOCKED);
         this.loadImages(this.IMAGES_DEAD_POISON);
         this.loadImages(this.IMAGES_DEAD_SHOCK);
-        this.animateCharacter();
-        this.applyGravity();
+        this.animateCharacter();  
+        this.gravityForCharacter();      
         this.swimAnimate();
-        this.checkStatusBars();
+        this.checkIfPoisonBarIsMax();
+    }
+
+    gravityForCharacter() {
+        setInterval(() => {
+            if (this.y <= this.max_Y - 75) {
+                this.y += this.speedY;
+            }
+        }, 1000 / 25);        
     }
 
 
@@ -179,7 +187,7 @@ class Character extends MovableObject {
                 this.playAnimation(this.IMAGES_FINSLAP);
                 this.getMovementTimeStamp();
             } else if (this.isHurt()) {
-                this.playAnimation(this.IMAGES_HURT_SHOCKED);
+                this.playAnimation(this.IMAGES_HURT_POISONED);
             } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT || this.world.keyboard.UP || this.world.keyboard.DOWN) {
                 this.playAnimation(this.IMAGES_SWIM);
                 this.getMovementTimeStamp();
@@ -190,7 +198,7 @@ class Character extends MovableObject {
                 this.playAnimation(this.IMAGES_POISON_BUBBLE);
                 this.getMovementTimeStamp();
             } else if (this.isDead()) {
-                this.playAnimation(this.IMAGES_DEAD_POISON);
+                this.playAnimation(this.IMAGES_DEAD_POISON); 
                 this.clearAllIntervals();
             } else if (this.characterLongIdle()) {
                 this.playLongIdleAnimation();
@@ -219,7 +227,7 @@ class Character extends MovableObject {
                 this.swimming_sound.play();
             }
 
-            if (this.world.keyboard.DOWN && this.y <= this.max_Y) {
+            if (this.world.keyboard.DOWN && this.y <= this.max_Y - 75) {
                 this.y += this.speed;
                 this.swimming_sound.play();
             }
@@ -264,29 +272,17 @@ class Character extends MovableObject {
         world.game_Sound.pause();
         world.bossAnthem.pause();
     }
+       
+   
 
-    checkStatusBars() {
-        this.checkIfCoinBarIsZero();
-        this.checkIfPoisonBarIsZero();
-    }
-
-    checkIfPoisonBarIsZero() {
+    checkIfPoisonBarIsMax() {
         setInterval(() => {
-            if (this.poison == 0) {
+            if (this.poison < 5) {
                 this.world.keyboard.F = false;
             }
         }, 1);
         
     }
-
-    checkIfCoinBarIsZero() {
-        setInterval(() => {
-            if (this.coin == 0) {
-                this.world.keyboard.D = false;
-            }
-        }, 1);
-        
-    }
-
+   
 
 }
