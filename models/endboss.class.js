@@ -141,6 +141,10 @@ class EndBoss extends MovableObject {
             if (this.bossEnergy < 50 && this.isHurt()) {
                 this.playAnimation(this.IMAGES_HURT);
             } 
+            if (this.bossEnergy == 0) {
+                world.character.clearAllIntervals();
+            }
+
         }, 100)
         
     }
