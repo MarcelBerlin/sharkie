@@ -35,10 +35,72 @@ h1 {
 }
 
 .startscreen img:hover {
-   transform: scale(1.1);
+   transform: scale(1.03);
    transition: all 50ms ease-in-out;
 }
 
+.menu-choise {
+    display: flex;   
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.menu-choise img {
+    margin: 5px;
+    height: 100px;
+    width: auto;
+}
+
+.start-button img {
+    cursor: pointer;
+}
+
+.start-button img:hover {
+    transform: scale(1.1);
+    transition: all 50ms ease-in-out;
+}
+
+.tutorial {
+    
+    display: none;
+    flex-direction: column;
+    align-items: center;
+}
+
+.tutorial img {
+    height: 100px;
+    width: auto;
+
+}
+
+.description {
+   
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+    
+}
+
+.description img {
+    width: auto;
+    height: 80px;
+}
+
+.description_1 {
+    font-size: 24px;
+    width: 60vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.description_2 {
+    margin-top: 15px;
+    color: yellow;
+    
+}
 
 canvas {
     

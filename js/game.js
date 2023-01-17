@@ -14,7 +14,19 @@ function init() {
 function DisplayShowHidden() {
     document.getElementById('startscreen').style.display = 'none';
     document.getElementById('canvas').style.display = 'block';
+    document.getElementById('tutorial').style.display = 'none';
 }
+
+function howToPlay() {
+    document.getElementById('tutorial').style.display = 'flex';
+    document.getElementById('startscreen').style.display = 'none';
+
+}
+
+// function backToStartScreen() {
+//     document.getElementById('tutorial').style.display = 'none';
+//     document.getElementById('startscreen').style.display = 'flex';
+// }
 
 
 
