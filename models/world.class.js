@@ -59,9 +59,12 @@ class World {
             this.throwingBubble.push(bubble);
         }
 
-        if (this.keyboard.F) {
+        if (this.keyboard.F && this.poisonBubbles > 0) {
             let poisonBubble = new ThrowableObject(this.character.x + 140, this.character.y + 110, this.character.otherDirection);
             this.throwingPoisonBubble.push(poisonBubble);
+            this.poisonBubbles--;
+            this.character.removePoisonFromBar();
+            this.poisonbar.setPercentage(this.character.poison);
         }
     }
 
@@ -146,9 +149,9 @@ class World {
     grabCoins() {
 
         this.level.coins.forEach((coin, i) => {
-            if (this.character.isColliding(coin)) {
+            if (this.character.isColliding(coin)) {                
                 this.coin_sound.play();
-                this.character.coinHit();
+                this.character.addCoinToBar();
                 this.coinbar.setPercentage(this.character.coin);
                 this.level.coins.splice(i, 1);
                 console.log(coin);
@@ -160,15 +163,16 @@ class World {
 
         this.level.flasks.forEach((poison, i) => {
             if (this.character.isColliding(poison)) {
+                this.poisonBubbles++;
                 this.bottle_sound.play();
-                this.character.flaskHit();
+                this.character.addPoisonflaskToBar();
                 this.poisonbar.setPercentage(this.character.poison);
                 this.level.flasks.splice(i, 1);
                 console.log(poison);
             }
         })
     }
-
+   
 
     // Elements will draw on Canvas ################################ 
 

@@ -76,21 +76,21 @@ class MovableObject extends DrawableObject {
         return this.x + this.width > movableObject.x && this.x < movableObject.x + movableObject.width;
     }
 
-    coinHit() {
+    addCoinToBar() {
         this.coin += 1;
         if (this.coin <= 0) {
             this.coin = 0
         } 
     }
 
-    flaskHit() {
+    addPoisonflaskToBar() {
         this.poison += 1;
         if (this.poison <= 0) {
             this.poison = 0;
         } 
     }
 
-    poisonBubbleShoot() {
+    removePoisonFromBar() {
         this.poison -= 1;        
     }
 

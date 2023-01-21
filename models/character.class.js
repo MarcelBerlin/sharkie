@@ -161,7 +161,7 @@ class Character extends MovableObject {
         this.animateCharacter();  
         this.gravityForCharacter();      
         this.swimAnimate();
-        this.checkIfPoisonBarIsMax();
+        // this.checkIfPoisonBarIsMax();
     }
 
     gravityForCharacter() {
@@ -275,14 +275,14 @@ class Character extends MovableObject {
        
    
 
-    checkIfPoisonBarIsMax() {
-        setInterval(() => {
-            if (this.poison < 5) {
-                this.world.keyboard.F = false;
-            }
-        }, 1);
+    // checkIfPoisonBarIsMax() {
+    //     setInterval(() => {
+    //         if (this.poison < 5) {
+    //             this.world.keyboard.F = false;
+    //         }
+    //     }, 1);
         
-    }
+    // }
    
 
 }

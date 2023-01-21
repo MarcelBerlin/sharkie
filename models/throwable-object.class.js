@@ -34,8 +34,9 @@ class ThrowableObject extends MovableObject {
                     this.applyGravity();
                     this.playAnimation(this.IMAGE_BUBBLE);
                     this.x -= 10;
-                } else if (!this.otherDirection) {
-                    this.applyGravity();                    
+                } else {
+                    this.applyGravity();    
+                    this.otherDirection                
                     this.x += 10;
                 }
 
