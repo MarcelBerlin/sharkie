@@ -67,7 +67,7 @@ class EndBoss extends MovableObject {
     hadFirstContact = false;
     biteAttack = new Audio('audio/bite.wav');
     splashJump = new Audio('audio/splash.wav');
-
+    youWinSound = new Audio('audio/winsound.mp3');
 
 
 
@@ -83,6 +83,7 @@ class EndBoss extends MovableObject {
         this.y = -50;
         this.speed = 30;
         this.animate();
+        
 
 
     }
@@ -116,7 +117,7 @@ class EndBoss extends MovableObject {
 
     }
 
-    // world - funktioniert hier !! #######################
+    
 
     attackCharacter() {
         setInterval(() => {
@@ -134,11 +135,11 @@ class EndBoss extends MovableObject {
         }, 500);
     }
 
-    // world - funktioniert hier NICHT!!! ##################
+    
 
     isHittenByBubble() {
         setInterval(() => {
-            if (this.bossEnergy < 50 && this.isHurt()) {
+            if (this.bossEnergy < 100 && this.isHurt()) {
                 this.playAnimation(this.IMAGES_HURT);
             } 
             if (this.bossEnergy == 0) {
@@ -155,14 +156,24 @@ class EndBoss extends MovableObject {
             if (this.bossEnergy == 0) {
                 this.playAnimation(this.IMAGES_DEAD);
                 setTimeout(() => {
-                    world.character.clearAllIntervals();
-                }, 500);
+                    world.character.clearAllIntervals();                                       
+                }, 300);
+                this.biteAttack.pause(); 
+                this.winGame();
             }
+            
         }, 100);
+        
     }
 
+    winGame() {
+        document.getElementById('title').style.display = 'none';
+        document.getElementById('canvas').style.display = 'none';
+        document.getElementById('win').style.display = 'flex';
+        this.youWinSound.play();
+    }
 
-
+    
 
 
 

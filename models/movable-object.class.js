@@ -13,7 +13,7 @@ class MovableObject extends DrawableObject {
     pufferFishEnergy = 10;
     jellyFishEnergy = 10;
     superJellyFishEnergy = 20;
-    bossEnergy = 50;
+    bossEnergy = 100;
     lastHit = 0;
 
     offset = {

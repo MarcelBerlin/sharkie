@@ -169,20 +169,7 @@ class World {
         })
     }
 
-    // shootPoisonBubble() {
-
-    //     let i = this.character.poison;
-
-    //     if (this.keyboard.F == true && i > 0) {
-    //         this.poisonbar.setPercentage(this.character.poison);
-    //         i--;
-    //         setInterval(() => {
-    //             this.character.poisonBubbleShoot();                              
-    //         }, 150);            
-    //     }
-    // }
-
-
+  
     draw() {
 
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
