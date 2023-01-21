@@ -139,7 +139,7 @@ class EndBoss extends MovableObject {
 
     isHittenByBubble() {
         setInterval(() => {
-            if (this.bossEnergy < 100 && this.isHurt()) {
+            if (this.bossEnergy < 50 && this.isHurt()) {
                 this.playAnimation(this.IMAGES_HURT);
             } 
             if (this.bossEnergy == 0) {

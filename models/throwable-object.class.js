@@ -34,9 +34,8 @@ class ThrowableObject extends MovableObject {
                     this.applyGravity();
                     this.playAnimation(this.IMAGE_BUBBLE);
                     this.x -= 10;
-                } else {
-                    this.applyGravity();    
-                    this.otherDirection                
+                } else if (!this.otherDirection) {
+                    this.applyGravity();                    
                     this.x += 10;
                 }
 
@@ -57,7 +56,7 @@ class ThrowableObject extends MovableObject {
                 } else {
                     this.applyGravity();  
                     this.otherDirection;
-                    this.x += 10;
+                    this.x -= 10;
                 }
 
             }, 20);
