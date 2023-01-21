@@ -6,6 +6,7 @@ class World {
     poisonbar = new PoisonBar();
     throwingBubble = [];
     throwingPoisonBubble = [];
+    poisonBubbles = 0;
     level = createLevel1(world);
     percentage = 20;
     canvas;
@@ -43,7 +44,6 @@ class World {
             this.CheckCollisions();
             this.grabCoins();
             this.grabPoison();
-            // this.shootPoisonBubble();
             this.checkThrowObjects();
             this.bubbleHit();
             this.finSlapHit();
@@ -55,12 +55,12 @@ class World {
     checkThrowObjects() {
 
         if (this.keyboard.D) {
-            let bubble = new ThrowableObject(this.character.x + 140, this.character.y + 110);
+            let bubble = new ThrowableObject(this.character.x + 140, this.character.y + 110, this.character.otherDirection);
             this.throwingBubble.push(bubble);
         }
 
         if (this.keyboard.F) {
-            let poisonBubble = new ThrowableObject(this.character.x + 140, this.character.y + 110);
+            let poisonBubble = new ThrowableObject(this.character.x + 140, this.character.y + 110, this.character.otherDirection);
             this.throwingPoisonBubble.push(poisonBubble);
         }
     }
@@ -163,13 +163,15 @@ class World {
                 this.bottle_sound.play();
                 this.character.flaskHit();
                 this.poisonbar.setPercentage(this.character.poison);
-                this.level.flasks.splice(i, 1);                         
+                this.level.flasks.splice(i, 1);
                 console.log(poison);
             }
         })
     }
 
-  
+
+    // Elements will draw on Canvas ################################ 
+
     draw() {
 
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
@@ -237,7 +239,7 @@ class World {
         mo.x = mo.x * -1;
     }
 
-
+    // ####################################################
 
 
 

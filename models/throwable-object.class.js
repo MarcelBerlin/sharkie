@@ -1,6 +1,6 @@
 class ThrowableObject extends MovableObject {
 
-    world;
+    world;   
 
     IMAGE_BUBBLE = [
         'img/1.Sharkie/4.Attack/Bubble trap/Bubble.png'
@@ -10,13 +10,14 @@ class ThrowableObject extends MovableObject {
         'img/1.Sharkie/4.Attack/Bubble trap/Poisoned Bubble (for whale).png',
     ];
 
-    constructor(x, y, world) {
+    constructor(x, y, world, otherDirection) {
         super().loadImage('img/1.Sharkie/4.Attack/Bubble trap/Bubble.png');
         this.loadImages(this.IMAGE_BUBBLE);
         this.loadImages(this.IMAGE_BOSS_BUBBLE);
         this.x = x;
         this.y = y;
         this.world = world;
+        this.otherDirection = otherDirection;
         this.width = 40;
         this.height = 40;
         this.BubbleBlow();
@@ -27,33 +28,39 @@ class ThrowableObject extends MovableObject {
 
 
     BubbleBlow() {
-       
-        if (world.keyboard.D == true) {
-            
-            setTimeout(() => {
-                setInterval(() => {
-                    this.playAnimation(this.IMAGE_BUBBLE);
-                    this.x += 10;
+        if (world.keyboard.D == true) { 
+            setInterval(() => {
+                if (this.otherDirection) {
                     this.applyGravity();
-                    
-                }, 20);       
-                
-            }, 150);           
+                    this.playAnimation(this.IMAGE_BUBBLE);
+                    this.x -= 10;
+                } else if (!this.otherDirection) {
+                    this.applyGravity();                    
+                    this.x += 10;
+                }
+
+            }, 20);
+
         }
     }
 
-    PoisonBubbleBlow() {        
+    PoisonBubbleBlow() {
 
-        if(world.keyboard.F == true) {
-            setTimeout(() => {
-                setInterval(() => {
+        if (world.keyboard.F == true) {
+
+            setInterval(() => {
+                if (this.otherDirection) {
+                    this.applyGravity();
                     this.playAnimation(this.IMAGE_BOSS_BUBBLE);
                     this.x += 10;
-                    this.applyGravity();
+                } else {
+                    this.applyGravity();  
+                    this.otherDirection;
+                    this.x += 10;
+                }
 
-                }, 20);
-            }, 200);       
-                                               
+            }, 20);
+
         }
     }
 

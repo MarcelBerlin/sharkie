@@ -157,7 +157,7 @@ class Character extends MovableObject {
         this.loadImages(this.IMAGES_HURT_POISONED);
         this.loadImages(this.IMAGES_HURT_SHOCKED);
         this.loadImages(this.IMAGES_DEAD_POISON);
-        this.loadImages(this.IMAGES_DEAD_SHOCK);
+        this.loadImages(this.IMAGES_DEAD_SHOCK);       
         this.animateCharacter();  
         this.gravityForCharacter();      
         this.swimAnimate();
@@ -186,7 +186,7 @@ class Character extends MovableObject {
             if (this.world.keyboard.SPACE) {
                 this.playAnimation(this.IMAGES_FINSLAP);
                 this.getMovementTimeStamp();
-            } else if (this.isHurt()) {
+            } else if (this.isHurt()) {                
                 this.playAnimation(this.IMAGES_HURT_POISONED);
             } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT || this.world.keyboard.UP || this.world.keyboard.DOWN) {
                 this.playAnimation(this.IMAGES_SWIM);
