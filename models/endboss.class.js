@@ -65,6 +65,7 @@ class EndBoss extends MovableObject {
     }
     world;
     hadFirstContact = false;
+    speedAfterHit = 30;
     biteAttack = new Audio('audio/bite.wav');
     splashJump = new Audio('audio/splash.wav');
     youWinSound = new Audio('audio/winsound.mp3');
@@ -83,11 +84,10 @@ class EndBoss extends MovableObject {
         this.y = -50;
         this.speed = 30;
         this.animate();
-        
-
-
     }
 
+
+    // endboss logic -------------------------------- # 
 
     animate() {
         let i = 0
@@ -96,36 +96,25 @@ class EndBoss extends MovableObject {
                 i = 0;
                 this.hadFirstContact = true;
                 setInterval(() => {
-                    world.game_Sound.pause();
-                    world.bossAnthem.play();
+                    this.activateBossSound();
                     if (i < 10) {
-                        this.playAnimation(this.IMAGES_INTRODUCE);
-                        this.splashJump.play();
+                        this.BossSpawning();
                     } else {
-                        this.playAnimation(this.IMAGES_FLOATING);
-                        this.attackCharacter();
-                        this.swimLeft();
-                        this.isHittenByBubble();
-                        this.isDefeated();
+                        this.BossAttackAndSwim(); 
                     }
                     i++;
                 }, 100);
-
-
             }
         }, 100);
-
     }
 
-    
-
+   
     attackCharacter() {
         setInterval(() => {
             if (world.character.x + 250 > this.x) {
                 this.playAnimation(this.IMAGES_ATTACK);
                 this.biteAttack.play();
             }
-
         }, 100);
     }
 
@@ -134,46 +123,60 @@ class EndBoss extends MovableObject {
             this.x -= 7.5;
         }, 500);
     }
-
     
 
     isHittenByBubble() {
         setInterval(() => {
             if (this.bossEnergy < 50 && this.isHurt()) {
-                this.playAnimation(this.IMAGES_HURT);
+                this.playAnimation(this.IMAGES_HURT);                
             } 
             if (this.bossEnergy == 0) {
                 world.character.clearAllIntervals();
             }
-
-        }, 100)
-        
+        }, 100)        
     }
-    // ####################################
 
     isDefeated() {
         setInterval(() => {
             if (this.bossEnergy == 0) {
                 this.playAnimation(this.IMAGES_DEAD);
                 setTimeout(() => {
-                    world.character.clearAllIntervals();                                       
+                    world.character.clearAllIntervals();  
+                    this.winGame();                                     
                 }, 300);
-                this.biteAttack.pause(); 
-                this.winGame();
-            }
-            
+                this.biteAttack.pause();                
+            }            
         }, 100);
         
+    }
+
+    // excluded functions -------------------------------- # 
+
+    BossSpawning() {
+        this.playAnimation(this.IMAGES_INTRODUCE);
+        this.splashJump.play();
+    }
+    
+    BossAttackAndSwim() {
+        this.playAnimation(this.IMAGES_FLOATING);
+        this.attackCharacter();
+        this.swimLeft();
+        this.isHittenByBubble();
+        this.isDefeated();
+    }
+   
+    activateBossSound() {
+        world.game_Sound.pause();
+        world.bossAnthem.play();
     }
 
     winGame() {
         document.getElementById('title').style.display = 'none';
         document.getElementById('canvas').style.display = 'none';
         document.getElementById('win').style.display = 'flex';
+        document.getElementById('fullscreenbutton').style.display = 'none';
         this.youWinSound.play();
     }
-
-    
 
 
 

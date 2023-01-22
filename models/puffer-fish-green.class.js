@@ -44,14 +44,12 @@ class PufferFishGreen extends MovableObject {
         this.x = 300 + Math.random() * 500;
         this.y = 30 + Math.random() * 300;
         this.speed = 0.2 + Math.random() * 0.35;
-        this.animate();
-        
+        this.animate();  
 
     }
 
 
     animate() {
-
         setInterval(() => {
             this.swimLeft();
         }, 1000 / 60);
@@ -61,9 +59,7 @@ class PufferFishGreen extends MovableObject {
         setInterval(() => {
             this.playAnimation(this.IMAGES_SWIM);
             if (this.pufferFishEnergy == 0) {
-                this.speed = 0;
-                this.y -= 10;
-                this.playAnimation(this.IMAGES_DEAD);
+                this.PufferIsKilledByCharacter();
             } else if (world.character.x + 200 > this.x && world.character.y + 200 > this.y && world.character.x - 200 < this.x && world.character.y - 50 < this.y) {
                 if (i < 5) {
                     this.playAnimation(this.IMAGES_TRANSITION);               
@@ -74,6 +70,12 @@ class PufferFishGreen extends MovableObject {
             }    
         }, 100); 
        
+    }
+
+    PufferIsKilledByCharacter() {
+        this.speed = 0;
+        this.y -= 10;
+        this.playAnimation(this.IMAGES_DEAD);
     }
 
 

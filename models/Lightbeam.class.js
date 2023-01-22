@@ -6,7 +6,6 @@ class LightBeam extends MovableObject {
     
     constructor() {
         super().loadImage('img/3. Background/Legacy/Layers/1. Light/3.png');
-
         this.x = 1000 + Math.random() * 500;   
         this.animate();        
     }

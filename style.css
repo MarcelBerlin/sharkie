@@ -21,6 +21,10 @@ h1 {
 
 }
 
+.gamingwindow {
+    position: relative;
+}
+
 .startscreen {
     display: flex;
     justify-content: center;
@@ -79,7 +83,7 @@ h1 {
 }
 
 .tutorial img {
-    height: 100px;
+    height: 70px;
     width: auto;
 
 }
@@ -104,13 +108,18 @@ h1 {
 }
 
 .description_2 {
-    margin-top: 15px;
+    width: 60vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;    
+    margin-bottom: 25px;
     font-size: 24px;
     color: yellow;
         
-}
+}  
 
-canvas {    
+
+canvas {      
     background-color: black;
     border-radius: 15px;
     box-shadow: 0px 0 10px 10px rgba(0, 0, 0, 0.25) ;
@@ -121,12 +130,12 @@ canvas {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-   
+    height: 100vh;   
 }
 
 .win-screen {
-    z-index: 99;
-    width: 100vw;
+    
+    width: 70vw;
     height: auto;
 }
 
@@ -148,6 +157,44 @@ canvas {
     transform: scale(1.03);
     transition: all 50ms ease-in-out;
 }
+
+#lose {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;      
+    height: 100vh;   
+} 
+
+
+.lose-screen {
+    width: 720px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+
+#fullscreenbutton {
+    margin-top: 25px;
+    display: none;
+    justify-content: center;
+    align-items: center;    
+}
+
+#fullscreenbutton img {
+    cursor: pointer;
+    height: 50px;
+    width: auto;
+}
+
+#fullscreenbutton img:hover {
+    transform: scale(1.03);
+    transition: all 50ms ease-in-out;
+}
+
+
 
 
 /* Smartphones ----------------------- */ 

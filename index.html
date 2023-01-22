@@ -37,6 +37,12 @@
 <body id="game">
     <h1 id="title">Sharkie</h1>   
 
+<div class="gamingwindow" id="fullScreen">
+
+
+
+<!-- Startscreen -->
+
     <div id="startscreen" class="startscreen">        
         <div>	
             <img src="img/1.Sharkie/1.IDLE/Prewiew.gif">
@@ -48,7 +54,11 @@
         </div>
                 
                 
-    </div>           
+    </div>      
+    
+<!-- ###### -->
+
+<!-- Tutorial - How To play -->
 
     <div id="tutorial" class="tutorial">
         <div class="description_1">
@@ -63,7 +73,8 @@
                 <img src="img/6.Botones/Key/D key.png"> Throw Standard Bubble <img src="img/2.Enemy/2 Jelly fish/Preview all colors.gif">
             </div>
             <div class="description_2">
-                <p><i>You can always use Standard Bubbles</i></p>
+                <div><i>1 Bubble for - <img src="img/2.Enemy/2 Jelly fish/Regular damage/Lila 1.png"> <img src="img/2.Enemy/2 Jelly fish/Regular damage/Yellow 1.png"></i></div>
+                <div><i>2 Bubbles for - <img src="img/2.Enemy/2 Jelly fish/Súper dangerous/Green 1.png"><img src="img/2.Enemy/2 Jelly fish/Súper dangerous/Pink 1.png"></i></div>
             </div>
              
         </div>
@@ -92,6 +103,10 @@
             <img src="img/6.Botones/Start/6.png" onclick="backToMenu()">
         </div>
     </div>
+
+<!-- ###### -->
+
+<!-- Win and Lose Windows -->
     
     <div id="win">
         <img class="win-screen" src="img/6.Botones/Try again/Mesa de trabajo 1.png">
@@ -101,7 +116,29 @@
         </div>
     </div>
 
+    <div id="lose">
+        <img class="lose-screen" src="img/6.Botones/Tittles/Game Over/Recurso 10.png">
+        <div class="win-buttons">
+            <img id="tryAgain" src="img/6.Botones/Try again/Recurso 15.png" onclick="init()">
+            <img src="img/6.Botones/Start/6.png" onclick="reloadPage()">
+        </div>
+    </div>
+
+<!-- ###### -->
+
+<!-- Canvas -->
     <canvas id="canvas" width="720px" height="480px" style="display: none;"></canvas>
+
+    <div id="fullscreenbutton" >
+        <img src="img/6.Botones/Full Screen/Mesa de trabajo 7.png" onclick="fullscreenToggle()">
+    </div>
+
+    <div id="closeFullscreen">
+        <img src="">
+    </div>
+<!-- ###### -->
+    
+</div>
 
     
     

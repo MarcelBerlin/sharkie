@@ -2,7 +2,7 @@ class MovableObject extends DrawableObject {
 
 
     speed = 0.1;
-    otherDirection = false;    
+    otherDirection = false;
     min_Y = 0;
     max_Y = 375;
     speedY = 0.15;
@@ -73,25 +73,25 @@ class MovableObject extends DrawableObject {
 
     // attackWithFinslap (enemy)
     attackWithFinslap(movableObject) {
-        return this.x + this.width > movableObject.x && this.x < movableObject.x + movableObject.width;
+        return this.x + this.width > movableObject.x && this.x < movableObject.x + movableObject.width && this.y + this.height > movableObject.y && this.y + 100 < movableObject.y + movableObject.height;
     }
 
     addCoinToBar() {
         this.coin += 1;
         if (this.coin <= 0) {
             this.coin = 0
-        } 
+        }
     }
 
     addPoisonflaskToBar() {
         this.poison += 1;
         if (this.poison <= 0) {
             this.poison = 0;
-        } 
+        }
     }
 
     removePoisonFromBar() {
-        this.poison -= 1;        
+        this.poison -= 1;
     }
 
     hit() {
@@ -104,8 +104,8 @@ class MovableObject extends DrawableObject {
     }
 
     isHurt() {
-        let timepassed = new Date().getTime() - this.lastHit; // Differenz in ms
-        timepassed = timepassed / 1000; // Differenz in sek
+        let timepassed = new Date().getTime() - this.lastHit; // Differenz in ms zum letzten Hit 
+        timepassed = timepassed / 1000; // Differenz in sek        
         return timepassed < 1;
 
     }
@@ -168,8 +168,8 @@ class MovableObject extends DrawableObject {
     endBossIsDead() {
         return this.bossEnergy == 0;
     }
-   
-    
+
+
 
 }
 

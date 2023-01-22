@@ -14,10 +14,12 @@ function init() {
 
 function DisplayShowHidden() {
     document.getElementById('win').style.display = 'none';
+    document.getElementById('lose').style.display = 'none';
     document.getElementById('title').style.display = 'block';
     document.getElementById('startscreen').style.display = 'none';
     document.getElementById('canvas').style.display = 'block';
     document.getElementById('tutorial').style.display = 'none';
+    document.getElementById('fullscreenbutton').style.display = 'flex';
 }
 
 function howToPlay() {
@@ -35,13 +37,11 @@ function backToMenu() {
 
 function reloadPage() {   
     window.location.reload();   
-
 }
 
-
-
-
-
+function fullscreenToggle() {
+    canvas.requestFullscreen()
+}
 
 
 window.addEventListener('keydown', (e) => {

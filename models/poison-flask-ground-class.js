@@ -7,8 +7,7 @@ class PoisonflaskGround extends MovableObject {
     constructor() {
         super().loadImage('img/4. Marcadores/Posión/Dark - Left.png');
         this.x = 300 + Math.random() * 1500;
-        this.y = 350 + Math.random() * 50;
-       
+        this.y = 350 + Math.random() * 50;       
     }
 
    

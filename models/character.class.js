@@ -144,6 +144,8 @@ class Character extends MovableObject {
     }
 
     swimming_sound = new Audio('audio/swim.mp3');
+    losesound = new Audio('audio/losehorn.wav');
+    awww = new Audio('audio/aww.mp3');
 
     constructor() {
         super().loadImage('img/1.Sharkie/1.IDLE/1.png');
@@ -157,21 +159,22 @@ class Character extends MovableObject {
         this.loadImages(this.IMAGES_HURT_POISONED);
         this.loadImages(this.IMAGES_HURT_SHOCKED);
         this.loadImages(this.IMAGES_DEAD_POISON);
-        this.loadImages(this.IMAGES_DEAD_SHOCK);       
-        this.animateCharacter();  
-        this.gravityForCharacter();      
+        this.loadImages(this.IMAGES_DEAD_SHOCK);
+        this.animateCharacter();
+        this.gravityForCharacter();
         this.swimAnimate();
-        // this.checkIfPoisonBarIsMax();
+
     }
+
+    // character logic -------------------------------- # 
 
     gravityForCharacter() {
         setInterval(() => {
             if (this.y <= this.max_Y - 75) {
                 this.y += this.speedY;
             }
-        }, 1000 / 25);        
+        }, 1000 / 25);
     }
-
 
     animateCharacter() {
 
@@ -184,22 +187,17 @@ class Character extends MovableObject {
 
         setInterval(() => {
             if (this.world.keyboard.SPACE) {
-                this.playAnimation(this.IMAGES_FINSLAP);
-                this.getMovementTimeStamp();
-            } else if (this.isHurt()) {                
-                this.playAnimation(this.IMAGES_HURT_POISONED);
+                this.meleeAttack();
             } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT || this.world.keyboard.UP || this.world.keyboard.DOWN) {
-                this.playAnimation(this.IMAGES_SWIM);
-                this.getMovementTimeStamp();
+                this.characterMoveOrders();
             } else if (this.world.keyboard.D) {
-                this.playAnimation(this.IMAGES_BUBBLE_ATTACK);
-                this.getMovementTimeStamp();
+                this.standardBubble();
             } else if (this.world.keyboard.F) {
-                this.playAnimation(this.IMAGES_POISON_BUBBLE);
-                this.getMovementTimeStamp();
+                this.poisonBubble();
+            } else if (this.isHurt()) {
+                this.world.CheckCollisions();
             } else if (this.isDead()) {
-                this.playAnimation(this.IMAGES_DEAD_POISON); 
-                this.clearAllIntervals();
+                this.characterIsDead();                               
             } else if (this.characterLongIdle()) {
                 this.playLongIdleAnimation();
             }
@@ -207,40 +205,75 @@ class Character extends MovableObject {
     }
 
     swimAnimate() {
-
         setInterval(() => {
             if (this.world.keyboard.RIGHT && this.x <= this.world.level.level_end_x) {
-                this.swimRight();
-                this.otherDirection = false;
-                this.swimming_sound.play();
+                this.characterMoveRight();
+            } if (this.world.keyboard.LEFT && this.x >= 50) {
+                this.characterMoveLeft();
+            } if (this.world.keyboard.UP && this.y >= -50) {
+                this.characterMoveUp();
+            } if (this.world.keyboard.DOWN && this.y <= this.max_Y - 75) {
+                this.characterMoveDown();
             }
-
-            if (this.world.keyboard.LEFT && this.x >= 50) {
-                this.swimLeft();
-                this.otherDirection = true
-                this.world.keyboard.D = false;
-                this.swimming_sound.play();
-            }
-
-            if (this.world.keyboard.UP && this.y >= -50) {
-                this.y -= this.speed;
-                this.swimming_sound.play();
-            }
-
-            if (this.world.keyboard.DOWN && this.y <= this.max_Y - 75) {
-                this.y += this.speed;
-                this.swimming_sound.play();
-            }
-
             this.world.camera_x = -this.x + 50;
         }, 1000 / 60);
-
     }
 
+    // excluded functions -------------------------------- # 
+
+    characterMoveRight() {
+        this.swimRight();
+        this.otherDirection = false;
+        this.swimming_sound.play();
+    }
+
+    characterMoveLeft() {
+        this.swimLeft();
+        this.otherDirection = true
+        this.world.keyboard.D = false;
+        this.swimming_sound.play();
+    }
+
+    characterMoveUp() {
+        this.y -= this.speed;
+        this.swimming_sound.play();
+    }
+
+    characterMoveDown() {
+        this.y += this.speed;
+        this.swimming_sound.play();
+    }
+
+    meleeAttack() {
+        this.playAnimation(this.IMAGES_FINSLAP);
+        this.getMovementTimeStamp();
+    }
+
+    characterMoveOrders() {
+        this.playAnimation(this.IMAGES_SWIM);
+        this.getMovementTimeStamp();
+    }
+
+    standardBubble() {
+        this.playAnimation(this.IMAGES_BUBBLE_ATTACK);
+        this.getMovementTimeStamp();
+    }
+
+    poisonBubble() {
+        this.playAnimation(this.IMAGES_POISON_BUBBLE);
+        this.getMovementTimeStamp();
+    }
+
+    characterIsDead() {
+        this.playAnimation(this.IMAGES_DEAD_POISON);
+        this.clearAllIntervals();
+        this.loseGame();
+    }
+
+    // ------------------------------- #
 
     getMovementTimeStamp() {
-        this.lastMovement = new Date().getTime();
-        // console.log(this.lastMovement);
+        this.lastMovement = new Date().getTime();        
     }
 
     characterLongIdle() {
@@ -262,27 +295,28 @@ class Character extends MovableObject {
         }
     }
 
+    loseGame() {
+        document.getElementById('title').style.display = 'none';
+        document.getElementById('canvas').style.display = 'none';
+        document.getElementById('lose').style.display = 'flex';
+        document.getElementById('fullscreenbutton').style.display = 'none';
+        this.losesound.play();
+        this.awww.play();
+    }
 
     clearAllIntervals() {
         setTimeout(() => {
             for (let i = 1; i < 9999; i++) window.clearInterval(i);
 
-        }, 500);
+        }, 400);
         world.ambient_Sound.pause();
         world.game_Sound.pause();
         world.bossAnthem.pause();
     }
-       
-   
 
-    // checkIfPoisonBarIsMax() {
-    //     setInterval(() => {
-    //         if (this.poison < 5) {
-    //             this.world.keyboard.F = false;
-    //         }
-    //     }, 1);
-        
-    // }
-   
+
+
+
+
 
 }
