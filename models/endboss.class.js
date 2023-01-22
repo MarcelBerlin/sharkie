@@ -144,7 +144,8 @@ class EndBoss extends MovableObject {
                     world.character.clearAllIntervals();  
                     this.winGame();                                     
                 }, 300);
-                this.biteAttack.pause();                
+                this.biteAttack.pause(); 
+                this.youWinSound.play();                              
             }            
         }, 100);
         
@@ -175,7 +176,7 @@ class EndBoss extends MovableObject {
         document.getElementById('canvas').style.display = 'none';
         document.getElementById('win').style.display = 'flex';
         document.getElementById('fullscreenbutton').style.display = 'none';
-        this.youWinSound.play();
+        
     }
 
 
