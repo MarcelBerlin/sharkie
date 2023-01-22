@@ -55,13 +55,23 @@ class World {
     checkThrowObjects() {
 
         if (this.keyboard.D) {
-            let bubble = new ThrowableObject(this.character.x + 140, this.character.y + 110, this.character.otherDirection);
-            this.throwingBubble.push(bubble);
+            if (this.character.otherDirection == true) {
+                let bubble = new ThrowableObject(this.character.x, this.character.y + 110, this.character.otherDirection);
+                this.throwingBubble.push(bubble);
+            } else {
+                let bubble = new ThrowableObject(this.character.x + 140, this.character.y + 110, this.character.otherDirection);
+                this.throwingBubble.push(bubble);
+            }
         }
 
         if (this.keyboard.F && this.poisonBubbles > 0) {
-            let poisonBubble = new ThrowableObject(this.character.x + 140, this.character.y + 110, this.character.otherDirection);
-            this.throwingPoisonBubble.push(poisonBubble);
+            if (this.character.otherDirection == true) {
+                let poisonBubble = new ThrowableObject(this.character.x, this.character.y + 110, this.character.otherDirection);
+                this.throwingPoisonBubble.push(poisonBubble);
+            } else {
+                let poisonBubble = new ThrowableObject(this.character.x + 140, this.character.y + 110, this.character.otherDirection);
+                this.throwingPoisonBubble.push(poisonBubble);
+            }
             this.poisonBubbles--;
             this.character.removePoisonFromBar();
             this.poisonbar.setPercentage(this.character.poison);
@@ -149,7 +159,7 @@ class World {
     grabCoins() {
 
         this.level.coins.forEach((coin, i) => {
-            if (this.character.isColliding(coin)) {                
+            if (this.character.isColliding(coin)) {
                 this.coin_sound.play();
                 this.character.addCoinToBar();
                 this.coinbar.setPercentage(this.character.coin);
@@ -172,7 +182,7 @@ class World {
             }
         })
     }
-   
+
 
     // Elements will draw on Canvas ################################ 
 

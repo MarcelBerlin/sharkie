@@ -39,7 +39,7 @@ class DrawableObject {
         if (this instanceof Character || this instanceof ThrowableObject ||this instanceof PufferFishGreen || this instanceof PufferFishPurple || this instanceof PufferFishRed || this instanceof JellyFishPurple || this instanceof JellyFishYellow || this instanceof JellySuperdangerousGreen || this instanceof JellySuperdangerousPurple || this instanceof EndBoss) {
             ctx.beginPath();
             ctx.lineWidth = '3';
-            ctx.strokeStyle = 'blue';
+            ctx.strokeStyle = 'transparent';
             ctx.rect(this.x, this.y, this.width, this.height);
             ctx.stroke();
         }

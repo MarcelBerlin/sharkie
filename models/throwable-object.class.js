@@ -10,16 +10,15 @@ class ThrowableObject extends MovableObject {
         'img/1.Sharkie/4.Attack/Bubble trap/Poisoned Bubble (for whale).png',
     ];
 
-    constructor(x, y, world, otherDirection) {
+    constructor(x, y, otherDirection) {
         super().loadImage('img/1.Sharkie/4.Attack/Bubble trap/Bubble.png');
         this.loadImages(this.IMAGE_BUBBLE);
         this.loadImages(this.IMAGE_BOSS_BUBBLE);
         this.x = x;
-        this.y = y;
-        this.world = world;
-        this.otherDirection = otherDirection;
+        this.y = y;                
         this.width = 40;
         this.height = 40;
+        this.otherDirection = otherDirection;
         this.BubbleBlow();
         this.PoisonBubbleBlow();
 
@@ -34,8 +33,9 @@ class ThrowableObject extends MovableObject {
                     this.applyGravity();
                     this.playAnimation(this.IMAGE_BUBBLE);
                     this.x -= 10;
-                } else if (!this.otherDirection) {
-                    this.applyGravity();                    
+                } else {
+                    this.applyGravity(); 
+                    this.otherDirection;                   
                     this.x += 10;
                 }
 
@@ -52,11 +52,11 @@ class ThrowableObject extends MovableObject {
                 if (this.otherDirection) {
                     this.applyGravity();
                     this.playAnimation(this.IMAGE_BOSS_BUBBLE);
-                    this.x += 10;
+                    this.x -= 10;
                 } else {
                     this.applyGravity();  
                     this.otherDirection;
-                    this.x -= 10;
+                    this.x += 10;
                 }
 
             }, 20);
