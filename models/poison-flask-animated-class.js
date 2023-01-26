@@ -24,7 +24,7 @@ class PoisonflaskAnimated extends MovableObject {
     }
 
     animateFlask() {
-        setInterval(() => {
+        setStoppableInterval(() => {
             this.playAnimation(this.IMAGES_POISONFLASK_ANIMATED);
         }, 150);
     }

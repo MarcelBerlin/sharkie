@@ -78,6 +78,8 @@ class Character extends MovableObject {
 
     IMAGES_FINSLAP = [
         'img/1.Sharkie/4.Attack/Fin slap/1.png',
+        'img/1.Sharkie/4.Attack/Fin slap/2.png',
+        'img/1.Sharkie/4.Attack/Fin slap/3.png',
         'img/1.Sharkie/4.Attack/Fin slap/4.png',
         'img/1.Sharkie/4.Attack/Fin slap/5.png',
         'img/1.Sharkie/4.Attack/Fin slap/6.png',
@@ -144,8 +146,7 @@ class Character extends MovableObject {
     }
 
     swimming_sound = new Audio('audio/swim.mp3');
-    losesound = new Audio('audio/losehorn.wav');
-    awww = new Audio('audio/aww.mp3');
+    
 
     constructor() {
         super().loadImage('img/1.Sharkie/1.IDLE/1.png');
@@ -169,7 +170,7 @@ class Character extends MovableObject {
     // character logic -------------------------------- # 
 
     gravityForCharacter() {
-        setInterval(() => {
+        setStoppableInterval(() => {
             if (this.y <= this.max_Y - 75) {
                 this.y += this.speedY;
             }
@@ -178,14 +179,14 @@ class Character extends MovableObject {
 
     animateCharacter() {
 
-        setInterval(() => {
+        setStoppableInterval(() => {
             let i = this.currentImage % this.IMAGES_IDLE.length; // let i = 0 % 6; => 0, Rest 1 // 0, 1, 2, 3, 4, 5, 6, 0, 1, 2... etc
             let path = this.IMAGES_IDLE[i];
             this.img = this.imageCache[path];
             this.currentImage++;
         }, 100);
 
-        setInterval(() => {
+        setStoppableInterval(() => {
             if (this.world.keyboard.SPACE) {
                 this.meleeAttack();
             } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT || this.world.keyboard.UP || this.world.keyboard.DOWN) {
@@ -205,7 +206,7 @@ class Character extends MovableObject {
     }
 
     swimAnimate() {
-        setInterval(() => {
+        setStoppableInterval(() => {
             if (this.world.keyboard.RIGHT && this.x <= this.world.level.level_end_x) {
                 this.characterMoveRight();
             } if (this.world.keyboard.LEFT && this.x >= 50) {
@@ -265,9 +266,9 @@ class Character extends MovableObject {
     }
 
     characterIsDead() {
-        this.playAnimation(this.IMAGES_DEAD_POISON);
-        this.clearAllIntervals();
-        this.loseGame();
+        this.playAnimation(this.IMAGES_DEAD_POISON);        
+        loseGame();
+        stopGame();
     }
 
     // ------------------------------- #
@@ -294,29 +295,7 @@ class Character extends MovableObject {
             this.img = this.imageCache[path2];
         }
     }
+  
 
-    loseGame() {
-        document.getElementById('title').style.display = 'none';
-        document.getElementById('canvas').style.display = 'none';
-        document.getElementById('lose').style.display = 'flex';
-        document.getElementById('fullscreenbutton').style.display = 'none';
-        this.losesound.play();
-        this.awww.play();
-    }
-
-    clearAllIntervals() {
-        setTimeout(() => {
-            for (let i = 1; i < 9999; i++) window.clearInterval(i);
-
-        }, 400);
-        world.ambient_Sound.pause();
-        world.game_Sound.pause();
-        world.bossAnthem.pause();
-    }
-
-
-
-
-
-
+    
 }

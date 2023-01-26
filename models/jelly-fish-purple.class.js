@@ -38,7 +38,7 @@ class JellyFishPurple extends MovableObject {
 
     animate() { 
         this.swimUp();
-            setInterval(() => {
+            setStoppableInterval(() => {
                 this.playAnimation(this.IMAGES_SWIM);
                 if(this.y <= this.min_Y) {
                     this.swimDown();
@@ -50,7 +50,7 @@ class JellyFishPurple extends MovableObject {
     }
 
     checkIfDead() {
-        setInterval(() => {
+        setStoppableInterval(() => {
             if (this.jellyFishEnergy == 0) {
                 this.speed = 0;
                 this.y -= 15;

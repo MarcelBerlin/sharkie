@@ -37,7 +37,7 @@ class JellySuperdangerousGreen extends MovableObject {
 
     animate() { 
         this.swimUp();
-            setInterval(() => {
+            setStoppableInterval(() => {
                 this.playAnimation(this.IMAGES_DANGEROUS);
                 if(this.y <= this.min_Y) {
                     this.swimDown();
@@ -49,7 +49,7 @@ class JellySuperdangerousGreen extends MovableObject {
     }
 
     checkIfDead() {
-        setInterval(() => {
+        setStoppableInterval(() => {
             if (this.superJellyFishEnergy == 0) {
                 this.speed = 0;
                 this.y -= 15;

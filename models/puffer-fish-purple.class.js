@@ -51,12 +51,12 @@ class PufferFishPurple extends MovableObject {
 
     animate() {
         
-        setInterval(() => {
+        setStoppableInterval(() => {
             this.swimLeft();
         }, 1000 / 60);
 
         let i = 0;
-        setInterval(() => {
+        setStoppableInterval(() => {
             this.playAnimation(this.IMAGES_SWIM);
             if (this.pufferFishEnergy == 0) {
                 this.speed = 0;

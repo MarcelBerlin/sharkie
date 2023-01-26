@@ -28,7 +28,7 @@ class ThrowableObject extends MovableObject {
 
     BubbleBlow() {
         if (world.keyboard.D) { 
-            setInterval(() => {
+            setStoppableInterval(() => {
                 this.playAnimation(this.IMAGE_BUBBLE);
                 if (this.otherDirection) {                    
                     this.applyGravity();                   
@@ -44,7 +44,7 @@ class ThrowableObject extends MovableObject {
 
     PoisonBubbleBlow() {
         if (world.keyboard.F) {
-            setInterval(() => {
+            setStoppableInterval(() => {
                 this.playAnimation(this.IMAGE_BOSS_BUBBLE);
                 if (this.otherDirection) {
                     this.applyGravity();                    

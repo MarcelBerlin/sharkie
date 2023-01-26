@@ -1,8 +1,15 @@
+let intervalIDs = [];
 let canvas;
 let world;
 let keyboard = new Keyboard();
 let gameSpeed = 10;
 
+let youWinSound = new Audio('audio/winsound.mp3');
+let losesound = new Audio('audio/losehorn.wav');
+let awww = new Audio('audio/aww.mp3');
+let ambient_Sound = new Audio('audio/underwater.wav');
+let game_Sound = new Audio('audio/sharkieanthem_short.mp3');
+let bossAnthem = new Audio('audio/bossanthem.mp3');
 
 
 function init() {
@@ -10,6 +17,13 @@ function init() {
     world = new World(canvas, keyboard);
     level1 = createLevel1(world);
     DisplayShowHidden();
+    playBackgroundSound();
+}
+
+function setStoppableInterval(fn, time) {
+    let id = setInterval(fn, time);
+    intervalIDs.push(id);
+
 }
 
 function DisplayShowHidden() {
@@ -35,75 +49,105 @@ function backToMenu() {
     document.getElementById('startscreen').style.display = 'flex';
 }
 
-function reloadPage() {   
-    window.location.reload();   
+function reloadPage() {
+    window.location.reload();
 }
 
 function fullscreenToggle() {
     canvas.requestFullscreen()
 }
 
+function stopGame() {
+    intervalIDs.forEach(clearInterval);
+}
 
-window.addEventListener('keydown', (e) => {
-    if (e.key == 'ArrowRight') {
+function loseGame() {
+    ambient_Sound.pause();
+    game_Sound.pause();
+    document.getElementById('title').style.display = 'none';
+    document.getElementById('canvas').style.display = 'none';
+    document.getElementById('lose').style.display = 'flex';
+    document.getElementById('fullscreenbutton').style.display = 'none';
+    losesound.play();
+    awww.play();
+}
+
+function winGame() {
+    ambient_Sound.pause();
+    game_Sound.pause();
+    bossAnthem.pause();
+    document.getElementById('title').style.display = 'none';
+    document.getElementById('canvas').style.display = 'none';
+    document.getElementById('win').style.display = 'flex';
+    document.getElementById('fullscreenbutton').style.display = 'none';
+    youWinSound.play(); 
+}
+
+function playBackgroundSound() {
+    ambient_Sound.play();
+    game_Sound.play();
+}
+
+window.addEventListener('keydown', (event) => {
+    if (event.key == 'ArrowRight') {
         keyboard.RIGHT = true;
     }
 
-    if (e.key == 'ArrowLeft') {
+    if (event.key == 'ArrowLeft') {
         keyboard.LEFT = true;
     }
 
-    if (e.key == 'ArrowUp') {
+    if (event.key == 'ArrowUp') {
         keyboard.UP = true;
     }
 
-    if (e.key == 'ArrowDown') {
+    if (event.key == 'ArrowDown') {
         keyboard.DOWN = true;
     }
 
-    if (e.key == ' ') {
-        keyboard.SPACE = true;
+    if (event.key == ' ') {
+        keyboard.SPACE = true; 
     }
 
-    if (e.key == 'd') {
+    if (event.key == 'd') {
         keyboard.D = true;
     }
 
-    if (e.key == 'f') {
+    if (event.key == 'f') {
         keyboard.F = true;
     }
-    
+
 
 });
 
-window.addEventListener('keyup', (e) => {
-    if (e.key == 'ArrowRight') {
+window.addEventListener('keyup', (event) => {
+    if (event.key == 'ArrowRight') {
         keyboard.RIGHT = false;
     }
 
-    if (e.key == 'ArrowLeft') {
+    if (event.key == 'ArrowLeft') {
         keyboard.LEFT = false;
     }
 
-    if (e.key == 'ArrowUp') {
+    if (event.key == 'ArrowUp') {
         keyboard.UP = false;
     }
 
-    if (e.key == 'ArrowDown') {
+    if (event.key == 'ArrowDown') {
         keyboard.DOWN = false;
     }
 
-    if (e.key == ' ') {
+    if (event.key == ' ') {
         keyboard.SPACE = false;
     }
 
-    if (e.key == 'd') {
+    if (event.key == 'd') {
         keyboard.D = false;
     }
 
-    if (e.key == 'f') {
+    if (event.key == 'f') {
         keyboard.F = false;
     }
-    
+
 
 });

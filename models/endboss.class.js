@@ -59,7 +59,7 @@ class EndBoss extends MovableObject {
     width = 450;
     offset = {
         top: 175,
-        bottom: 30,
+        bottom: 0,
         left: 30,
         right: 30
     }
@@ -81,7 +81,7 @@ class EndBoss extends MovableObject {
         this.loadImages(this.IMAGES_HURT);
         this.loadImages(this.IMAGES_DEAD);
         this.x = 2200;
-        this.y = -50;
+        this.y = 0;
         this.speed = 30;
         this.animate();
     }
@@ -91,11 +91,11 @@ class EndBoss extends MovableObject {
 
     animate() {
         let i = 0
-        setInterval(() => {
+        setStoppableInterval(() => {
             if (world.character.x > 1800 && !this.hadFirstContact) {
                 i = 0;
                 this.hadFirstContact = true;
-                setInterval(() => {
+                setStoppableInterval(() => {
                     this.activateBossSound();
                     if (i < 10) {
                         this.BossSpawning();
@@ -110,7 +110,7 @@ class EndBoss extends MovableObject {
 
    
     attackCharacter() {
-        setInterval(() => {
+        setStoppableInterval(() => {
             if (world.character.x + 250 > this.x) {
                 this.playAnimation(this.IMAGES_ATTACK);
                 this.biteAttack.play();
@@ -126,26 +126,26 @@ class EndBoss extends MovableObject {
     
 
     isHittenByBubble() {
-        setInterval(() => {
+        setStoppableInterval(() => {
             if (this.bossEnergy < 50 && this.isHurt()) {
                 this.playAnimation(this.IMAGES_HURT);                
             } 
             if (this.bossEnergy == 0) {
-                world.character.clearAllIntervals();
+                this.isDefeated();
             }
         }, 100)        
     }
 
     isDefeated() {
-        setInterval(() => {
+        setStoppableInterval(() => {
             if (this.bossEnergy == 0) {
                 this.playAnimation(this.IMAGES_DEAD);
                 setTimeout(() => {
-                    world.character.clearAllIntervals();  
-                    this.winGame();                                     
-                }, 300);
+                    winGame();
+                    stopGame();                                                          
+                }, 200);
                 this.biteAttack.pause(); 
-                this.youWinSound.play();                              
+                                             
             }            
         }, 100);
         
@@ -167,17 +167,11 @@ class EndBoss extends MovableObject {
     }
    
     activateBossSound() {
-        world.game_Sound.pause();
-        world.bossAnthem.play();
+        game_Sound.pause();
+        bossAnthem.play();
     }
 
-    winGame() {
-        document.getElementById('title').style.display = 'none';
-        document.getElementById('canvas').style.display = 'none';
-        document.getElementById('win').style.display = 'flex';
-        document.getElementById('fullscreenbutton').style.display = 'none';
-        
-    }
+   
 
 
 

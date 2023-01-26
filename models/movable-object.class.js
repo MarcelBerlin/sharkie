@@ -25,7 +25,7 @@ class MovableObject extends DrawableObject {
 
 
     applyGravity() {
-        setInterval(() => {
+        setStoppableInterval(() => {
             if (this.y <= this.max_Y) {
                 this.y += this.speedY;
             }
@@ -44,13 +44,13 @@ class MovableObject extends DrawableObject {
     }
 
     swimUp() {
-        setInterval(() => {
+        setStoppableInterval(() => {
             this.y -= this.speed;
         }, 1000 / 60);
     }
 
     swimDown() {
-        setInterval(() => {
+        setStoppableInterval(() => {
             this.y += this.speed;
         }, 1000 / 60);
     }

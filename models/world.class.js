@@ -12,9 +12,7 @@ class World {
     canvas;
     ctx;
     keyboard;
-    camera_x = 0;
-    ambient_Sound = new Audio('audio/underwater.wav');
-    game_Sound = new Audio('audio/sharkieanthem_short.mp3');
+    camera_x = 0;    
     bossAnthem = new Audio('audio/bossanthem.mp3');
     coin_sound = new Audio('audio/coins.wav');
     slap_sound = new Audio('audio/slap.wav');
@@ -28,8 +26,6 @@ class World {
         this.ctx = canvas.getContext('2d');
         this.keyboard = keyboard;
         this.canvas = canvas;
-        this.ambient_Sound.play();
-        this.game_Sound.play();
         this.setWorld();
         this.swimCollectAndAttack();
         this.draw();
@@ -42,7 +38,7 @@ class World {
 
 
     swimCollectAndAttack() {
-        setInterval(() => {
+        setStoppableInterval(() => {
             this.CheckCollisions();
             this.grabCoins();
             this.grabPoison();
@@ -52,6 +48,73 @@ class World {
             this.poisonBubbleHit();
         }, 300)
     }
+
+    // Elements will draw on Canvas ################################ 
+
+    draw() {
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        this.ctx.translate(this.camera_x, 0);
+        this.addObjectToCanvas(this.level.backgroundObjects);
+        this.ctx.translate(-this.camera_x, 0);
+        this.addToMap(this.healthbar);
+        this.addToMap(this.coinbar);
+        this.addToMap(this.poisonbar);
+        this.ctx.translate(this.camera_x, 0);
+        this.addObjectToCanvas(this.throwingBubble);
+        this.addObjectToCanvas(this.throwingPoisonBubble);
+        this.addObjectToCanvas(this.level.flasks);
+        this.addObjectToCanvas(this.level.coins);
+        this.addToMap(this.character);
+        this.addObjectToCanvas(this.level.pufferFish);
+        this.addObjectToCanvas(this.level.jellyFish);
+        this.addObjectToCanvas(this.level.endBoss);
+        this.addObjectToCanvas(this.level.lights);
+        this.ctx.translate(-this.camera_x, 0);
+
+        // Draw() wird immer und immer wieder aufgerufen
+
+        let self = this;
+        requestAnimationFrame(function () {
+            self.draw();
+        });
+
+        // #############################################
+    }
+
+
+    addObjectToCanvas(object) {
+        object.forEach(o => {
+            this.addToMap(o);
+        });
+    }
+
+    addToMap(mo) {
+        if (mo.otherDirection) {
+            this.flipImage(mo);
+        }
+
+        mo.drawImage(this.ctx);
+        mo.drawOutlines(this.ctx);
+
+        if (mo.otherDirection) {
+            this.flipImageBack(mo);
+        }
+    }
+
+    flipImage(mo) {
+        this.ctx.save();
+        this.ctx.translate(mo.width, 0);
+        this.ctx.scale(-1, 1);
+        mo.x = mo.x * -1;
+    }
+
+    flipImageBack(mo) {
+        this.ctx.restore();
+        mo.x = mo.x * -1;
+    }
+
+    // ####################################################
+
 
     // game logic -------------------------------- # 
 
@@ -64,7 +127,7 @@ class World {
             this.ThrowPoisonBubble();
         }
     }
- 
+
 
     CheckCollisions() {
         this.CheckCollisionPufferFish();
@@ -97,7 +160,7 @@ class World {
                 this.DamageFromEndboss();
             }
         })
-    }   
+    }
 
 
     bubbleHit() {
@@ -113,7 +176,7 @@ class World {
 
     finSlapHit() {
         this.level.pufferFish.forEach((pufferFish) => {
-            if (this.character.attackWithFinslap(pufferFish) && this.keyboard.SPACE) {                
+            if (this.character.attackWithFinslap(pufferFish) && this.keyboard.SPACE) {
                 this.pufferFishHitAndKill(pufferFish);
             }
         })
@@ -228,74 +291,6 @@ class World {
         this.poisonbar.setPercentage(this.character.poison);
         this.level.flasks.splice(i, 1);
     }
-
-
-    // Elements will draw on Canvas ################################ 
-
-    draw() {
-        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-        this.ctx.translate(this.camera_x, 0);
-        this.addObjectToCanvas(this.level.backgroundObjects);
-        this.ctx.translate(-this.camera_x, 0);
-        this.addToMap(this.healthbar);
-        this.addToMap(this.coinbar);
-        this.addToMap(this.poisonbar);
-        this.ctx.translate(this.camera_x, 0);
-        this.addObjectToCanvas(this.throwingBubble);
-        this.addObjectToCanvas(this.throwingPoisonBubble);
-        this.addObjectToCanvas(this.level.flasks);
-        this.addObjectToCanvas(this.level.coins);
-        this.addToMap(this.character);
-        this.addObjectToCanvas(this.level.pufferFish);
-        this.addObjectToCanvas(this.level.jellyFish);
-        this.addObjectToCanvas(this.level.endBoss);
-        this.addObjectToCanvas(this.level.lights);
-        this.ctx.translate(-this.camera_x, 0);
-
-        // Draw() wird immer und immer wieder aufgerufen
-
-        let self = this;
-        requestAnimationFrame(function () {
-            self.draw();
-        });
-
-        // #############################################
-    }
-
-
-    addObjectToCanvas(object) {
-        object.forEach(o => {
-            this.addToMap(o);
-        });
-    }
-
-    addToMap(mo) {
-        if (mo.otherDirection) {
-            this.flipImage(mo);
-        }
-
-        mo.drawImage(this.ctx);
-        mo.drawOutlines(this.ctx);
-
-        if (mo.otherDirection) {
-            this.flipImageBack(mo);
-        }
-    }
-
-    flipImage(mo) {
-        this.ctx.save();
-        this.ctx.translate(mo.width, 0);
-        this.ctx.scale(-1, 1);
-        mo.x = mo.x * -1;
-    }
-
-    flipImageBack(mo) {
-        this.ctx.restore();
-        mo.x = mo.x * -1;
-    }
-
-    // ####################################################
-
 
 
 }
