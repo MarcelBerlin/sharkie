@@ -44,8 +44,7 @@ function DisplayShowHidden() {
     document.getElementById('tutorial').style.display = 'none';
     document.getElementById('fullscreenbutton').style.display = 'flex';
     document.getElementById('mute').classList.remove('d-none');
-    document.getElementById('BossName').style.display = 'block';
-    
+        
 }
 
 function howToPlay() {
