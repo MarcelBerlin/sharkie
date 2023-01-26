@@ -66,9 +66,7 @@ class EndBoss extends MovableObject {
     world;
     hadFirstContact = false;
     speedAfterHit = 30;
-    biteAttack = new Audio('audio/bite.wav');
-    splashJump = new Audio('audio/splash.wav');
-    youWinSound = new Audio('audio/winsound.mp3');
+    
 
 
 
@@ -113,7 +111,7 @@ class EndBoss extends MovableObject {
         setStoppableInterval(() => {
             if (world.character.x + 250 > this.x) {
                 this.playAnimation(this.IMAGES_ATTACK);
-                this.biteAttack.play();
+                biteAttack.play();
             }
         }, 100);
     }
@@ -128,7 +126,7 @@ class EndBoss extends MovableObject {
     isHittenByBubble() {
         setStoppableInterval(() => {
             if (this.bossEnergy < 50 && this.isHurt()) {
-                this.playAnimation(this.IMAGES_HURT);                
+                this.playAnimation(this.IMAGES_HURT);                       
             } 
             if (this.bossEnergy == 0) {
                 this.isDefeated();
@@ -144,7 +142,7 @@ class EndBoss extends MovableObject {
                     winGame();
                     stopGame();                                                          
                 }, 200);
-                this.biteAttack.pause(); 
+                biteAttack.pause(); 
                                              
             }            
         }, 100);
@@ -155,7 +153,7 @@ class EndBoss extends MovableObject {
 
     BossSpawning() {
         this.playAnimation(this.IMAGES_INTRODUCE);
-        this.splashJump.play();
+        splashJump.play();
     }
     
     BossAttackAndSwim() {

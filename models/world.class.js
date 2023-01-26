@@ -2,6 +2,7 @@ class World {
 
     character = new Character();
     healthbar = new HealthBar();
+    healthbarBoss = new HealthBarBoss();
     coinbar = new CoinBar();
     poisonbar = new PoisonBar();
     throwingBubble = [];
@@ -12,14 +13,8 @@ class World {
     canvas;
     ctx;
     keyboard;
-    camera_x = 0;    
-    bossAnthem = new Audio('audio/bossanthem.mp3');
-    coin_sound = new Audio('audio/coins.wav');
-    slap_sound = new Audio('audio/slap.wav');
-    characterHitByPufferFish = new Audio('audio/hit.wav');
-    characterHitByJellyFish = new Audio('audio/electroshock.wav');
-    bubble_sound = new Audio('audio/bubble.wav');
-    bottle_sound = new Audio('audio/bottle.wav');
+    camera_x = 0;
+
 
 
     constructor(canvas, keyboard) {
@@ -57,6 +52,7 @@ class World {
         this.addObjectToCanvas(this.level.backgroundObjects);
         this.ctx.translate(-this.camera_x, 0);
         this.addToMap(this.healthbar);
+        this.addToMap(this.healthbarBoss);
         this.addToMap(this.coinbar);
         this.addToMap(this.poisonbar);
         this.ctx.translate(this.camera_x, 0);
@@ -236,33 +232,33 @@ class World {
 
     DamageFromPufferfish() {
         this.character.playAnimation(this.character.IMAGES_HURT_POISONED);
-        this.characterHitByPufferFish.play();
+        characterHitByPufferFish.play();
         this.character.hit();
         this.healthbar.setPercentage(this.character.energy);
     }
 
     DamageFromJellyfish() {
         this.character.playAnimation(this.character.IMAGES_HURT_SHOCKED);
-        this.characterHitByJellyFish.play();
+        characterHitByJellyFish.play();
         this.character.hit();
         this.healthbar.setPercentage(this.character.energy);
     }
 
     DamageFromEndboss() {
         this.character.playAnimation(this.character.IMAGES_HURT_POISONED);
-        this.characterHitByPufferFish.play();
+        characterHitByPufferFish.play();
         this.character.hit();
         this.healthbar.setPercentage(this.character.energy);
     }
 
     pufferFishHitAndKill(pufferFish) {
-        this.slap_sound.play();
+        slap_sound.play();
         pufferFish.hitPufferFish();
         pufferFish.pufferFishIsDead();
     }
 
     jellyFishHitAndKill(jellyFish, i) {
-        this.bubble_sound.play();
+        bubble_sound.play();
         jellyFish.hitJellyFish();
         jellyFish.hitSuperJellyFish();
         jellyFish.jellyFishIsDead();
@@ -271,14 +267,15 @@ class World {
     }
 
     endBossHitAndKill(endBoss, i) {
-        this.bubble_sound.play();
-        endBoss.hitEndboss();
+        bubble_sound.play();
+        endBoss.hitEndboss();        
+        this.healthbarBoss.setPercentage(endBoss.bossEnergy);        
         endBoss.endBossIsDead();
         this.throwingPoisonBubble.splice(i, 1);
     }
 
     increaseCoinbar(i) {
-        this.coin_sound.play();
+        coin_sound.play();
         this.character.addCoinToBar();
         this.coinbar.setPercentage(this.character.coin);
         this.level.coins.splice(i, 1);
@@ -286,7 +283,7 @@ class World {
 
     increasePoisonbar(i) {
         this.poisonBubbles++;
-        this.bottle_sound.play();
+        bottle_sound.play();
         this.character.addPoisonflaskToBar();
         this.poisonbar.setPercentage(this.character.poison);
         this.level.flasks.splice(i, 1);

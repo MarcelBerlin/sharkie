@@ -42,7 +42,7 @@ class PufferFishGreen extends MovableObject {
         this.loadImages(this.IMAGES_BUBBLESWIM);
         this.loadImages(this.IMAGES_DEAD);
         this.x = 300 + Math.random() * 500;
-        this.y = 30 + Math.random() * 300;
+        this.y = this.min_Y + 75 + Math.random() * 250;
         this.speed = 0.2 + Math.random() * 0.35;
         this.animate();  
 

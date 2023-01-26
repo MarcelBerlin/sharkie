@@ -21,6 +21,23 @@ h1 {
 
 }
 
+h3 {
+    z-index: 1;
+    display: none;
+    position: absolute;
+    top: 50px;
+    right: 50px;
+    font-weight: 100;
+    font-size: 18px;
+    letter-spacing: 3px;
+    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+
+}
+
+.d-none {
+    display: none;
+}
+
 .gamingwindow {
     position: relative;
 }
@@ -118,12 +135,28 @@ h1 {
         
 }  
 
-
 canvas {      
     background-color: black;
     border-radius: 15px;
     box-shadow: 0px 0 10px 10px rgba(0, 0, 0, 0.25);    
 }
+
+.canvas_relative {
+    position: relative;
+}
+
+
+
+.mute {
+    cursor: pointer;
+    z-index: 50;
+    width: 45px;
+    height: 45px;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}
+
 
 #win {
     display: none;
@@ -176,16 +209,16 @@ canvas {
 }
 
 
-#fullscreenbutton {
-    margin-top: 25px;
+#fullscreenbutton {    
     display: none;
-    justify-content: center;
-    align-items: center;    
+    position: absolute;
+    top: 15px;
+    right: 70px;   
 }
 
 #fullscreenbutton img {
     cursor: pointer;
-    height: 50px;
+    height: 35px;
     width: auto;
 }
 

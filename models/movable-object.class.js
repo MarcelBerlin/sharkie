@@ -3,7 +3,7 @@ class MovableObject extends DrawableObject {
 
     speed = 0.1;
     otherDirection = false;
-    min_Y = 0;
+    min_Y = 30;
     max_Y = 375;
     speedY = 0.15;
     acceleration = 0.25;
@@ -15,6 +15,7 @@ class MovableObject extends DrawableObject {
     superJellyFishEnergy = 20;
     bossEnergy = 50;
     lastHit = 0;
+    currentImage = 0;
 
     offset = {
         top: 0,

@@ -10,6 +10,7 @@
     <script src="models/statusbar-health.class.js"></script>     
     <script src="models/statusbar-coin.class.js"></script>
     <script src="models/statusbar-poison.class.js"></script> 
+    <script src="models/statusbar-health-boss.class.js"></script>   
     <script src="models/world.class.js"></script>   
     <script src="models/movable-object.class.js"></script>
     <script src="models/character.class.js"></script>    
@@ -127,11 +128,22 @@
 <!-- ###### -->
 
 <!-- Canvas -->
+<div class="canvas_relative" id="fullScreenWindow">
+
     <canvas id="canvas" width="720px" height="480px" style="display: none;"></canvas>
+    <img src="img/laut.png" class="mute d-none" onclick="toggleMute()" id="mute">
 
     <div id="fullscreenbutton" >
         <img src="img/6.Botones/Full Screen/Mesa de trabajo 7.png" onclick="fullscreenToggle()">
     </div>
+
+    <h3 id="BossName">El Gigante</h3>
+    
+</div>
+    
+
+
+    
 
     <div id="closeFullscreen">
         <img src="">

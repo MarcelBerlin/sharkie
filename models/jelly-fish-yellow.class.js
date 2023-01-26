@@ -37,9 +37,9 @@ class JellyFishYellow extends MovableObject {
         this.swimUp();
         setStoppableInterval(() => {
             this.playAnimation(this.IMAGES_SWIM);
-            if(this.y <= this.min_Y) {
+            if(this.y - 75 <= this.min_Y) {
                 this.swimDown();
-            } if(this.y >= this.max_Y - 100) {
+            } if(this.y >= this.max_Y - 50) {
                 this.swimUp();
             }           
         }, 100);

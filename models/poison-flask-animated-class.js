@@ -19,7 +19,7 @@ class PoisonflaskAnimated extends MovableObject {
         super().loadImage('img/4. Marcadores/Posión/Animada/1.png');
         this.loadImages(this.IMAGES_POISONFLASK_ANIMATED);
         this.x = 300 + Math.random() * 1500;
-        this.y = 50 + Math.random() * 300;
+        this.y = this.min_Y + 75 + Math.random() * 250;
         this.animateFlask();
     }
 

@@ -10,6 +10,15 @@ let awww = new Audio('audio/aww.mp3');
 let ambient_Sound = new Audio('audio/underwater.wav');
 let game_Sound = new Audio('audio/sharkieanthem_short.mp3');
 let bossAnthem = new Audio('audio/bossanthem.mp3');
+let swimming_sound = new Audio('audio/swim.mp3');
+let coin_sound = new Audio('audio/coins.wav');
+let slap_sound = new Audio('audio/slap.wav');
+let characterHitByPufferFish = new Audio('audio/hit.wav');
+let characterHitByJellyFish = new Audio('audio/electroshock.wav');
+let bubble_sound = new Audio('audio/bubble.wav');
+let bottle_sound = new Audio('audio/bottle.wav');
+let biteAttack = new Audio('audio/bite.wav');
+let splashJump = new Audio('audio/splash.wav');
 
 
 function init() {
@@ -34,6 +43,9 @@ function DisplayShowHidden() {
     document.getElementById('canvas').style.display = 'block';
     document.getElementById('tutorial').style.display = 'none';
     document.getElementById('fullscreenbutton').style.display = 'flex';
+    document.getElementById('mute').classList.remove('d-none');
+    document.getElementById('BossName').style.display = 'block';
+    
 }
 
 function howToPlay() {
@@ -56,6 +68,37 @@ function reloadPage() {
 function fullscreenToggle() {
     canvas.requestFullscreen()
 }
+
+function toggleMute() {    
+    toggleNoSoundBtn();
+    game_Sound.muted = !game_Sound.muted;
+    ambient_Sound.muted = !ambient_Sound.muted;
+    bossAnthem.muted = !bossAnthem.muted;
+    coin_sound.muted = !coin_sound.muted;
+    slap_sound.muted = !slap_sound.muted;
+    characterHitByPufferFish.muted = !characterHitByPufferFish.muted;
+    characterHitByJellyFish.muted = !characterHitByJellyFish.muted;
+    bubble_sound.muted = !bubble_sound.muted;
+    bottle_sound.muted = !bottle_sound.muted;
+    swimming_sound.muted = !swimming_sound.muted;
+    splashJump.muted = !splashJump.muted;
+    biteAttack.muted = !biteAttack.muted;
+    youWinSound.muted = !youWinSound.muted;
+    losesound.muted = !losesound.muted;
+    awww.muted = !awww.muted;
+}
+
+function toggleNoSoundBtn(){
+    let img = document.getElementById('mute').src; //= 'img/laut.png';
+
+    if (img.indexOf('laut.png')!=-1) {
+      document.getElementById('mute').src = 'img/stumm.png';
+    } else {
+      document.getElementById('mute').src = 'img/laut.png';
+    }
+   
+}
+
 
 function stopGame() {
     intervalIDs.forEach(clearInterval);

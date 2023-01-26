@@ -145,9 +145,6 @@ class Character extends MovableObject {
         right: 40
     }
 
-    swimming_sound = new Audio('audio/swim.mp3');
-    
-
     constructor() {
         super().loadImage('img/1.Sharkie/1.IDLE/1.png');
         this.loadImages(this.IMAGES_IDLE);
@@ -211,7 +208,7 @@ class Character extends MovableObject {
                 this.characterMoveRight();
             } if (this.world.keyboard.LEFT && this.x >= 50) {
                 this.characterMoveLeft();
-            } if (this.world.keyboard.UP && this.y >= -50) {
+            } if (this.world.keyboard.UP && this.y >= this.min_Y) {
                 this.characterMoveUp();
             } if (this.world.keyboard.DOWN && this.y <= this.max_Y - 75) {
                 this.characterMoveDown();
@@ -225,24 +222,24 @@ class Character extends MovableObject {
     characterMoveRight() {
         this.swimRight();
         this.otherDirection = false;
-        this.swimming_sound.play();
+        swimming_sound.play();
     }
 
     characterMoveLeft() {
         this.swimLeft();
         this.otherDirection = true
         this.world.keyboard.D = false;
-        this.swimming_sound.play();
+        swimming_sound.play();
     }
 
     characterMoveUp() {
         this.y -= this.speed;
-        this.swimming_sound.play();
+        swimming_sound.play();
     }
 
     characterMoveDown() {
         this.y += this.speed;
-        this.swimming_sound.play();
+        swimming_sound.play();
     }
 
     meleeAttack() {
