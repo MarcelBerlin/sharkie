@@ -137,6 +137,9 @@ class Character extends MovableObject {
     y = 100;
     world;
     lastMovement = 0;
+    finSlap = false;
+    bubbleBlow = false;
+    poisonBubbleBlow = false;
 
     offset = {
         top: 120,
@@ -195,7 +198,7 @@ class Character extends MovableObject {
             } else if (this.isHurt()) {
                 this.world.CheckCollisions();
             } else if (this.isDead()) {
-                this.characterIsDead();                               
+                this.characterIsDead();
             } else if (this.characterLongIdle()) {
                 this.playLongIdleAnimation();
             }
@@ -242,10 +245,11 @@ class Character extends MovableObject {
         swimming_sound.play();
     }
 
-    meleeAttack() {
+    meleeAttack() {       
         this.playAnimation(this.IMAGES_FINSLAP);
-        this.getMovementTimeStamp();
+        this.getMovementTimeStamp();            
     }
+
 
     characterMoveOrders() {
         this.playAnimation(this.IMAGES_SWIM);
@@ -263,7 +267,7 @@ class Character extends MovableObject {
     }
 
     characterIsDead() {
-        this.playAnimation(this.IMAGES_DEAD_POISON);        
+        this.playAnimation(this.IMAGES_DEAD_POISON);
         loseGame();
         stopGame();
     }
@@ -271,7 +275,7 @@ class Character extends MovableObject {
     // ------------------------------- #
 
     getMovementTimeStamp() {
-        this.lastMovement = new Date().getTime();        
+        this.lastMovement = new Date().getTime();
     }
 
     characterLongIdle() {
@@ -292,7 +296,7 @@ class Character extends MovableObject {
             this.img = this.imageCache[path2];
         }
     }
-  
 
-    
+
+
 }

@@ -3,6 +3,7 @@ let canvas;
 let world;
 let keyboard = new Keyboard();
 let gameSpeed = 10;
+let attackTrigger;
 
 let youWinSound = new Audio('audio/winsound.mp3');
 let losesound = new Audio('audio/losehorn.wav');
@@ -88,12 +89,12 @@ function toggleMute() {
 }
 
 function toggleNoSoundBtn(){
-    let img = document.getElementById('mute').src; //= 'img/laut.png';
+    let img = document.getElementById('mute').src; //= 'img/laut-40.png';
 
-    if (img.indexOf('laut.png')!=-1) {
-      document.getElementById('mute').src = 'img/stumm.png';
+    if (img.indexOf('laut-40.png')!=-1) {
+      document.getElementById('mute').src = 'img/kein-ton-40.png';
     } else {
-      document.getElementById('mute').src = 'img/laut.png';
+      document.getElementById('mute').src = 'img/laut-40.png';
     }
    
 }
@@ -110,6 +111,7 @@ function loseGame() {
     document.getElementById('canvas').style.display = 'none';
     document.getElementById('lose').style.display = 'flex';
     document.getElementById('fullscreenbutton').style.display = 'none';
+    document.getElementById('mute').style.display = 'none';
     losesound.play();
     awww.play();
 }
@@ -122,6 +124,7 @@ function winGame() {
     document.getElementById('canvas').style.display = 'none';
     document.getElementById('win').style.display = 'flex';
     document.getElementById('fullscreenbutton').style.display = 'none';
+    document.getElementById('mute').style.display = 'none';
     youWinSound.play(); 
 }
 
@@ -148,15 +151,15 @@ window.addEventListener('keydown', (event) => {
     }
 
     if (event.key == ' ') {
-        keyboard.SPACE = true; 
+        keyboard.SPACE = true;        
     }
 
     if (event.key == 'd') {
-        keyboard.D = true;
+        keyboard.D = true;        
     }
 
     if (event.key == 'f') {
-        keyboard.F = true;
+        keyboard.F = true;        
     }
 
 
@@ -184,11 +187,11 @@ window.addEventListener('keyup', (event) => {
     }
 
     if (event.key == 'd') {
-        keyboard.D = false;
+        keyboard.D = false;      
     }
 
     if (event.key == 'f') {
-        keyboard.F = false;
+        keyboard.F = false;        
     }
 
 

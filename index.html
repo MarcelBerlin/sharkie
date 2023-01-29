@@ -1,22 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">    
-     
-    <script src="models/drawableObject.class.js"></script> 
-    <script src="models/statusbar-health.class.js"></script>     
+    <link rel="stylesheet" href="style.css">
+
+    <script src="models/drawableObject.class.js"></script>
+    <script src="models/statusbar-health.class.js"></script>
     <script src="models/statusbar-coin.class.js"></script>
-    <script src="models/statusbar-poison.class.js"></script> 
-    <script src="models/statusbar-health-boss.class.js"></script>   
-    <script src="models/world.class.js"></script>   
+    <script src="models/statusbar-poison.class.js"></script>
+    <script src="models/statusbar-health-boss.class.js"></script>
+    <script src="models/world.class.js"></script>
     <script src="models/movable-object.class.js"></script>
-    <script src="models/character.class.js"></script>    
-    <script src="models/throwable-object.class.js"></script>       
+    <script src="models/character.class.js"></script>
+    <script src="models/throwable-object.class.js"></script>
     <script src="models/Lightbeam.class.js"></script>
-    <script src="models/coins-class.js"></script>    
+    <script src="models/coins-class.js"></script>
     <script src="models/poison-flask-ground-class.js"></script>
     <script src="models/poison-flask-animated-class.js"></script>
     <script src="models/puffer-fish-green.class.js"></script>
@@ -26,133 +27,164 @@
     <script src="models/jelly-fish-yellow.class.js"></script>
     <script src="models/jelly-superdangerous-green.class.js"></script>
     <script src="models/jelly-superdangerous-purple.class.js"></script>
-    <script src="models/endboss.class.js"></script>    
+    <script src="models/endboss.class.js"></script>
     <script src="models/keyboard.class.js"></script>
-    <script src="models/backgroundObject.class.js"></script>   
-    <script src="models/level.class.js"></script>     
-    <script src="levels/level1.js"></script>    
-    <script src="js/game.js"></script>    
-    
+    <script src="models/backgroundObject.class.js"></script>
+    <script src="models/level.class.js"></script>
+    <script src="levels/level1.js"></script>
+    <script src="js/game.js"></script>
+
     <title>Sharkie - The Game</title>
 </head>
+
 <body id="game">
-    <h1 id="title">Sharkie</h1>   
+    <h1 id="title">Sharkie</h1>
 
-<div class="gamingwindow" id="fullScreen">
+    <div class="gamingwindow" id="fullScreen">
 
 
 
-<!-- Startscreen -->
+        <!-- Startscreen -->
 
-    <div id="startscreen" class="startscreen">        
-        <div>	
-            <img src="img/1.Sharkie/1.IDLE/Prewiew.gif">
-        </div>
-        
-        <div class="menu-choise">
-            <img src="img/6.Botones/Start/3.png" onclick="init()"> 
-            <img src="img/6.Botones/Start/5.png" onclick="howToPlay()">
-        </div>
-                
-                
-    </div>      
-    
-<!-- ###### -->
-
-<!-- Tutorial - How To play -->
-
-    <div id="tutorial" class="tutorial">
-        <div class="description_1">
-            <img src="img/6.Botones/Key/arrow keys.png"> Move Sharkie <img src="img/1.Sharkie/3.Swim/PreviewOP1.gif">
-        </div>
-        <div class="description_2">
-            <p><i></i></p>
-        </div>
-
-        <div class="description">
-            <div class="description_1">
-                <img src="img/6.Botones/Key/D key.png"> Throw Standard Bubble <img src="img/2.Enemy/2 Jelly fish/Preview all colors.gif">
+        <div id="startscreen" class="startscreen">
+            <div>
+                <img src="img/1.Sharkie/1.IDLE/Prewiew.gif">
             </div>
-            <div class="description_2">
-                <div><i>1 Bubble for - <img src="img/2.Enemy/2 Jelly fish/Regular damage/Lila 1.png"> <img src="img/2.Enemy/2 Jelly fish/Regular damage/Yellow 1.png"></i></div>
-                <div><i>2 Bubbles for - <img src="img/2.Enemy/2 Jelly fish/Súper dangerous/Green 1.png"><img src="img/2.Enemy/2 Jelly fish/Súper dangerous/Pink 1.png"></i></div>
+
+            <div class="menu-choise">
+                <img src="img/6.Botones/Start/3.png" onclick="init()">
+                <img src="img/6.Botones/Start/5.png" onclick="howToPlay()">
             </div>
-             
+
+            <div class="buttons-for-play">
+                <div class="fast-tutorial">
+                    <img src="img/6.Botones/Key/arrow keys.png"> Move Sharkie
+                </div>
+                <div class="fast-tutorial">
+                    <img src="img/6.Botones/Key/D key.png"> Throw Standard Bubble
+                </div>
+                <div class="fast-tutorial">
+                    <img src="img/6.Botones/Key/F key.png"> Throw Poison Bubble
+                </div>
+                <div class="fast-tutorial">
+                    <img src="img/6.Botones/Key/Space Bar key.png"> FinSlap
+                </div>
+
+            </div>
+
+
         </div>
 
-        <div class="description">
-            <div class="description_1">
-                <img src="img/6.Botones/Key/F key.png"> Throw Poison Bubble <img src="img/2.Enemy/3 Final Enemy/Preview.gif">
+        <!-- ###### -->
+
+        <!-- Tutorial - How To play -->
+
+        <div id="tutorial" class="tutorial">
+            <div class="tutorial-description">
+                <div class="tutorial-left">
+                    <div class="description">
+                        <div class="description_1-3">
+                            <img src="img/6.Botones/Key/arrow keys.png"> Move Sharkie <img
+                                src="img/1.Sharkie/3.Swim/PreviewOP1.gif">
+                        </div>
+                        <div class="infotext">
+                            <p><i></i></p>
+                        </div>
+                    </div>
+                    <div class="description">
+                        <div class="description_1-3">
+                            <img src="img/6.Botones/Key/D key.png"> Throw Standard Bubble <img
+                                src="img/2.Enemy/2 Jelly fish/Preview all colors.gif">
+                        </div>
+                        <div class="infotext">
+                            <div><i>1 Bubble for - <img src="img/2.Enemy/2 Jelly fish/Regular damage/Lila 1.png"> <img
+                                        src="img/2.Enemy/2 Jelly fish/Regular damage/Yellow 1.png"></i></div>
+                            <div><i>2 Bubbles for - <img src="img/2.Enemy/2 Jelly fish/Súper dangerous/Green 1.png"><img
+                                        src="img/2.Enemy/2 Jelly fish/Súper dangerous/Pink 1.png"></i></div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="tutorial-right">
+                    <div class="description">
+                        <div class="description_1-3">
+                            <img src="img/6.Botones/Key/F key.png"> Throw Poison Bubble <img
+                                src="img/2.Enemy/3 Final Enemy/Preview.gif">
+                        </div>
+                        <div class="infotext">
+                            <p><i>Collect 5x Poisonbottles to defeat the endboss!</i></p>
+                        </div>
+
+                    </div>
+
+                    <div class="description">
+                        <div class="description_4">
+                            <img src="img/6.Botones/Key/Space Bar key.png" class="spacebar"> FinSlap <img
+                                src="img/2.Enemy/1.Puffer fish (3 color options)/Preview.gif" class="bubblefish-img">
+                        </div>
+                        <div class="infotext">
+                            <p><i>Bubbles doesn't work against PufferFishes!</i></p>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="description_2">
-                <p><i>You must collect Poisonbottles in order to defeat the endboss!</i></p>
+
+            <div class="start-button">
+                <img src="img/6.Botones/Start/3.png" onclick="init()">
+                <img src="img/6.Botones/Start/6.png" onclick="backToMenu()">
             </div>
-            
         </div>
 
-        <div class="description">
-            <div class="description_1">
-                <img src="img/6.Botones/Key/Space Bar key.png">  FinSlap  <img src="img/2.Enemy/1.Puffer fish (3 color options)/Preview.gif">
+        <!-- ###### -->
+
+        <!-- Win and Lose Windows -->
+
+        <div id="win">
+            <img class="win-screen" src="img/6.Botones/Try again/Mesa de trabajo 1.png">
+            <div class="win-buttons">
+                <img id="tryAgain" src="img/6.Botones/Try again/Recurso 15.png" onclick="init()">
+                <img src="img/6.Botones/Start/6.png" onclick="reloadPage()">
             </div>
-            <div class="description_2">
-                <p><i>Bubbles doesn't work against PufferFishes!</i></p>
-            </div>            
         </div>
 
-        <div class="start-button">
-            <img src="img/6.Botones/Start/3.png" onclick="init()">
-            <img src="img/6.Botones/Start/6.png" onclick="backToMenu()">
+        <div id="lose">
+            <img class="lose-screen" src="img/6.Botones/Tittles/Game Over/Recurso 10.png">
+            <div class="win-buttons">
+                <img id="tryAgain" src="img/6.Botones/Try again/Recurso 15.png" onclick="init()">
+                <img src="img/6.Botones/Start/6.png" onclick="reloadPage()">
+            </div>
         </div>
+
+        <!-- ###### -->
+
+        <!-- Canvas -->
+        <div class="canvas_relative" id="fullScreenWindow">
+
+            <canvas id="canvas" width="720px" height="480px" style="display: none;"></canvas>
+            <img src="img/laut-40.png" class="mute d-none" onclick="toggleMute()" id="mute">
+
+            <div id="fullscreenbutton">
+                <img src="img/6.Botones/Full Screen/Mesa de trabajo 7.png" onclick="fullscreenToggle()">
+            </div>
+
+
+        </div>
+
+
+
+
+
+        <div id="closeFullscreen">
+            <img src="">
+        </div>
+        <!-- ###### -->
+
     </div>
 
-<!-- ###### -->
-
-<!-- Win and Lose Windows -->
-    
-    <div id="win">
-        <img class="win-screen" src="img/6.Botones/Try again/Mesa de trabajo 1.png">
-        <div class="win-buttons">
-            <img id="tryAgain" src="img/6.Botones/Try again/Recurso 15.png" onclick="init()">
-            <img src="img/6.Botones/Start/6.png" onclick="reloadPage()">
-        </div>
-    </div>
-
-    <div id="lose">
-        <img class="lose-screen" src="img/6.Botones/Tittles/Game Over/Recurso 10.png">
-        <div class="win-buttons">
-            <img id="tryAgain" src="img/6.Botones/Try again/Recurso 15.png" onclick="init()">
-            <img src="img/6.Botones/Start/6.png" onclick="reloadPage()">
-        </div>
-    </div>
-
-<!-- ###### -->
-
-<!-- Canvas -->
-<div class="canvas_relative" id="fullScreenWindow">
-
-    <canvas id="canvas" width="720px" height="480px" style="display: none;"></canvas>
-    <img src="img/laut.png" class="mute d-none" onclick="toggleMute()" id="mute">
-
-    <div id="fullscreenbutton" >
-        <img src="img/6.Botones/Full Screen/Mesa de trabajo 7.png" onclick="fullscreenToggle()">
-    </div>
-
-        
-</div>
-    
 
 
-    
-
-    <div id="closeFullscreen">
-        <img src="">
-    </div>
-<!-- ###### -->
-    
-</div>
-
-    
-    
 
 </body>
+
 </html>
