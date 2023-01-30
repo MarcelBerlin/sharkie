@@ -6,7 +6,7 @@ let gameSpeed = 10;
 let attackTrigger;
 
 let youWinSound = new Audio('audio/winsound.mp3');
-let losesound = new Audio('audio/losehorn.wav');
+// let losesound = new Audio('audio/losehorn.wav');
 let awww = new Audio('audio/aww.mp3');
 let ambient_Sound = new Audio('audio/underwater.wav');
 let game_Sound = new Audio('audio/sharkieanthem_short.mp3');
@@ -65,8 +65,39 @@ function reloadPage() {
     window.location.reload();
 }
 
-function fullscreenToggle() {
-    canvas.requestFullscreen()
+function fullScreen() {
+    let fullscreen = document.getElementById('fullScreen');
+    enterFullscreen(fullscreen);
+}
+
+function enterFullscreen(element) {
+    if(element.requestFullscreen) {
+      element.requestFullscreen();
+    } else if(element.msRequestFullscreen) {      // for IE11 (remove June 15, 2022)
+      element.msRequestFullscreen();
+    } else if(element.webkitRequestFullscreen) {  // iOS Safari
+      element.webkitRequestFullscreen();
+    }
+    addStylesForFullScreen();
+  }
+
+    
+  function exitFullscreen() {
+    if(document.exitFullscreen) {
+      document.exitFullscreen();
+    } else if(document.webkitExitFullscreen) {
+      document.webkitExitFullscreen();
+    }
+  }
+
+function addStylesForFullScreen() {
+    document.getElementById('fullscreenbutton').style.display = 'none';
+    document.getElementById('exitFullscreenIcon').classList.remove('d-none');
+    document.getElementById('canvas').classList.add('canvasFullScreen'); 
+    document.getElementById('win').classList.add('winScreenContainerFullScreen', 'winScreenContainerFullScreenh2', 'imgTrophyContainerFullScreenimg');
+    document.getElementById('lose').classList.add('gameOverScreenFullScreen');
+    document.getElementById('positionAbsoluteLeft').classList.add('d-none');
+    document.getElementById('positionAbsoluteRight').classList.add('d-none');
 }
 
 function toggleMute() {    
@@ -84,7 +115,7 @@ function toggleMute() {
     splashJump.muted = !splashJump.muted;
     biteAttack.muted = !biteAttack.muted;
     youWinSound.muted = !youWinSound.muted;
-    losesound.muted = !losesound.muted;
+    // losesound.muted = !losesound.muted;
     awww.muted = !awww.muted;
 }
 
@@ -112,7 +143,7 @@ function loseGame() {
     document.getElementById('lose').style.display = 'flex';
     document.getElementById('fullscreenbutton').style.display = 'none';
     document.getElementById('mute').style.display = 'none';
-    losesound.play();
+    // losesound.play();
     awww.play();
 }
 
