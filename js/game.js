@@ -154,12 +154,19 @@ function showMobileBtn() {
     document.getElementById('mobileRightBtn').classList.remove('d-none');
 }
 
+function hideMobileBtn() {
+    document.getElementById('mobileLeftBtn').classList.add('d-none');
+    document.getElementById('mobileRightBtn').classList.add('d-none');
+}
+
+
 
 function stopGame() {
     intervalIDs.forEach(clearInterval);
 }
 
 function loseGame() {
+    hideMobileBtn();
     ambient_Sound.pause();
     game_Sound.pause();
     document.getElementById('title').style.display = 'none';
@@ -171,6 +178,7 @@ function loseGame() {
 }
 
 function winGame() {
+    hideMobileBtn();
     ambient_Sound.pause();
     game_Sound.pause();
     bossAnthem.pause();

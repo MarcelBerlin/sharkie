@@ -59,9 +59,7 @@ class PufferFishPurple extends MovableObject {
         setStoppableInterval(() => {
             this.playAnimation(this.IMAGES_SWIM);
             if (this.pufferFishEnergy == 0) {
-                this.speed = 0;
-                this.y -= 10;
-                this.playAnimation(this.IMAGES_DEAD);
+                this.PufferIsKilledByCharacter();
             } else if(world.character.x + 200 > this.x && world.character.y + 200 > this.y && world.character.x - 200 < this.x && world.character.y - 50 < this.y) {
                 if (i < 5) {
                     this.playAnimation(this.IMAGES_TRANSITION);               
@@ -70,7 +68,12 @@ class PufferFishPurple extends MovableObject {
                 }
                 i++;
             }    
-        }, 100); 
-       
+        }, 100);        
+    }
+
+    PufferIsKilledByCharacter() {
+        this.speed = 0;
+        this.y -= 15;
+        this.playAnimation(this.IMAGES_DEAD);
     }
 }

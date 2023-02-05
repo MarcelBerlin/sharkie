@@ -4,7 +4,7 @@ class MovableObject extends DrawableObject {
     speed = 0.1;
     otherDirection = false;
     min_Y = 30;
-    max_Y = 375;
+    max_Y = 325;
     speedY = 0.15;
     acceleration = 0.25;
     energy = 50;
@@ -26,8 +26,8 @@ class MovableObject extends DrawableObject {
 
     applyGravity() {
         setStoppableInterval(() => {
-            if (this.y <= this.max_Y) {
-                this.y += this.speedY;
+            if (this.y <= this.max_Y + 75) {
+                this.y -= this.speedY;
             }
         }, 1000 / 25);
     }

@@ -74,7 +74,7 @@ class PufferFishGreen extends MovableObject {
 
     PufferIsKilledByCharacter() {
         this.speed = 0;
-        this.y -= 10;
+        this.y -= 15;
         this.playAnimation(this.IMAGES_DEAD);
     }
 

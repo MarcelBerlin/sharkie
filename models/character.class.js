@@ -219,7 +219,7 @@ class Character extends MovableObject {
             } if (this.world.keyboard.DOWN && this.y <= this.max_Y - 75) {
                 this.characterMoveDown();
             }
-            this.world.camera_x = -this.x + 50;
+            this.world.camera_x = -this.x + 100;
         }, 1000 / 60);
     }
 
