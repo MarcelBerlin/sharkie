@@ -195,15 +195,18 @@ class Character extends MovableObject {
                 this.standardBubble();
             } else if (this.world.keyboard.F) {
                 this.poisonBubble();
-            } else if (this.isHurt()) {
-                this.world.CheckCollisions();
-            } else if (this.isDead()) {
+            }  else if (this.isDead()) {
                 this.characterIsDead();
             } else if (this.characterLongIdle()) {
                 this.playLongIdleAnimation();
             }
         }, 100);
     }
+
+
+    // else if (this.isHurt()) {
+    //     this.world.CheckCollisions();
+    // }
 
     swimAnimate() {
         setStoppableInterval(() => {

@@ -7,7 +7,7 @@ class MovableObject extends DrawableObject {
     max_Y = 375;
     speedY = 0.15;
     acceleration = 0.25;
-    energy = 100;
+    energy = 50;
     coin = 0;
     poison = 0;
     pufferFishEnergy = 10;
@@ -15,8 +15,7 @@ class MovableObject extends DrawableObject {
     superJellyFishEnergy = 20;
     bossEnergy = 50;
     lastHit = 0;
-    currentImage = 0;
-
+    
     offset = {
         top: 0,
         bottom: 0,
@@ -102,13 +101,14 @@ class MovableObject extends DrawableObject {
         } else {
             this.lastHit = new Date().getTime();
         }
+        console.log(this.energy);
+        
     }
 
     isHurt() {
         let timepassed = new Date().getTime() - this.lastHit; // Differenz in ms zum letzten Hit 
-        timepassed = timepassed / 1000; // Differenz in sek        
+        timepassed = timepassed / 1000; // Differenz in sek              
         return timepassed < 1;
-
     }
 
     isDead() {

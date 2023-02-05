@@ -17,7 +17,7 @@ class HealthBarBoss extends DrawableObject {
         this.width = 200;
         this.height = 50;
         this.y = 50;
-        this.x = 500;
+        this.x = 580;
         this.setPercentage(50);
     }
 

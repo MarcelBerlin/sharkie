@@ -6,7 +6,6 @@ let gameSpeed = 10;
 let attackTrigger;
 
 let youWinSound = new Audio('audio/winsound.mp3');
-// let losesound = new Audio('audio/losehorn.wav');
 let awww = new Audio('audio/aww.mp3');
 let ambient_Sound = new Audio('audio/underwater.wav');
 let game_Sound = new Audio('audio/sharkieanthem_short.mp3');
@@ -27,7 +26,13 @@ function init() {
     world = new World(canvas, keyboard);
     level1 = createLevel1(world);
     DisplayShowHidden();
-    playBackgroundSound();
+    playBackgroundSound();    
+    showMobileBtn();
+}
+
+function restartGame() {
+    exitFullscreen();
+    init();
 }
 
 function setStoppableInterval(fn, time) {
@@ -44,8 +49,8 @@ function DisplayShowHidden() {
     document.getElementById('canvas').style.display = 'block';
     document.getElementById('tutorial').style.display = 'none';
     document.getElementById('fullscreenbutton').style.display = 'flex';
-    document.getElementById('mute').classList.remove('d-none');
-        
+    document.getElementById('mute').style.display = 'flex';
+
 }
 
 function howToPlay() {
@@ -70,37 +75,52 @@ function fullScreen() {
     enterFullscreen(fullscreen);
 }
 
+
 function enterFullscreen(element) {
-    if(element.requestFullscreen) {
-      element.requestFullscreen();
-    } else if(element.msRequestFullscreen) {      // for IE11 (remove June 15, 2022)
-      element.msRequestFullscreen();
-    } else if(element.webkitRequestFullscreen) {  // iOS Safari
-      element.webkitRequestFullscreen();
+    if (element.requestFullscreen) {
+        element.requestFullscreen();
+    } else if (element.msRequestFullscreen) {      // for IE11 (remove June 15, 2022)
+        element.msRequestFullscreen();
+    } else if (element.webkitRequestFullscreen) {  // iOS Safari
+        element.webkitRequestFullscreen();
     }
     addStylesForFullScreen();
-  }
+}
 
-    
-  function exitFullscreen() {
-    if(document.exitFullscreen) {
-      document.exitFullscreen();
-    } else if(document.webkitExitFullscreen) {
-      document.webkitExitFullscreen();
+
+function closeFullScreen() {
+    let fullscreen = document.getElementById('fullScreen');
+    exitFullscreen(fullscreen);
+}
+
+function exitFullscreen() {
+    if (document.exitFullscreen) {
+        document.exitFullscreen();
+    } else if (document.webkitExitFullscreen) {
+        document.webkitExitFullscreen();
     }
-  }
+    removeStylesFromFullScreen();
+}
+
 
 function addStylesForFullScreen() {
     document.getElementById('fullscreenbutton').style.display = 'none';
-    document.getElementById('exitFullscreenIcon').classList.remove('d-none');
-    document.getElementById('canvas').classList.add('canvasFullScreen'); 
+    document.getElementById('closeFullscreen').style.display = 'block';
+    document.getElementById('canvas').classList.add('canvasFullScreen');
     document.getElementById('win').classList.add('winScreenContainerFullScreen', 'winScreenContainerFullScreenh2', 'imgTrophyContainerFullScreenimg');
     document.getElementById('lose').classList.add('gameOverScreenFullScreen');
-    document.getElementById('positionAbsoluteLeft').classList.add('d-none');
-    document.getElementById('positionAbsoluteRight').classList.add('d-none');
+    
 }
 
-function toggleMute() {    
+function removeStylesFromFullScreen() {
+    document.getElementById('closeFullscreen').style.display = 'none';
+    document.getElementById('fullscreenbutton').style.display = 'block';    
+    document.getElementById('canvas').classList.remove('canvasFullScreen');
+    document.getElementById('win').classList.remove('winScreenContainerFullScreen', 'winScreenContainerFullScreenh2', 'imgTrophyContainerFullScreenimg');
+    document.getElementById('lose').classList.remove('gameOverScreenFullScreen');
+}
+
+function toggleMute() {
     toggleNoSoundBtn();
     game_Sound.muted = !game_Sound.muted;
     ambient_Sound.muted = !ambient_Sound.muted;
@@ -115,19 +135,23 @@ function toggleMute() {
     splashJump.muted = !splashJump.muted;
     biteAttack.muted = !biteAttack.muted;
     youWinSound.muted = !youWinSound.muted;
-    // losesound.muted = !losesound.muted;
     awww.muted = !awww.muted;
 }
 
-function toggleNoSoundBtn(){
+function toggleNoSoundBtn() {
     let img = document.getElementById('mute').src; //= 'img/laut-40.png';
 
-    if (img.indexOf('laut-40.png')!=-1) {
-      document.getElementById('mute').src = 'img/kein-ton-40.png';
+    if (img.indexOf('laut-40.png') != -1) {
+        document.getElementById('mute').src = 'img/kein-ton-40.png';
     } else {
-      document.getElementById('mute').src = 'img/laut-40.png';
+        document.getElementById('mute').src = 'img/laut-40.png';
     }
-   
+
+}
+
+function showMobileBtn() {
+    document.getElementById('mobileLeftBtn').classList.remove('d-none');
+    document.getElementById('mobileRightBtn').classList.remove('d-none');
 }
 
 
@@ -143,7 +167,6 @@ function loseGame() {
     document.getElementById('lose').style.display = 'flex';
     document.getElementById('fullscreenbutton').style.display = 'none';
     document.getElementById('mute').style.display = 'none';
-    // losesound.play();
     awww.play();
 }
 
@@ -156,7 +179,7 @@ function winGame() {
     document.getElementById('win').style.display = 'flex';
     document.getElementById('fullscreenbutton').style.display = 'none';
     document.getElementById('mute').style.display = 'none';
-    youWinSound.play(); 
+    youWinSound.play();
 }
 
 function playBackgroundSound() {
@@ -182,15 +205,15 @@ window.addEventListener('keydown', (event) => {
     }
 
     if (event.key == ' ') {
-        keyboard.SPACE = true;        
+        keyboard.SPACE = true;
     }
 
     if (event.key == 'd') {
-        keyboard.D = true;        
+        keyboard.D = true;
     }
 
     if (event.key == 'f') {
-        keyboard.F = true;        
+        keyboard.F = true;
     }
 
 
@@ -218,11 +241,11 @@ window.addEventListener('keyup', (event) => {
     }
 
     if (event.key == 'd') {
-        keyboard.D = false;      
+        keyboard.D = false;
     }
 
     if (event.key == 'f') {
-        keyboard.F = false;        
+        keyboard.F = false;
     }
 
 

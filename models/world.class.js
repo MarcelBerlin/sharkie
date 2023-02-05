@@ -125,16 +125,17 @@ class World {
     }
 
 
-    CheckCollisions() {
+    CheckCollisions() {        
         this.CheckCollisionPufferFish();
         this.CheckCollisionJellyFish();
         this.CheckCollisionEndboss();
+               
     }
 
 
     CheckCollisionPufferFish() {
         this.level.pufferFish.forEach((pufferFish) => {
-            if (this.character.isColliding(pufferFish)) {
+            if (this.character.isColliding(pufferFish) && !this.character.isHurt()) {
                 this.DamageFromPufferfish();
             }
         })
@@ -143,7 +144,7 @@ class World {
 
     CheckCollisionJellyFish() {
         this.level.jellyFish.forEach((jellyFish) => {
-            if (this.character.isColliding(jellyFish)) {
+            if (this.character.isColliding(jellyFish) && !this.character.isHurt()) {
                 this.DamageFromJellyfish();
             }
         })
@@ -152,7 +153,7 @@ class World {
 
     CheckCollisionEndboss() {
         this.level.endBoss.forEach((endBoss) => {
-            if (this.character.isColliding(endBoss)) {
+            if (this.character.isColliding(endBoss) && !this.character.isHurt()) {
                 this.DamageFromEndboss();
             }
         })
