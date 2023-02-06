@@ -22,41 +22,41 @@ class ThrowableObject extends MovableObject {
         this.BubbleBlow();
         this.PoisonBubbleBlow();
 
-
     }
 
 
     BubbleBlow() {
         if (world.keyboard.D) { 
-            setStoppableInterval(() => {
-                this.playAnimation(this.IMAGE_BUBBLE);
+            this.playAnimation(this.IMAGE_BUBBLE);            
+            setStoppableInterval(() => {                
                 if (this.otherDirection) {                    
                     this.applyGravity();                   
-                    this.x -= 10;
+                    this.x -= 10;                    
                 } else {
                     this.applyGravity(); 
                     this.otherDirection;                   
-                    this.x += 10;
-                }
-            }, 20);
-        }
+                    this.x += 10;                    
+                } 
+            }, 25);
+            this.getTimeForLastBubble();    
+        }             
     }
 
     PoisonBubbleBlow() {
         if (world.keyboard.F) {
-            setStoppableInterval(() => {
-                this.playAnimation(this.IMAGE_BOSS_BUBBLE);
+            this.playAnimation(this.IMAGE_BOSS_BUBBLE);            
+            setStoppableInterval(() => {                
                 if (this.otherDirection) {
                     this.applyGravity();                    
-                    this.x -= 10;
+                    this.x -= 10;                    
                 } else {
                     this.applyGravity();  
                     this.otherDirection;
-                    this.x += 10;
-                }
-            }, 20);
-        }
+                    this.x += 10;                     
+                }  
+            }, 25);
+            this.getTimeForLastBubble(); 
+        }              
     }
-
 
 }

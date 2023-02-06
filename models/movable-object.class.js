@@ -15,6 +15,7 @@ class MovableObject extends DrawableObject {
     superJellyFishEnergy = 20;
     bossEnergy = 50;
     lastHit = 0;
+    lastBubble = 0;
     
     offset = {
         top: 0,
@@ -100,8 +101,7 @@ class MovableObject extends DrawableObject {
             this.energy = 0;
         } else {
             this.lastHit = new Date().getTime();
-        }
-        console.log(this.energy);
+        }  console.log(this.energy);      
         
     }
 
@@ -168,6 +168,17 @@ class MovableObject extends DrawableObject {
 
     endBossIsDead() {
         return this.bossEnergy == 0;
+    }
+
+    getTimeForLastBubble() {
+        this.lastBubble = new Date().getTime();
+    }
+
+
+    timeBetweenBubbles() {
+        let timepassed = new Date().getTime() - this.lastBubble;
+        timepassed = timepassed / 500;
+        return timepassed < 1;
     }
 
 

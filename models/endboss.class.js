@@ -113,13 +113,13 @@ class EndBoss extends MovableObject {
                 this.playAnimation(this.IMAGES_ATTACK);
                 biteAttack.play();
             }
-        }, 100);
+        }, 200);
     }
 
     swimLeft() {
         setTimeout(() => {
             this.x -= 7.5;
-        }, 500);
+        }, 200);
     }
     
 
@@ -131,7 +131,7 @@ class EndBoss extends MovableObject {
             if (this.bossEnergy == 0) {
                 this.isDefeated();
             }
-        }, 100)        
+        }, 200)        
     }
 
     isDefeated() {
@@ -141,11 +141,11 @@ class EndBoss extends MovableObject {
                 setTimeout(() => {
                     winGame();
                     stopGame();                                                          
-                }, 200);
+                }, 300);
                 biteAttack.pause(); 
                                              
             }            
-        }, 100);
+        }, 200);
         
     }
 
@@ -168,12 +168,5 @@ class EndBoss extends MovableObject {
         game_Sound.pause();
         bossAnthem.play();
     }
-
    
-
-
-
-
-
-
 }

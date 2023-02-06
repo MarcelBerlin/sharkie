@@ -223,9 +223,9 @@ window.addEventListener('keydown', (event) => {
     if (event.key == 'f') {
         keyboard.F = true;
     }
-
-
+    
 });
+
 
 window.addEventListener('keyup', (event) => {
     if (event.key == 'ArrowRight') {

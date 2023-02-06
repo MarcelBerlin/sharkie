@@ -184,29 +184,30 @@ class Character extends MovableObject {
             let path = this.IMAGES_IDLE[i];
             this.img = this.imageCache[path];
             this.currentImage++;
-        }, 100);
 
-        setStoppableInterval(() => {
-            if (this.world.keyboard.SPACE) {
+
+            if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT || this.world.keyboard.UP || this.world.keyboard.DOWN) {
+                this.characterMoveOrders()               
+            } else if (this.isHurt()) {
+                this.collideWithPufferFish();
+                this.collideWithJellyFish();
+                this.collideWithEndboss();
+            } else if (this.isDead()) {
+                this.characterIsDead();
+            } else if (this.characterLongIdle()) {                
+                this.playLongIdleAnimation();
+            } else if (this.world.keyboard.SPACE) {
                 this.meleeAttack();
-            } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT || this.world.keyboard.UP || this.world.keyboard.DOWN) {
-                this.characterMoveOrders();
             } else if (this.world.keyboard.D) {
                 this.standardBubble();
             } else if (this.world.keyboard.F) {
                 this.poisonBubble();
-            }  else if (this.isDead()) {
-                this.characterIsDead();
-            } else if (this.characterLongIdle()) {
-                this.playLongIdleAnimation();
-            }
-        }, 100);
+            } else {
+                
+            } 
+        }, 100);       
     }
 
-
-    // else if (this.isHurt()) {
-    //     this.world.CheckCollisions();
-    // }
 
     swimAnimate() {
         setStoppableInterval(() => {
@@ -219,7 +220,7 @@ class Character extends MovableObject {
             } if (this.world.keyboard.DOWN && this.y <= this.max_Y - 75) {
                 this.characterMoveDown();
             }
-            this.world.camera_x = -this.x + 100;
+            this.world.camera_x = -this.x + 75;
         }, 1000 / 60);
     }
 
@@ -248,9 +249,9 @@ class Character extends MovableObject {
         swimming_sound.play();
     }
 
-    meleeAttack() {       
+    meleeAttack() {
         this.playAnimation(this.IMAGES_FINSLAP);
-        this.getMovementTimeStamp();            
+        this.getMovementTimeStamp();
     }
 
 
@@ -275,6 +276,31 @@ class Character extends MovableObject {
         stopGame();
     }
 
+    collideWithPufferFish() {
+        this.world.level.pufferFish.forEach(pufferFish => { 
+            if (this.isColliding(pufferFish)) {
+                this.playAnimation(this.IMAGES_HURT_POISONED);
+            }           
+        });
+    }
+
+    collideWithJellyFish() {
+        this.world.level.jellyFish.forEach(jellyFish => { 
+            if (this.isColliding(jellyFish)) {
+                this.playAnimation(this.IMAGES_HURT_SHOCKED);
+            }           
+        });
+    }
+
+    collideWithEndboss() {
+        this.world.level.endBoss.forEach(endBoss => {
+            if (this.isColliding(endBoss)) {
+                this.playAnimation(this.IMAGES_HURT_POISONED);
+            }
+        });
+    }
+    
+
     // ------------------------------- #
 
     getMovementTimeStamp() {
@@ -284,10 +310,13 @@ class Character extends MovableObject {
     characterLongIdle() {
         let timepassed = new Date().getTime() - this.lastMovement;
         timepassed = timepassed / 1000;
-        return timepassed > 5;
+        return timepassed > 3;
     }
 
     playLongIdleAnimation() {
+        this.world.keyboard.D = false;
+        this.world.keyboard.F = false;
+        this.world.keyboard.SPACE = false;
         let i = this.currentImage;
         let j = this.currentImage % this.IMAGES_LONGIDLE.length; // Das % Zeichen sorgt für ein wiederholtes itterieren.
         let path1 = this.IMAGES_LONGIDLE_INTRO[i];
@@ -299,7 +328,7 @@ class Character extends MovableObject {
             this.img = this.imageCache[path2];
         }
     }
-
+    
 
 
 }

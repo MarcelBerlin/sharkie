@@ -5,11 +5,14 @@
 }
 
 body {
+    margin: 0;
+    height: 100vh;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: center;    
     background-image: url('./img/underwater2.jpg');
-    background-position: center top;
+    background-position: center;
+    background-size: cover;
     font-family: 'LuckiestGuy-Regular', 'sharkparty', 'Arial', 'Helvetica', 'sans-serif';
     color: antiquewhite;
 }
@@ -317,6 +320,7 @@ canvas {
 .winScreenContainerFullScreen {
     background-image: url('./img/underwater2.jpg');
     background-position: center top;
+    background-size: cover;
     width: 100%;
     height: 100vh;
 }
@@ -336,6 +340,7 @@ canvas {
 .gameOverScreenFullScreen {
     background-image: url('./img/underwater2.jpg');
     background-position: center top;
+    background-size: cover;
     width: 100%;
     height: 100vh;
 }

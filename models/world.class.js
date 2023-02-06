@@ -22,7 +22,7 @@ class World {
         this.keyboard = keyboard;
         this.canvas = canvas;
         this.setWorld();
-        this.swimCollectAndAttack();
+        this.swimCollectAndAttack();     
         this.draw();
     }
 
@@ -33,14 +33,14 @@ class World {
 
 
     swimCollectAndAttack() {
-        setStoppableInterval(() => {
-            this.CheckCollisions();
+        setStoppableInterval(() => { 
+            this.checkThrowObjects();           
             this.grabCoins();
-            this.grabPoison();
-            this.checkThrowObjects();
+            this.grabPoison();            
             this.bubbleHit();
             this.finSlapHit();
             this.poisonBubbleHit();
+            this.CheckCollisions();
         }, 300)
     }
 
@@ -114,30 +114,30 @@ class World {
 
     // game logic -------------------------------- # 
 
-    checkThrowObjects() {
-        if (this.keyboard.D) {
-            this.ThrowStandardBubble();
-        }
-
-        if (this.keyboard.F && this.poisonBubbles > 0) {
-            this.ThrowPoisonBubble();
-        }
+    checkThrowObjects() {        
+            if (this.keyboard.D && !this.character.timeBetweenBubbles()) {
+                this.ThrowStandardBubble();
+            }
+    
+            if (this.keyboard.F && this.poisonBubbles > 0 && !this.character.timeBetweenBubbles()) {
+                this.ThrowPoisonBubble();
+            }        
     }
 
 
-    CheckCollisions() {        
+    CheckCollisions() {
         this.CheckCollisionPufferFish();
         this.CheckCollisionJellyFish();
         this.CheckCollisionEndboss();
-               
+
     }
 
 
     CheckCollisionPufferFish() {
-        this.level.pufferFish.forEach((pufferFish) => {
-            if (this.character.isColliding(pufferFish) && !this.character.isHurt()) {
-                this.DamageFromPufferfish();
-            }
+        this.level.pufferFish.forEach((pufferFish) => {            
+                if (this.character.isColliding(pufferFish) && !this.character.isHurt()) {
+                    this.DamageFromPufferfish();                    
+                }                        
         })
     }
 
@@ -145,7 +145,7 @@ class World {
     CheckCollisionJellyFish() {
         this.level.jellyFish.forEach((jellyFish) => {
             if (this.character.isColliding(jellyFish) && !this.character.isHurt()) {
-                this.DamageFromJellyfish();
+                this.DamageFromJellyfish();                
             }
         })
     }
@@ -154,7 +154,7 @@ class World {
     CheckCollisionEndboss() {
         this.level.endBoss.forEach((endBoss) => {
             if (this.character.isColliding(endBoss) && !this.character.isHurt()) {
-                this.DamageFromEndboss();
+                this.DamageFromEndboss();                
             }
         })
     }
@@ -231,24 +231,21 @@ class World {
         this.poisonbar.setPercentage(this.character.poison);
     }
 
-    DamageFromPufferfish() {
-        this.character.playAnimation(this.character.IMAGES_HURT_POISONED);
+    DamageFromPufferfish() {        
         characterHitByPufferFish.play();
-        this.character.hit();
+        this.character.hit();        
         this.healthbar.setPercentage(this.character.energy);
     }
 
-    DamageFromJellyfish() {
-        this.character.playAnimation(this.character.IMAGES_HURT_SHOCKED);
+    DamageFromJellyfish() {        
         characterHitByJellyFish.play();
-        this.character.hit();
+        this.character.hit();        
         this.healthbar.setPercentage(this.character.energy);
     }
 
-    DamageFromEndboss() {
-        this.character.playAnimation(this.character.IMAGES_HURT_POISONED);
+    DamageFromEndboss() {        
         characterHitByPufferFish.play();
-        this.character.hit();
+        this.character.hit();        
         this.healthbar.setPercentage(this.character.energy);
     }
 
@@ -269,8 +266,8 @@ class World {
 
     endBossHitAndKill(endBoss, i) {
         bubble_sound.play();
-        endBoss.hitEndboss();        
-        this.healthbarBoss.setPercentage(endBoss.bossEnergy);        
+        endBoss.hitEndboss();
+        this.healthbarBoss.setPercentage(endBoss.bossEnergy);
         endBoss.endBossIsDead();
         this.throwingPoisonBubble.splice(i, 1);
     }
