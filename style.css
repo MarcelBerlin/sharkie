@@ -109,6 +109,7 @@ h3 {
     width: 640px;
     display: flex;
     justify-content: space-evenly;
+    margin-top: 100px;
 }
 
 
@@ -131,7 +132,7 @@ h3 {
 }
 
 .tutorial-description {
-    width: 100%;
+    
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -141,19 +142,21 @@ h3 {
 .tutorial-left {
     display: flex;
     flex-direction: column;
+    margin-right: 75px;
 
 }
 
 .tutorial-right {
     display: flex;
     flex-direction: column;
-
+    margin-left: 75px;
 }
 
 
 .description {
     display: flex;
     flex-direction: column;
+    margin-bottom: 50px;
 
 }
 
@@ -162,6 +165,7 @@ h3 {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    width: 120%;
 }
 
 .description_1-3 img {
@@ -189,6 +193,10 @@ h3 {
 .infotext {
     font-size: 18px;
     color: yellow;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 120%;
 }
 
 .infotext img {

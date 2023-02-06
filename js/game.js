@@ -256,5 +256,4 @@ window.addEventListener('keyup', (event) => {
         keyboard.F = false;
     }
 
-
 });
