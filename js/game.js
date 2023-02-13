@@ -3,7 +3,6 @@ let canvas;
 let world;
 let keyboard = new Keyboard();
 let gameSpeed = 10;
-let attackTrigger;
 
 let youWinSound = new Audio('audio/winsound.mp3');
 let awww = new Audio('audio/aww.mp3');
@@ -50,7 +49,7 @@ function DisplayShowHidden() {
     document.getElementById('tutorial').style.display = 'none';
     document.getElementById('fullscreenbutton').style.display = 'flex';
     document.getElementById('mute').style.display = 'flex';
-
+    document.getElementById('ingameMoveOrders').style.display = 'flex';    
 }
 
 function howToPlay() {
@@ -174,6 +173,7 @@ function loseGame() {
     document.getElementById('lose').style.display = 'flex';
     document.getElementById('fullscreenbutton').style.display = 'none';
     document.getElementById('mute').style.display = 'none';
+    document.getElementById('ingameMoveOrders').style.display = 'none'; 
     awww.play();
 }
 
@@ -187,6 +187,7 @@ function winGame() {
     document.getElementById('win').style.display = 'flex';
     document.getElementById('fullscreenbutton').style.display = 'none';
     document.getElementById('mute').style.display = 'none';
+    document.getElementById('ingameMoveOrders').style.display = 'none'; 
     youWinSound.play();
 }
 

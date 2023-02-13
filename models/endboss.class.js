@@ -145,7 +145,7 @@ class EndBoss extends MovableObject {
                 biteAttack.pause(); 
                                              
             }            
-        }, 200);
+        }, 500);
         
     }
 

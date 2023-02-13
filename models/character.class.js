@@ -178,23 +178,17 @@ class Character extends MovableObject {
     }
 
     animateCharacter() {
-
         setStoppableInterval(() => {
-            let i = this.currentImage % this.IMAGES_IDLE.length; // let i = 0 % 6; => 0, Rest 1 // 0, 1, 2, 3, 4, 5, 6, 0, 1, 2... etc
-            let path = this.IMAGES_IDLE[i];
-            this.img = this.imageCache[path];
-            this.currentImage++;
-
-
-            if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT || this.world.keyboard.UP || this.world.keyboard.DOWN) {
-                this.characterMoveOrders()               
+            this.loadImageArray();
+            if (this.canCharacterSwim()) {
+                this.characterMoveOrders()
             } else if (this.isHurt()) {
                 this.collideWithPufferFish();
                 this.collideWithJellyFish();
                 this.collideWithEndboss();
             } else if (this.isDead()) {
                 this.characterIsDead();
-            } else if (this.characterLongIdle()) {                
+            } else if (this.characterLongIdle()) {
                 this.playLongIdleAnimation();
             } else if (this.world.keyboard.SPACE) {
                 this.meleeAttack();
@@ -202,29 +196,51 @@ class Character extends MovableObject {
                 this.standardBubble();
             } else if (this.world.keyboard.F) {
                 this.poisonBubble();
-            } else {
-                
             } 
-        }, 100);       
+        }, 100);
     }
-
+    
 
     swimAnimate() {
         setStoppableInterval(() => {
-            if (this.world.keyboard.RIGHT && this.x <= this.world.level.level_end_x) {
+            if (this.canSwimRight()) {
                 this.characterMoveRight();
-            } if (this.world.keyboard.LEFT && this.x >= 50) {
+            } if (this.canSwimLeft()) {
                 this.characterMoveLeft();
-            } if (this.world.keyboard.UP && this.y >= this.min_Y) {
+            } if (this.canSwimUp()) {
                 this.characterMoveUp();
-            } if (this.world.keyboard.DOWN && this.y <= this.max_Y - 75) {
+            } if (this.canSwimDown()) {
                 this.characterMoveDown();
-            }
-            this.world.camera_x = -this.x + 75;
+            } this.characterCamPosition();
         }, 1000 / 60);
     }
 
-    // excluded functions -------------------------------- # 
+
+    // excluded functions -------------------------------- #
+
+    characterCamPosition() {
+        return this.world.camera_x = -this.x + 75;
+    }
+
+    canCharacterSwim() {
+        return this.world.keyboard.RIGHT || this.world.keyboard.LEFT || this.world.keyboard.UP || this.world.keyboard.DOWN;
+    }
+
+    canSwimRight() {
+        return this.world.keyboard.RIGHT && this.x <= this.world.level.level_end_x;
+    }
+
+    canSwimLeft() {
+        return this.world.keyboard.LEFT && this.x >= 50;
+    }
+
+    canSwimUp() {
+        return this.world.keyboard.UP && this.y >= this.min_Y;
+    }
+
+    canSwimDown() {
+        return this.world.keyboard.DOWN && this.y <= this.max_Y - 75;
+    }
 
     characterMoveRight() {
         this.swimRight();
@@ -277,18 +293,18 @@ class Character extends MovableObject {
     }
 
     collideWithPufferFish() {
-        this.world.level.pufferFish.forEach(pufferFish => { 
+        this.world.level.pufferFish.forEach(pufferFish => {
             if (this.isColliding(pufferFish)) {
                 this.playAnimation(this.IMAGES_HURT_POISONED);
-            }           
+            }
         });
     }
 
     collideWithJellyFish() {
-        this.world.level.jellyFish.forEach(jellyFish => { 
+        this.world.level.jellyFish.forEach(jellyFish => {
             if (this.isColliding(jellyFish)) {
                 this.playAnimation(this.IMAGES_HURT_SHOCKED);
-            }           
+            }
         });
     }
 
@@ -299,7 +315,6 @@ class Character extends MovableObject {
             }
         });
     }
-    
 
     // ------------------------------- #
 
@@ -328,7 +343,13 @@ class Character extends MovableObject {
             this.img = this.imageCache[path2];
         }
     }
-    
+
+    loadImageArray() {
+        let i = this.currentImage % this.IMAGES_IDLE.length; // let i = 0 % 6; => 0, Rest 1 // 0, 1, 2, 3, 4, 5, 6, 0, 1, 2... etc
+        let path = this.IMAGES_IDLE[i];
+        this.img = this.imageCache[path];
+        this.currentImage++;
+    }
 
 
 }

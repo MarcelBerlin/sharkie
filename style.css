@@ -78,6 +78,19 @@ h3 {
     height: 70px;
 }
 
+.ingameTutorial {    
+    margin-top: 15px;
+    width: 100%;
+    display: none;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.ingameTutorial img {
+    width: auto;
+    height: 50px;
+}
+
 .fast-tutorial {
     display: flex;
     justify-content: center;
