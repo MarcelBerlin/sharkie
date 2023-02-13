@@ -55,9 +55,7 @@ class Character extends MovableObject {
 
     IMAGES_BUBBLE_ATTACK = [
         'img/1.Sharkie/4.Attack/Bubble trap/op1/1.png',
-        'img/1.Sharkie/4.Attack/Bubble trap/op1/2.png',
-        'img/1.Sharkie/4.Attack/Bubble trap/op1/3.png',
-        'img/1.Sharkie/4.Attack/Bubble trap/op1/4.png',
+        'img/1.Sharkie/4.Attack/Bubble trap/op1/2.png',        
         'img/1.Sharkie/4.Attack/Bubble trap/op1/5.png',
         'img/1.Sharkie/4.Attack/Bubble trap/op1/6.png',
         'img/1.Sharkie/4.Attack/Bubble trap/op1/7.png',
@@ -66,9 +64,7 @@ class Character extends MovableObject {
 
     IMAGES_POISON_BUBBLE = [
         'img/1.Sharkie/4.Attack/Bubble trap/For Whale/1.png',
-        'img/1.Sharkie/4.Attack/Bubble trap/For Whale/2.png',
-        'img/1.Sharkie/4.Attack/Bubble trap/For Whale/3.png',
-        'img/1.Sharkie/4.Attack/Bubble trap/For Whale/4.png',
+        'img/1.Sharkie/4.Attack/Bubble trap/For Whale/2.png',        
         'img/1.Sharkie/4.Attack/Bubble trap/For Whale/5.png',
         'img/1.Sharkie/4.Attack/Bubble trap/For Whale/6.png',
         'img/1.Sharkie/4.Attack/Bubble trap/For Whale/7.png',
@@ -183,24 +179,17 @@ class Character extends MovableObject {
             if (this.canCharacterSwim()) {
                 this.characterMoveOrders()
             } else if (this.isHurt()) {
-                this.collideWithPufferFish();
-                this.collideWithJellyFish();
-                this.collideWithEndboss();
+                this.collisionWithEnemy();
             } else if (this.isDead()) {
                 this.characterIsDead();
             } else if (this.characterLongIdle()) {
                 this.playLongIdleAnimation();
-            } else if (this.world.keyboard.SPACE) {
-                this.meleeAttack();
-            } else if (this.world.keyboard.D) {
-                this.standardBubble();
-            } else if (this.world.keyboard.F) {
-                this.poisonBubble();
+            } else if (this.canAttack()) {
+                this.characterAttackEnemies();
             } 
         }, 100);
     }
     
-
     swimAnimate() {
         setStoppableInterval(() => {
             if (this.canSwimRight()) {
@@ -242,6 +231,14 @@ class Character extends MovableObject {
         return this.world.keyboard.DOWN && this.y <= this.max_Y - 75;
     }
 
+    canAttack() {
+        return this.world.keyboard.SPACE || this.world.keyboard.D || this.world.keyboard.F;
+    }
+
+    collisionWithEnemy() {
+        return this.collideWithPufferFish() || this.collideWithJellyFish() || this.collideWithEndboss();
+    }
+
     characterMoveRight() {
         this.swimRight();
         this.otherDirection = false;
@@ -263,6 +260,16 @@ class Character extends MovableObject {
     characterMoveDown() {
         this.y += this.speed;
         swimming_sound.play();
+    }
+
+    characterAttackEnemies() {
+        if (this.world.keyboard.SPACE) {
+            this.meleeAttack();
+        } else if (this.world.keyboard.D) {
+            this.standardBubble();
+        } else if (this.world.keyboard.F) {
+            this.poisonBubble();
+        } 
     }
 
     meleeAttack() {

@@ -82,6 +82,9 @@ class EndBoss extends MovableObject {
         this.y = 0;
         this.speed = 30;
         this.animate();
+        this.attackCharacter();
+        this.isDefeated();
+        
     }
 
 
@@ -127,10 +130,7 @@ class EndBoss extends MovableObject {
         setStoppableInterval(() => {
             if (this.bossEnergy < 50 && this.isHurt()) {
                 this.playAnimation(this.IMAGES_HURT);                       
-            } 
-            if (this.bossEnergy == 0) {
-                this.isDefeated();
-            }
+            }             
         }, 200)        
     }
 
@@ -141,11 +141,11 @@ class EndBoss extends MovableObject {
                 setTimeout(() => {
                     winGame();
                     stopGame();                                                          
-                }, 300);
+                }, 500);
                 biteAttack.pause(); 
                                              
             }            
-        }, 500);
+        }, 100);
         
     }
 

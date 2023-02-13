@@ -150,13 +150,14 @@ function toggleNoSoundBtn() {
 
 function showMobileBtn() {
     document.getElementById('mobileLeftBtn').classList.remove('d-none');
-    document.getElementById('mobileRightBtn').classList.remove('d-none');
+    document.getElementById('mobileRightBtn').classList.remove('d-none');        
 }
 
 function hideMobileBtn() {
     document.getElementById('mobileLeftBtn').classList.add('d-none');
-    document.getElementById('mobileRightBtn').classList.add('d-none');
+    document.getElementById('mobileRightBtn').classList.add('d-none');    
 }
+
 
 
 

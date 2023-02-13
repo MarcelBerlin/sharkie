@@ -50,9 +50,7 @@ h3 {
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
-    width: 720px;
-    height: 480px;
+    flex-direction: column;    
 
 }
 
@@ -65,18 +63,10 @@ h3 {
     transition: all 50ms ease-in-out;
 }
 
-.buttons-for-play {
-    margin-top: 25px;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.sharkiePreview {
+    margin-bottom: 25px;
 }
 
-.buttons-for-play img {
-    width: auto;
-    height: 70px;
-}
 
 .ingameTutorial {    
     margin-top: 15px;
@@ -155,14 +145,16 @@ h3 {
 .tutorial-left {
     display: flex;
     flex-direction: column;
-    margin-right: 75px;
+    margin-right: 3%
 
 }
 
 .tutorial-right {
     display: flex;
     flex-direction: column;
-    margin-left: 75px;
+    align-items: center;
+    justify-content: center;
+    margin-left: 3%;
 }
 
 
@@ -178,7 +170,7 @@ h3 {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 120%;
+    width: 105%;
 }
 
 .description_1-3 img {
@@ -191,6 +183,7 @@ h3 {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    width: 110%;
 }
 
 .spacebar {
@@ -204,10 +197,10 @@ h3 {
 }
 
 .infotext {
-    font-size: 18px;
+    font-size: 16px;
     color: yellow;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     width: 120%;
 }
@@ -369,81 +362,3 @@ canvas {
 
 /* ########################## */
 
-/* Smartphones ----------------------- */
-
-@media (min-width: 820px) {
-
-    .positionAbsoluteMove {
-        display: none;
-    }
-
-    .positonAbsoluteAttack {
-        display: none;
-    }
-}
-
-@media only screen and (max-width: 820px) {
-    canvas {
-        width: 100%;
-    }
-
-    #title {
-        position: absolute;
-        top: 0;
-    }
-
-    .btnMobile {
-        position: absolute;
-        opacity: 0.9;
-        height: 40px;
-        width: auto;
-    }
-
-    #btnMobileLeft {
-        bottom: 10px;
-        left: 10px;
-    }
-
-    #btnMobileDown {
-        bottom: 10px;
-        left: 55px;
-    }
-
-    #btnMobileRight {
-        bottom: 10px;
-        left: 100px;
-    }
-
-    #btnMobileUp {
-        bottom: 55px;
-        left: 55px;
-    }
-
-    #btnMobileBubble {
-        right: 100px;
-        bottom: 25px;
-    }
-
-    #btnMobilePoisonBubble {
-        right: 65px;
-        bottom: 80px;
-    }
-
-    #btnMobileSlap {
-        right: 15px;
-        bottom: 5px;
-        height: 70px;
-    }
-}
-
-/* Smartphones ----------------------- */
-
-@media only screen and (max-height: 480px) {
-    canvas {
-        height: 100vh;
-    }
-
-    #title {
-        display: none;
-    }
-}

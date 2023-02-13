@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="media.css">
 
     <script src="models/drawableObject.class.js"></script>
     <script src="models/statusbar-health.class.js"></script>
@@ -47,30 +48,14 @@
         <!-- Startscreen -->
 
         <div id="startscreen" class="startscreen">
-            <div>
+            <div class="sharkiePreview">
                 <img src="img/1.Sharkie/1.IDLE/Prewiew.gif">
             </div>
 
             <div class="menu-choise">
                 <img src="img/6.Botones/Start/3.png" onclick="init()">
                 <img src="img/6.Botones/Start/5.png" onclick="howToPlay()">
-            </div>
-
-            <div class="buttons-for-play">
-                <div class="fast-tutorial">
-                    <img src="img/6.Botones/Key/arrow keys.png"> Move Sharkie
-                </div>
-                <div class="fast-tutorial">
-                    <img src="img/6.Botones/Key/D key.png"> Throw Standard Bubble
-                </div>
-                <div class="fast-tutorial">
-                    <img src="img/6.Botones/Key/F key.png"> Throw Poison Bubble
-                </div>
-                <div class="fast-tutorial">
-                    <img src="img/6.Botones/Key/Space Bar key.png"> FinSlap
-                </div>
-            </div>
-
+            </div>           
 
         </div>
 
@@ -161,7 +146,7 @@
         <div class="canvas_relative">
 
             <canvas id="canvas" width="820px" height="480px" style="display: none;"></canvas>
-            <img src="img/laut-40.png" class="mute d-none" onclick="toggleMute()" id="mute">
+            <img src="img/laut-40.png" class="mute d-none" title="Mute/unmute" onclick="toggleMute()" id="mute">
 
             <div id="fullscreenbutton">
                 <img src="img/6.Botones/Full Screen/Mesa de trabajo 7.png" onclick="fullScreen()">
@@ -199,7 +184,7 @@
 
 
         <div id="closeFullscreen" onclick="closeFullScreen()">
-            <img src="img/fenster-schließen-40.png">
+            <img src="img/fenster-schließen-40.png" title="close Fullscreen">
         </div>
         <!-- ###### -->
 

@@ -8,6 +8,8 @@ class World {
     throwingBubble = [];
     throwingPoisonBubble = [];
     poisonBubbles = 0;
+    lastBubble = false;
+    alreadyThrow = false;
     level = createLevel1(world);
     percentage = 20;
     canvas;
@@ -24,6 +26,7 @@ class World {
         this.setWorld();
         this.swimCollectAndAttack();     
         this.draw();
+        this.checkTimeBetweenBubble();
     }
 
 
@@ -115,13 +118,16 @@ class World {
     // game logic -------------------------------- # 
 
     checkThrowObjects() {        
-            if (this.keyboard.D && !this.character.timeBetweenBubbles()) {
+            if (this.keyboard.D && !this.lastBubble) {
+                this.alreadyThrow = true;
                 this.ThrowStandardBubble();
-            }
-    
-            if (this.keyboard.F && this.poisonBubbles > 0 && !this.character.timeBetweenBubbles()) {
+            }    
+            if (this.keyboard.F && this.poisonBubbles > 0 && !this.lastBubble) {
+                this.alreadyThrow = true;
                 this.ThrowPoisonBubble();
-            }        
+            } else {
+                this.bubbleDelay();
+            }
     }
 
 
@@ -206,9 +212,25 @@ class World {
         })
     }
 
+    bubbleDelay() {
+        if (this.alreadyThrow) {
+            this.alreadyThrow = false;            
+            setTimeout(() => {
+                this.lastBubble = false;                
+            }, 1000);
+        }
+    }
+
+    checkTimeBetweenBubble() {
+        setStoppableInterval(() => {
+            this.checkThrowObjects();
+        }, 1000 / 60);
+    }
+
     // excluded functions -------------------------------- # 
 
     ThrowStandardBubble() {
+        this.lastBubble = true;
         if (this.character.otherDirection == true) {
             let bubble = new ThrowableObject(this.character.x, this.character.y + 110, this.character.otherDirection);
             this.throwingBubble.push(bubble);
@@ -219,6 +241,7 @@ class World {
     }
 
     ThrowPoisonBubble() {
+        this.lastBubble = true;
         if (this.character.otherDirection == true) {
             let poisonBubble = new ThrowableObject(this.character.x, this.character.y + 110, this.character.otherDirection);
             this.throwingPoisonBubble.push(poisonBubble);

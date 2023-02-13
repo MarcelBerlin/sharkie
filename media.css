@@ -1,0 +1,332 @@
+/* Smartphones ----- width ------------- */
+
+@media (min-width: 820px) {
+
+    .positionAbsoluteMove {
+        display: none;
+    }
+
+    .positonAbsoluteAttack {
+        display: none;
+    }
+
+
+}
+
+@media only screen and (max-width: 960px) {
+    .tutorial-description {
+        flex-direction: column;
+    }
+
+    .start-button {
+        width: 550px;
+        margin-bottom: 5%;
+    }
+
+    .start-button img {
+        height: 65px;
+    }
+}
+
+@media only screen and (max-width: 820px) {
+    canvas {
+        width: 100%;
+    }
+
+    #title {
+        position: absolute;
+        top: 0;
+    }
+
+    .ingameTutorial {
+        display: none !important;
+    }
+
+    .menu-choise {
+        flex-direction: column;
+    }
+
+    .sharkiePreview {
+        margin-top: 20%;
+    }
+
+    .btnMobile {
+        position: absolute;
+        opacity: 0.9;
+        height: 40px;
+        width: auto;
+    }
+
+    #btnMobileLeft {
+        bottom: 10px;
+        left: 10px;
+    }
+
+    #btnMobileDown {
+        bottom: 10px;
+        left: 55px;
+    }
+
+    #btnMobileRight {
+        bottom: 10px;
+        left: 100px;
+    }
+
+    #btnMobileUp {
+        bottom: 55px;
+        left: 55px;
+    }
+
+    #btnMobileBubble {
+        right: 100px;
+        bottom: 25px;
+    }
+
+    #btnMobilePoisonBubble {
+        right: 65px;
+        bottom: 80px;
+    }
+
+    #btnMobileSlap {
+        right: 15px;
+        bottom: 5px;
+        height: 70px;
+    }
+}
+
+@media only screen and (max-width: 650px) {
+
+    #fullscreenbutton {
+        top: 10px;
+    }
+
+    #fullscreenbutton img {
+        height: 30px;
+    }
+
+    .mute {
+        width: 35px;
+        height: 35px;
+        top: 10px;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+
+    .btnMobile {
+        position: absolute;
+        opacity: 0.9;
+        height: 35px;
+        width: auto;
+    }
+
+    #btnMobileLeft {
+        bottom: 10px;
+        left: 10px;
+    }
+
+    #btnMobileDown {
+        bottom: 10px;
+        left: 50px;
+    }
+
+    #btnMobileRight {
+        bottom: 10px;
+        left: 90px;
+    }
+
+    #btnMobileUp {
+        bottom: 50px;
+        left: 50px;
+    }
+
+    #btnMobileBubble {
+        right: 90px;
+        bottom: 25px;
+    }
+
+    #btnMobilePoisonBubble {
+        right: 65px;
+        bottom: 75px;
+    }
+
+    #btnMobileSlap {
+        right: 15px;
+        bottom: 5px;
+        height: 65px;
+    }
+}
+
+/* Smartphones ----- height ------------ */
+
+@media only screen and (max-height: 800px) {
+
+    .start-button {
+        margin-top: 0px;
+    }
+}
+
+@media only screen and (max-height: 680px) {
+
+    h1 {
+        font-size: 36px;
+    }
+
+    #title {
+        position: absolute;
+        top: 0;
+    }
+
+    .sharkiePreview {
+        margin-top: 80px;
+    }
+}
+
+@media only screen and (max-height: 600px) {   
+
+    .menu-choise img {
+        height: 70px;
+    }
+}
+
+
+@media only screen and (max-height: 575px) {
+    canvas {
+        height: 100vh;
+    }
+
+    #title {
+        position: absolute;
+        top: 0;
+    }
+
+    .ingameTutorial {
+        display: none !important;
+    }
+
+    .btnMobile {
+        position: absolute;
+        opacity: 0.9;
+        height: 40px;
+        width: auto;
+    }
+
+    #btnMobileLeft {
+        bottom: 10px;
+        left: 10px;
+    }
+
+    #btnMobileDown {
+        bottom: 10px;
+        left: 55px;
+    }
+
+    #btnMobileRight {
+        bottom: 10px;
+        left: 100px;
+    }
+
+    #btnMobileUp {
+        bottom: 55px;
+        left: 55px;
+    }
+
+    #btnMobileBubble {
+        right: 100px;
+        bottom: 25px;
+    }
+
+    #btnMobilePoisonBubble {
+        right: 65px;
+        bottom: 80px;
+    }
+
+    #btnMobileSlap {
+        right: 15px;
+        bottom: 5px;
+        height: 70px;
+    }
+}
+
+
+
+
+@media only screen and (max-height: 400px) {
+
+    #fullscreenbutton {
+        top: 10px;
+    }
+
+    #fullscreenbutton img {
+        height: 30px;
+    }
+
+    .mute {
+        width: 35px;
+        height: 35px;
+        top: 10px;
+    }
+
+}
+
+@media only screen and (max-height: 300px) {
+
+    #fullscreenbutton {
+        right: 50px;
+        top: 10px;
+    }
+
+    #fullscreenbutton img {
+        height: 25px;
+    }
+
+    .mute {
+        width: 25px;
+        height: 25px;
+        top: 10px;
+    }
+
+    .btnMobile {
+        position: absolute;
+        opacity: 0.9;
+        height: 30px;
+        width: auto;
+    }
+
+    #btnMobileLeft {
+        bottom: 10px;
+        left: 10px;
+    }
+
+    #btnMobileDown {
+        bottom: 10px;
+        left: 45px;
+    }
+
+    #btnMobileRight {
+        bottom: 10px;
+        left: 80px;
+    }
+
+    #btnMobileUp {
+        bottom: 45px;
+        left: 45px;
+    }
+
+    #btnMobileBubble {
+        right: 80px;
+        bottom: 20px;
+    }
+
+    #btnMobilePoisonBubble {
+        right: 55px;
+        bottom: 65px;
+    }
+
+    #btnMobileSlap {
+        right: 15px;
+        bottom: 5px;
+        height: 55px;
+    }
+
+}

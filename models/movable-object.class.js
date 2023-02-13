@@ -172,14 +172,7 @@ class MovableObject extends DrawableObject {
     getTimeForLastBubble() {
         this.lastBubble = new Date().getTime();
     }
-
-
-    timeBetweenBubbles() {
-        let timepassed = new Date().getTime() - this.lastBubble;
-        timepassed = timepassed / 500;
-        return timepassed < 1;
-    }
-
+  
 
 
 }
