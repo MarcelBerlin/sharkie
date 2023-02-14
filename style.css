@@ -13,6 +13,7 @@ body {
     background-image: url('./img/underwater2.jpg');
     background-position: center;
     background-size: cover;
+    background-attachment: fixed;
     font-family: 'LuckiestGuy-Regular', 'sharkparty', 'Arial', 'Helvetica', 'sans-serif';
     color: antiquewhite;
 }

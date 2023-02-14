@@ -10,7 +10,6 @@
         display: none;
     }
 
-
 }
 
 @media only screen and (max-width: 960px) {
@@ -92,6 +91,33 @@
         bottom: 5px;
         height: 70px;
     }
+
+    .win-buttons {
+        width: 700px;
+    }
+
+    .win-buttons img {
+        height: 80px;
+    }
+
+    .lose-screen {
+        width: 600px;
+    }
+
+}
+
+@media only screen and (max-width: 700px) {
+    .win-buttons {
+        width: 600px;
+    }
+
+    .win-buttons img {
+        height: 65px;
+    }
+
+    .lose-screen {
+        width: 500px;
+    }
 }
 
 @media only screen and (max-width: 650px) {
@@ -112,6 +138,22 @@
 }
 
 @media only screen and (max-width: 600px) {
+
+    .win-buttons {
+        width: auto;
+        height: 100px;
+        flex-direction: column;
+        margin-top: 5%;
+    }
+
+    .win-buttons img {
+        height: 65px;
+        margin-top: 5%;
+    }
+
+    .lose-screen {
+        width: 400px;
+    }
 
     .btnMobile {
         position: absolute;
@@ -155,9 +197,53 @@
         bottom: 5px;
         height: 65px;
     }
+
+    .description_1-3 {
+        flex-direction: column;
+        width: unset;
+        height: 200px;
+        text-align: center;
+    }
+
+    .description_4 {
+        flex-direction: column;
+        width: unset;
+        height: 200px;
+        text-align: center;
+    }
+
+    .infotext {
+        flex-direction: column;
+        width: unset;
+        text-align: center;
+        margin-top: 5%;
+    }
+
+    .start-button {
+        flex-direction: column;
+        width: 200px;
+        align-items: center;
+    }
+
+    .start-button img {
+        margin-bottom: 10%;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .lose-screen {
+        width: 350px;
+    }
+}
+
+@media only screen and (max-width: 450px) {
+    .lose-screen {
+        width: 300px;
+    }
 }
 
 /* Smartphones ----- height ------------ */
+
 
 @media only screen and (max-height: 800px) {
 
@@ -191,6 +277,7 @@
 
 
 @media only screen and (max-height: 575px) {
+
     canvas {
         height: 100vh;
     }
@@ -203,6 +290,15 @@
     .ingameTutorial {
         display: none !important;
     }
+
+    /* .positionAbsoluteMove {
+        display: flex;
+    }
+
+    .positonAbsoluteAttack {
+        display: flex;
+    } */
+  
 
     .btnMobile {
         position: absolute;
@@ -246,12 +342,35 @@
         bottom: 5px;
         height: 70px;
     }
+
+    .menu-choise {
+        margin-top: -5%;
+    }
 }
 
 
+@media only screen and (max-height: 500px) {
+
+    .sharkiePreview img {
+        height: 150px;
+    }
+
+    .menu-choise img {
+        height: 60px;
+    }
+}
 
 
 @media only screen and (max-height: 400px) {
+
+    .menu-choise img {
+        height: 60px;
+        margin-top: -5%;
+    }
+
+    .sharkiePreview img {
+        height: 150px;
+    }
 
     #fullscreenbutton {
         top: 10px;

@@ -174,7 +174,8 @@ function loseGame() {
     document.getElementById('lose').style.display = 'flex';
     document.getElementById('fullscreenbutton').style.display = 'none';
     document.getElementById('mute').style.display = 'none';
-    document.getElementById('ingameMoveOrders').style.display = 'none'; 
+    document.getElementById('ingameMoveOrders').style.display = 'none';
+    document.getElementById('mobileLeftBtn').classList.add('d-none'); 
     awww.play();
 }
 
