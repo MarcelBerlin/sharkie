@@ -91,7 +91,7 @@ class EndBoss extends MovableObject {
     animate() {
         let i = 0
         setStoppableInterval(() => {
-            if (world.character.x > 1800 && !this.hadFirstContact) {
+            if (this.charackterIsInRange()) {
                 i = 0;
                 this.hadFirstContact = true;
                 this.activateBossSound();
@@ -144,6 +144,10 @@ class EndBoss extends MovableObject {
     }
 
     // excluded functions -------------------------------- # 
+
+    charackterIsInRange() {
+        return world.character.x > 1800 && !this.hadFirstContact;
+    }
 
     BossSpawning() {
         this.playAnimation(this.IMAGES_INTRODUCE);
