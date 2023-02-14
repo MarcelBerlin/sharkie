@@ -66,7 +66,7 @@ class EndBoss extends MovableObject {
     world;
     hadFirstContact = false;
     speedAfterHit = 30;
-    
+
 
 
 
@@ -82,8 +82,6 @@ class EndBoss extends MovableObject {
         this.y = 0;
         this.speed = 30;
         this.animate();
-        this.attackCharacter();
-        this.isDefeated();
         
     }
 
@@ -96,27 +94,29 @@ class EndBoss extends MovableObject {
             if (world.character.x > 1800 && !this.hadFirstContact) {
                 i = 0;
                 this.hadFirstContact = true;
+                this.activateBossSound();
                 setStoppableInterval(() => {
-                    this.activateBossSound();
-                    if (i < 10) {
-                        this.BossSpawning();
-                    } else {
-                        this.BossAttackAndSwim(); 
-                    }
+                    this.bossSpawnAndAttackCharackter(i);
                     i++;
                 }, 100);
             }
         }, 100);
     }
 
-   
+    bossSpawnAndAttackCharackter(i) {
+        if (i < 10) {
+            this.BossSpawning();
+        } else {
+            this.BossAttackAndSwim();
+        }        
+    }
+
+
     attackCharacter() {
-        setStoppableInterval(() => {
-            if (world.character.x + 250 > this.x) {
-                this.playAnimation(this.IMAGES_ATTACK);
-                biteAttack.play();
-            }
-        }, 200);
+        if (world.character.x + 250 > this.x) {
+            this.playAnimation(this.IMAGES_ATTACK);
+            biteAttack.play();
+        }
     }
 
     swimLeft() {
@@ -124,29 +124,23 @@ class EndBoss extends MovableObject {
             this.x -= 7.5;
         }, 200);
     }
-    
+
 
     isHittenByBubble() {
-        setStoppableInterval(() => {
-            if (this.bossEnergy < 50 && this.isHurt()) {
-                this.playAnimation(this.IMAGES_HURT);                       
-            }             
-        }, 200)        
+        if (this.bossEnergy < 50 && this.isHurt()) {
+            this.playAnimation(this.IMAGES_HURT);
+        }
     }
 
     isDefeated() {
-        setStoppableInterval(() => {
-            if (this.bossEnergy == 0) {
+        if (this.bossEnergy == 0) {
                 this.playAnimation(this.IMAGES_DEAD);
                 setTimeout(() => {
                     winGame();
-                    stopGame();                                                          
+                    stopGame();
                 }, 500);
-                biteAttack.pause(); 
-                                             
-            }            
-        }, 100);
-        
+                biteAttack.pause();
+            }   
     }
 
     // excluded functions -------------------------------- # 
@@ -155,7 +149,7 @@ class EndBoss extends MovableObject {
         this.playAnimation(this.IMAGES_INTRODUCE);
         splashJump.play();
     }
-    
+
     BossAttackAndSwim() {
         this.playAnimation(this.IMAGES_FLOATING);
         this.attackCharacter();
@@ -163,10 +157,10 @@ class EndBoss extends MovableObject {
         this.isHittenByBubble();
         this.isDefeated();
     }
-   
+
     activateBossSound() {
         game_Sound.pause();
         bossAnthem.play();
     }
-   
+
 }
