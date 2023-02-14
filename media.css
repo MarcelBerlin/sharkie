@@ -240,6 +240,18 @@
     .lose-screen {
         width: 300px;
     }
+
+    .menu-choise img {
+        height: 80px;
+        
+    }
+}
+
+@media only screen and (max-width: 300px) {
+    .menu-choise img {
+        height: 70px;
+        
+    }
 }
 
 /* Smartphones ----- height ------------ */
@@ -364,8 +376,8 @@
 @media only screen and (max-height: 400px) {
 
     .menu-choise img {
-        height: 60px;
-        margin-top: -5%;
+        height: 50px;
+        margin-top: 0%;
     }
 
     .sharkiePreview img {
