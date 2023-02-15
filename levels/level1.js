@@ -12,6 +12,9 @@ function createLevel1(world) {
         ],
         [
             new JellyFishPurple(world),
+            new JellyFishYellow(world),
+        ],
+        [
             new JellySuperdangerousGreen(world),
         ],
         [

@@ -11,7 +11,7 @@ class MovableObject extends DrawableObject {
     poison = 0;
     pufferFishEnergy = 10;
     jellyFishEnergy = 10;
-    superJellyFishEnergy = 20;
+    superJellyFishEnergy = 10;
     bossEnergy = 50;
     lastHit = 0;
     lastBubble = 0;
@@ -100,8 +100,16 @@ class MovableObject extends DrawableObject {
             this.energy = 0;
         } else {
             this.lastHit = new Date().getTime();
-        }  console.log(this.energy);      
-        
+        }  console.log(this.energy);       
+    }
+
+    hitBySuperJellyAndBoss() {
+        this.energy -= 10;
+        if (this.energy <= 0) {
+            this.energy = 0;
+        } else {
+            this.lastHit = new Date().getTime();
+        }  console.log(this.energy);  
     }
 
     isHurt() {

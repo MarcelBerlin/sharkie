@@ -1,6 +1,7 @@
 class Level {
     pufferFish;
     jellyFish;
+    superJellyFish;
     endBoss;
     lights;
     backgroundObjects;
@@ -9,9 +10,10 @@ class Level {
     level_end_x = 2200;    
     
 
-    constructor(pufferFish, jellyFish, endBoss, lights, backgroundObjects, flasks, coins) {
+    constructor(pufferFish, jellyFish, superJellyFish, endBoss, lights, backgroundObjects, flasks, coins) {
         this.pufferFish = pufferFish;
         this.jellyFish = jellyFish;
+        this.superJellyFish = superJellyFish;
         this.endBoss = endBoss;
         this.lights = lights;
         this.backgroundObjects = backgroundObjects;

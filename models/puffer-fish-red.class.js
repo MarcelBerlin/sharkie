@@ -61,7 +61,7 @@ class PufferFishRed extends MovableObject {
             this.playAnimation(this.IMAGES_SWIM);
             if (this.pufferFishEnergy == 0) {
                 this.PufferIsKilledByCharacter();
-            } else if(world.character.x + 200 > this.x && world.character.y + 200 > this.y && world.character.x - 200 < this.x && world.character.y - 50 < this.y) {
+            } else if(this.characterIsInRange()) {
                 if (i < 5) {
                     this.playAnimation(this.IMAGES_TRANSITION);               
                 } else {
@@ -76,5 +76,9 @@ class PufferFishRed extends MovableObject {
         this.speed = 0;
         this.y -= 15;
         this.playAnimation(this.IMAGES_DEAD);
+    }
+
+    characterIsInRange() {
+        return world.character.x + 200 > this.x && world.character.y + 200 > this.y && world.character.x - 200 < this.x && world.character.y - 50 < this.y;
     }
 }

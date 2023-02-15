@@ -146,8 +146,11 @@ h3 {
 .tutorial-left {
     display: flex;
     flex-direction: column;
-    margin-right: 3%
-
+    align-items: center;
+    justify-content: center;
+    margin-right: 5%;
+    text-align: center;
+    
 }
 
 .tutorial-right {
@@ -155,7 +158,8 @@ h3 {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin-left: 3%;
+    margin-left: 5%;
+    text-align: center;
 }
 
 
@@ -163,6 +167,7 @@ h3 {
     display: flex;
     flex-direction: column;
     margin-bottom: 50px;
+    
 
 }
 
@@ -171,7 +176,8 @@ h3 {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 105%;
+    width: 110%;
+    
 }
 
 .description_1-3 img {
@@ -198,17 +204,18 @@ h3 {
 }
 
 .infotext {
-    font-size: 16px;
+    font-size: 18px;
     color: yellow;
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    width: 120%;
+    width: 125%;
 }
 
 .infotext img {
     width: auto;
     height: 70px;
+    margin-left: 2%;
 }
 
 canvas {

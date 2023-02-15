@@ -179,6 +179,7 @@ function loseGame() {
     hideMobileBtn();
     ambient_Sound.pause();
     game_Sound.pause();
+    bossAnthem.pause();
     document.getElementById('title').style.display = 'none';
     document.getElementById('canvas').style.display = 'none';
     document.getElementById('lose').style.display = 'flex';
