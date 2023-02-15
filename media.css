@@ -1,6 +1,6 @@
 /* Smartphones ----- width ------------- */
 
-@media (min-width: 820px) {
+@media (min-width: 850px) {
 
     .positionAbsoluteMove {
         display: none;
@@ -122,6 +122,15 @@
 
 @media only screen and (max-width: 650px) {
 
+    #homebutton {
+        top: 10px;
+        right: 215px;
+    }
+
+    #homebutton img {
+        height: 30px;
+    }
+
     #fullscreenbutton {
         top: 10px;
     }
@@ -234,6 +243,11 @@
     .lose-screen {
         width: 350px;
     }
+
+    .win-buttons img {
+        height: 50px;
+        margin-top: 5%;
+    }
 }
 
 @media only screen and (max-width: 450px) {
@@ -244,6 +258,12 @@
     .menu-choise img {
         height: 80px;
         
+    }
+}
+
+@media only screen and (max-width: 320px) {
+    .lose-screen {
+        width: 250px;
     }
 }
 
@@ -303,15 +323,7 @@
         display: none !important;
     }
 
-    /* .positionAbsoluteMove {
-        display: flex;
-    }
-
-    .positonAbsoluteAttack {
-        display: flex;
-    } */
-  
-
+    
     .btnMobile {
         position: absolute;
         opacity: 0.9;
@@ -384,6 +396,15 @@
         height: 150px;
     }
 
+    #homebutton {
+        top: 10px;
+        right: 215px;
+    }
+
+    #homebutton img {
+        height: 30px;
+    }
+
     #fullscreenbutton {
         top: 10px;
     }
@@ -401,6 +422,15 @@
 }
 
 @media only screen and (max-height: 300px) {
+
+    #homebutton {
+        right: 165px;
+        top: 10px;
+    }
+
+    #homebutton img {
+        height: 25px;
+    }
 
     #fullscreenbutton {
         right: 50px;
@@ -458,6 +488,16 @@
         right: 15px;
         bottom: 5px;
         height: 55px;
+    }
+
+    .win-screen {
+        width: 60vw;
+        height: auto;
+    }
+
+    .win-buttons img {
+        height: 50px;
+        margin-top: 0;
     }
 
 }

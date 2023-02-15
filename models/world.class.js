@@ -272,10 +272,12 @@ class World {
         this.healthbar.setPercentage(this.character.energy);
     }
 
-    pufferFishHitAndKill(pufferFish) {
+    pufferFishHitAndKill(pufferFish, i) {
         slap_sound.play();
         pufferFish.hitPufferFish();
         pufferFish.pufferFishIsDead();
+        this.throwingBubble.splice(i, 1);
+        this.throwingPoisonBubble.splice(i, 1);
     }
 
     jellyFishHitAndKill(jellyFish, i) {
@@ -285,6 +287,7 @@ class World {
         jellyFish.jellyFishIsDead();
         jellyFish.superJellyFishIsDead();
         this.throwingBubble.splice(i, 1);
+        this.throwingPoisonBubble.splice(i, 1);
     }
 
     endBossHitAndKill(endBoss, i) {
@@ -292,7 +295,8 @@ class World {
         endBoss.hitEndboss();
         this.healthbarBoss.setPercentage(endBoss.bossEnergy);
         endBoss.endBossIsDead();
-        this.throwingPoisonBubble.splice(i, 1);
+        this.throwingBubble.splice(i, 1);
+        this.throwingPoisonBubble.splice(i, 1);        
     }
 
     increaseCoinbar(i) {

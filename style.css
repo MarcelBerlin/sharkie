@@ -290,6 +290,19 @@ canvas {
 
 /* Fullscreen-Mode ################## */
 
+#homebutton {
+    display: none;
+    position: absolute;
+    top: 15px;
+    right: 250px;  
+}
+
+#homebutton img {
+    cursor: pointer;
+    height: 35px;
+    width: auto;
+}
+
 #fullscreenbutton {
     display: none;
     position: absolute;

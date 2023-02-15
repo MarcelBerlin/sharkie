@@ -31,6 +31,7 @@ function init() {
 
 function restartGame() {
     exitFullscreen();
+    reloadMusic();
     init();
 }
 
@@ -48,6 +49,7 @@ function DisplayShowHidden() {
     document.getElementById('canvas').style.display = 'block';
     document.getElementById('tutorial').style.display = 'none';
     document.getElementById('fullscreenbutton').style.display = 'flex';
+    document.getElementById('homebutton').style.display = 'flex';
     document.getElementById('mute').style.display = 'flex';
     document.getElementById('ingameMoveOrders').style.display = 'flex';    
 }
@@ -103,6 +105,7 @@ function exitFullscreen() {
 
 
 function addStylesForFullScreen() {
+    document.getElementById('homebutton').style.display = 'none';
     document.getElementById('fullscreenbutton').style.display = 'none';
     document.getElementById('closeFullscreen').style.display = 'block';
     document.getElementById('canvas').classList.add('canvasFullScreen');
@@ -113,7 +116,8 @@ function addStylesForFullScreen() {
 
 function removeStylesFromFullScreen() {
     document.getElementById('closeFullscreen').style.display = 'none';
-    document.getElementById('fullscreenbutton').style.display = 'block';    
+    document.getElementById('homebutton').style.display = 'flex';
+    document.getElementById('fullscreenbutton').style.display = 'flex';    
     document.getElementById('canvas').classList.remove('canvasFullScreen');
     document.getElementById('win').classList.remove('winScreenContainerFullScreen', 'winScreenContainerFullScreenh2', 'imgTrophyContainerFullScreenimg');
     document.getElementById('lose').classList.remove('gameOverScreenFullScreen');
@@ -135,6 +139,12 @@ function toggleMute() {
     biteAttack.muted = !biteAttack.muted;
     youWinSound.muted = !youWinSound.muted;
     awww.muted = !awww.muted;
+}
+
+function reloadMusic() {
+    game_Sound.load();
+    ambient_Sound.load();
+    bossAnthem.load();        
 }
 
 function toggleNoSoundBtn() {
