@@ -27,7 +27,7 @@
     }
 }
 
-@media only screen and (max-width: 820px) {
+@media only screen and (max-width: 850px) {
     canvas {
         width: 100%;
     }
@@ -118,6 +118,49 @@
     .lose-screen {
         width: 500px;
     }
+
+    .btnMobile {
+        position: absolute;
+        opacity: 0.9;
+        height: 70px;
+        width: auto;
+    }
+
+    #btnMobileLeft {
+        bottom: -180px;
+        left: 10px;
+    }
+
+    #btnMobileDown {
+        bottom: -180px;
+        left: 90px;
+    }
+
+    #btnMobileRight {
+        bottom: -180px;
+        left: 170px;
+    }
+
+    #btnMobileUp {
+        bottom: -100px;
+        left: 90px;
+    }
+
+    #btnMobileBubble {
+        right: 140px;
+        bottom: -250px;
+    }
+
+    #btnMobilePoisonBubble {
+        right: 65px;
+        bottom: -160px;
+    }
+
+    #btnMobileSlap {
+        right: 15px;
+        bottom: -300px;
+        height: 110px;
+    }
 }
 
 @media only screen and (max-width: 650px) {
@@ -167,44 +210,44 @@
     .btnMobile {
         position: absolute;
         opacity: 0.9;
-        height: 35px;
+        height: 70px;
         width: auto;
     }
 
     #btnMobileLeft {
-        bottom: 10px;
+        bottom: -180px;
         left: 10px;
     }
 
     #btnMobileDown {
-        bottom: 10px;
-        left: 50px;
-    }
-
-    #btnMobileRight {
-        bottom: 10px;
+        bottom: -180px;
         left: 90px;
     }
 
+    #btnMobileRight {
+        bottom: -180px;
+        left: 170px;
+    }
+
     #btnMobileUp {
-        bottom: 50px;
-        left: 50px;
+        bottom: -100px;
+        left: 90px;
     }
 
     #btnMobileBubble {
-        right: 90px;
-        bottom: 25px;
+        right: 140px;
+        bottom: -250px;
     }
 
     #btnMobilePoisonBubble {
         right: 65px;
-        bottom: 75px;
+        bottom: -160px;
     }
 
     #btnMobileSlap {
         right: 15px;
-        bottom: 5px;
-        height: 65px;
+        bottom: -300px;
+        height: 110px;
     }
 
     .description_1-3 {
@@ -248,6 +291,74 @@
         height: 50px;
         margin-top: 5%;
     }
+
+    #homebutton {
+        top: 630px;
+        left: 10px;
+    }
+
+    #homebutton img {
+        height: 50px;
+    }
+
+    #fullscreenbutton {
+        top: 700px;
+        left: 10px;
+    }
+
+    #fullscreenbutton img {
+        height: 40px;
+    }
+    
+    .mute {
+        width: 60px;
+        height: 60px;
+        top: 650px;
+        left: 230px;
+    }
+
+    .btnMobile {
+        position: absolute;
+        opacity: 0.9;
+        height: 70px;
+        width: auto;
+    }
+
+    #btnMobileLeft {
+        bottom: -180px;
+        left: 10px;
+    }
+
+    #btnMobileDown {
+        bottom: -180px;
+        left: 90px;
+    }
+
+    #btnMobileRight {
+        bottom: -180px;
+        left: 170px;
+    }
+
+    #btnMobileUp {
+        bottom: -100px;
+        left: 90px;
+    }
+
+    #btnMobileBubble {
+        right: 140px;
+        bottom: -300px;
+    }
+
+    #btnMobilePoisonBubble {
+        right: 65px;
+        bottom: -220px;
+    }
+
+    #btnMobileSlap {
+        right: 15px;
+        bottom: -360px;
+        height: 110px;
+    }
 }
 
 @media only screen and (max-width: 450px) {
@@ -257,8 +368,123 @@
 
     .menu-choise img {
         height: 80px;
-        
+
     }
+
+    .btnMobile {
+        position: absolute;
+        opacity: 0.9;
+        height: 70px;
+        width: auto;
+    }
+
+    #btnMobileLeft {
+        bottom: -180px;
+        left: 10px;
+    }
+
+    #btnMobileDown {
+        bottom: -180px;
+        left: 90px;
+    }
+
+    #btnMobileRight {
+        bottom: -180px;
+        left: 170px;
+    }
+
+    #btnMobileUp {
+        bottom: -100px;
+        left: 90px;
+    }
+
+    #btnMobileBubble {
+        right: 140px;
+        bottom: -350px;
+    }
+
+    #btnMobilePoisonBubble {
+        right: 65px;
+        bottom: -270px;
+    }
+
+    #btnMobileSlap {
+        right: 15px;
+        bottom: -410px;
+        height: 110px;
+    }
+}
+
+@media only screen and (max-width: 370px) {
+
+    .btnMobile {
+        position: absolute;
+        opacity: 0.9;
+        height: 60px;
+        width: auto;
+    }
+
+    #btnMobileLeft {
+        bottom: -180px;
+        left: 10px;
+    }
+
+    #btnMobileDown {
+        bottom: -180px;
+        left: 80px;
+    }
+
+    #btnMobileRight {
+        bottom: -180px;
+        left: 150px;
+    }
+
+    #btnMobileUp {
+        bottom: -100px;
+        left: 80px;
+    }
+
+    #btnMobileBubble {
+        right: 140px;
+        bottom: -320px;
+    }
+
+    #btnMobilePoisonBubble {
+        right: 65px;
+        bottom: -255px;
+    }
+
+    #btnMobileSlap {
+        right: 15px;
+        bottom: -380px;
+        height: 110px;
+    }
+
+    .mute {
+        width: 40px;
+        height: 40px;
+        top: 575px;
+        left: 180px;
+    }
+
+    #homebutton {
+        top: 550px;
+        left: 10px;
+    }
+
+    #homebutton img {
+        height: 40px;
+    }
+
+    #fullscreenbutton {
+        top: 600px;
+        left: 10px;
+    }
+
+    #fullscreenbutton img {
+        height: 30px;
+    }
+    
 }
 
 @media only screen and (max-width: 320px) {
@@ -270,8 +496,10 @@
 @media only screen and (max-width: 300px) {
     .menu-choise img {
         height: 70px;
-        
+
     }
+
+   
 }
 
 /* Smartphones ----- height ------------ */
@@ -300,7 +528,7 @@
     }
 }
 
-@media only screen and (max-height: 600px) {   
+@media only screen and (max-height: 600px) {
 
     .menu-choise img {
         height: 70px;
@@ -323,7 +551,7 @@
         display: none !important;
     }
 
-    
+
     .btnMobile {
         position: absolute;
         opacity: 0.9;

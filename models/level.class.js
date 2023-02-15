@@ -7,7 +7,7 @@ class Level {
     backgroundObjects;
     flasks;
     coins;
-    level_end_x = 2200;    
+    level_end_x = 2130;    
     
 
     constructor(pufferFish, jellyFish, superJellyFish, endBoss, lights, backgroundObjects, flasks, coins) {

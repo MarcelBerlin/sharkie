@@ -59,7 +59,7 @@ class EndBoss extends MovableObject {
     width = 450;
     offset = {
         top: 175,
-        bottom: 0,
+        bottom: 50,
         left: 30,
         right: 30
     }
@@ -143,6 +143,15 @@ class EndBoss extends MovableObject {
             }   
     }
 
+    checkIfCharacterIsBehindBoss() {
+        if (world.character.x > this.x + 150) {
+            world.character.energy = 0;
+            if (world.character.isDead()) {
+                loseGame();
+            }
+        }
+    }
+
     // excluded functions -------------------------------- # 
 
     charackterIsInRange() {
@@ -160,6 +169,7 @@ class EndBoss extends MovableObject {
         this.swimLeft();
         this.isHittenByBubble();
         this.isDefeated();
+        this.checkIfCharacterIsBehindBoss();
     }
 
     activateBossSound() {

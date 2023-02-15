@@ -176,10 +176,10 @@ class Character extends MovableObject {
     animateCharacter() {
         setStoppableInterval(() => {
             this.loadImageArray();
-            if (this.canCharacterSwim()) {
-                this.characterMoveOrders()
-            } else if (this.isHurt()) {
+            if (this.isHurt()) {
                 this.collisionWithEnemy();
+            } else if (this.canCharacterSwim()) {
+                this.characterMoveOrders();
             } else if (this.isDead()) {
                 this.characterIsDead();
             } else if (this.characterLongIdle()) {
@@ -190,6 +190,9 @@ class Character extends MovableObject {
         }, 100);
     }
     
+    
+    
+
     swimAnimate() {
         setStoppableInterval(() => {
             if (this.canSwimRight()) {

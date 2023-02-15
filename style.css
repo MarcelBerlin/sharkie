@@ -310,6 +310,11 @@ canvas {
     width: auto;
 }
 
+#homebutton img:hover {
+    transform: scale(1.05);
+    transition: all 50ms ease-in-out;
+}
+
 #fullscreenbutton {
     display: none;
     position: absolute;
