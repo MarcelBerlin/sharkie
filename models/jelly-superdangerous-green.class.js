@@ -54,7 +54,6 @@ class JellySuperdangerousGreen extends MovableObject {
                 this.speed = 0;
                 this.y -= 15;
                 this.playAnimation(this.IMAGES_DEAD);
-
             }
         }, 100);
     }

@@ -18,7 +18,6 @@ class World {
     camera_x = 0;
 
 
-
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
         this.keyboard = keyboard;
@@ -29,11 +28,9 @@ class World {
         this.checkTimeBetweenBubble();
     }
 
-
     setWorld() {
         this.character.world = this;
     }
-
 
     swimCollectAndAttack() {
         setStoppableInterval(() => {
@@ -48,7 +45,9 @@ class World {
         }, 300)
     }
 
-    // Elements will draw on Canvas ################################ 
+    /**
+     * Elements are going to draw on Canvas by loading init()
+     */
 
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
@@ -116,8 +115,10 @@ class World {
 
     // ####################################################
 
-
-    // game logic -------------------------------- # 
+   
+    /**
+     * game logic (checks if objects collide and were hitten)
+     */ 
 
     checkThrowObjects() {
         if (this.characterCanThrowBubble()) {
@@ -223,7 +224,12 @@ class World {
         }, 1000 / 60);
     }
 
-    // excluded functions -------------------------------- # 
+    // ####################################################
+
+
+    /**
+     * excluded functions - (to compress logic code)
+     */ 
 
     ThrowStandardBubble() {
         this.lastBubble = true;

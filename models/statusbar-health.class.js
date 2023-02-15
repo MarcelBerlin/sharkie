@@ -21,14 +21,11 @@ class HealthBar extends DrawableObject {
         this.setPercentage(50);
     }
 
-
     setPercentage(percentage) {
         this.percentage = percentage;
         let path = this.IMAGE_HEALTHBAR[this.showImageIndex(percentage)];
         this.img = this.imageCache[path];
     }
-
-
 
     showImageIndex(percentage) {
         if (percentage > 40) {

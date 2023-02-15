@@ -236,7 +236,7 @@ class Character extends MovableObject {
     }
 
     collisionWithEnemy() {
-        return this.collideWithPufferFish() || this.collideWithJellyFish() || this.collideWithEndboss();
+        return this.collideWithPufferFish() || this.collideWithJellyFish() || this.collideWithSuperJellyFish() || this.collideWithEndboss();
     }
 
     characterMoveRight() {
@@ -315,6 +315,14 @@ class Character extends MovableObject {
         });
     }
 
+    collideWithSuperJellyFish() {
+        this.world.level.superJellyFish.forEach(superJellyFish => {
+            if (this.isColliding(superJellyFish)) {
+                this.playAnimation(this.IMAGES_HURT_SHOCKED);
+            }
+        });
+    }
+    
     collideWithEndboss() {
         this.world.level.endBoss.forEach(endBoss => {
             if (this.isColliding(endBoss)) {

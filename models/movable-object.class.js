@@ -32,7 +32,6 @@ class MovableObject extends DrawableObject {
         }, 1000 / 25);
     }
 
-
     swimLeft() {
         this.x -= this.speed;
 
@@ -63,7 +62,8 @@ class MovableObject extends DrawableObject {
     }
 
 
-    // is colliding (enemy)
+    // Collision Detection #####################
+
     isColliding(movableObject) {
         return this.x + this.width - this.offset.right > movableObject.x + movableObject.offset.left &&
             this.y + this.height - this.offset.bottom > movableObject.y + movableObject.offset.top &&
@@ -72,6 +72,7 @@ class MovableObject extends DrawableObject {
     }
 
     // attackWithFinslap (enemy)
+
     attackWithFinslap(movableObject) {
         return this.x + this.width > movableObject.x && this.x < movableObject.x + movableObject.width && this.y + this.height > movableObject.y && this.y + 100 < movableObject.y + movableObject.height;
     }
@@ -179,8 +180,7 @@ class MovableObject extends DrawableObject {
 
     getTimeForLastBubble() {
         this.lastBubble = new Date().getTime();
-    }
-  
+    }  
 
 
 }

@@ -25,7 +25,7 @@ class ThrowableObject extends MovableObject {
 
     }
 
-
+    
     BubbleBlow() {
         if (world.keyboard.D) { 
             this.playAnimation(this.IMAGE_BUBBLE);            
@@ -47,8 +47,9 @@ class ThrowableObject extends MovableObject {
     }
 
 
-    // excluded functions ############################
-
+    /**
+     * excluded functions
+     */
 
     checkDirectionOfTheCharacter() {
         if (this.otherDirection) {
