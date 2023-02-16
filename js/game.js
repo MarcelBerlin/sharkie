@@ -19,10 +19,6 @@ let bottle_sound = new Audio('audio/bottle.wav');
 let biteAttack = new Audio('audio/bite.wav');
 let splashJump = new Audio('audio/splash.wav');
 
-if (window.innerWidth > window.innerHeight) {
-    // Display message to user to rotate device
-    alert('Bitte drehen Sie Ihr Smartphone.');
-}
 
 
 function init() {
@@ -59,18 +55,19 @@ function DisplayShowHidden() {
     document.getElementById('ingameMoveOrders').style.display = 'flex';    
 }
 
-function howToPlay() {
-    document.getElementById('title').style.display = 'none';
-    document.getElementById('tutorial').style.display = 'flex';
-    document.getElementById('startscreen').style.display = 'none';
 
-}
+function toggleMenuScreen(screen) {
+    if (screen === 'how-to-play') {
+      document.getElementById('title').style.display = 'none';
+      document.getElementById('tutorial').style.display = 'flex';
+      document.getElementById('startscreen').style.display = 'none';
+    } else if (screen === 'back-to-menu') {
+      document.getElementById('title').style.display = 'block';
+      document.getElementById('tutorial').style.display = 'none';
+      document.getElementById('startscreen').style.display = 'flex';
+    }
+  }
 
-function backToMenu() {
-    document.getElementById('title').style.display = 'block';
-    document.getElementById('tutorial').style.display = 'none';
-    document.getElementById('startscreen').style.display = 'flex';
-}
 
 function reloadPage() {
     window.location.reload();
@@ -90,7 +87,7 @@ function enterFullscreen(element) {
     } else if (element.webkitRequestFullscreen) {  // iOS Safari
         element.webkitRequestFullscreen();
     }
-    addStylesForFullScreen();
+    switchStylesForFullscreen('addStylesFullscreen');
 }
 
 
@@ -104,27 +101,44 @@ function exitFullscreen() {
         document.exitFullscreen();
     } else if (document.webkitExitFullscreen) {
         document.webkitExitFullscreen();
+    }    
+    switchStylesForFullscreen('removeStylesFullscreen');
+}
+
+
+function switchStylesForFullscreen(styles) {
+    if (styles === 'addStylesFullscreen') {
+        ingameSwitchButtons('fullscreenON');
+        canvasWinAndLoseWindow('fullscreenOPEN');
+    } else if (styles === 'removeStylesFullscreen') {
+        ingameSwitchButtons('fullscreenOFF');
+        canvasWinAndLoseWindow('fullscreenEXIT');
     }
-    removeStylesFromFullScreen();
 }
 
 
-function addStylesForFullScreen() {
-    document.getElementById('homebutton').style.display = 'none';
-    document.getElementById('fullscreenbutton').style.display = 'none';
-    document.getElementById('closeFullscreen').style.display = 'block';
-    document.getElementById('canvas').classList.add('canvasFullScreen');
-    document.getElementById('win').classList.add('winScreenContainerFullScreen', 'winScreenContainerFullScreenh2', 'imgTrophyContainerFullScreenimg');
-    document.getElementById('lose').classList.add('gameOverScreenFullScreen');
+function ingameSwitchButtons(ingameSwitch) {
+    if (ingameSwitch === 'fullscreenON') {
+        document.getElementById('homebutton').style.display = 'none';
+        document.getElementById('fullscreenbutton').style.display = 'none';
+        document.getElementById('closeFullscreen').style.display = 'block';
+    } else if (ingameSwitch === 'fullscreenOFF') {
+        document.getElementById('closeFullscreen').style.display = 'none';
+        document.getElementById('homebutton').style.display = 'flex';
+        document.getElementById('fullscreenbutton').style.display = 'flex'; 
+    }
 }
 
-function removeStylesFromFullScreen() {
-    document.getElementById('closeFullscreen').style.display = 'none';
-    document.getElementById('homebutton').style.display = 'flex';
-    document.getElementById('fullscreenbutton').style.display = 'flex';    
-    document.getElementById('canvas').classList.remove('canvasFullScreen');
-    document.getElementById('win').classList.remove('winScreenContainerFullScreen', 'winScreenContainerFullScreenh2', 'imgTrophyContainerFullScreenimg');
-    document.getElementById('lose').classList.remove('gameOverScreenFullScreen');
+function canvasWinAndLoseWindow(window) {
+    if (window === 'fullscreenOPEN') {
+        document.getElementById('canvas').classList.add('canvasFullScreen');
+        document.getElementById('win').classList.add('winScreenContainerFullScreen', 'winScreenContainerFullScreenh2', 'imgTrophyContainerFullScreenimg');
+        document.getElementById('lose').classList.add('gameOverScreenFullScreen');
+    } else if (window === 'fullscreenEXIT') {
+        document.getElementById('canvas').classList.remove('canvasFullScreen');
+        document.getElementById('win').classList.remove('winScreenContainerFullScreen', 'winScreenContainerFullScreenh2', 'imgTrophyContainerFullScreenimg');
+        document.getElementById('lose').classList.remove('gameOverScreenFullScreen');
+    }
 }
 
 function toggleMute() {
