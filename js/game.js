@@ -253,6 +253,10 @@ function playBackgroundSound() {
     game_Sound.play();
 }
 
+/**
+ * Keyboard trigger DOWN
+ */
+
 window.addEventListener('keydown', (event) => {
     if (event.key == 'ArrowRight') {
         keyboard.RIGHT = true;
@@ -277,6 +281,9 @@ window.addEventListener('keydown', (event) => {
     }    
 });
 
+/**
+ * Keyboard trigger UP
+ */
 
 window.addEventListener('keyup', (event) => {
     if (event.key == 'ArrowRight') {
