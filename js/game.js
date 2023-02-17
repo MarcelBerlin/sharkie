@@ -31,7 +31,7 @@ function init() {
 }
 
 function restartGame() {
-    exitFullscreen();
+    checkForFullscreen();
     reloadMusic();
     init();
 }
@@ -42,15 +42,15 @@ function setStoppableInterval(fn, time) {
 
 }
 
+
 function DisplayShowHidden() {
+    checkForFullscreen();
     document.getElementById('win').style.display = 'none';
     document.getElementById('lose').style.display = 'none';
     document.getElementById('title').style.display = 'block';
     document.getElementById('startscreen').style.display = 'none';
     document.getElementById('canvas').style.display = 'block';
-    document.getElementById('tutorial').style.display = 'none';
-    document.getElementById('fullscreenbutton').style.display = 'flex';
-    document.getElementById('homebutton').style.display = 'flex';
+    document.getElementById('tutorial').style.display = 'none';    
     document.getElementById('mute').style.display = 'flex';
     document.getElementById('ingameMoveOrders').style.display = 'flex';    
 }
@@ -71,6 +71,16 @@ function toggleMenuScreen(screen) {
 
 function reloadPage() {
     window.location.reload();
+}
+
+function checkForFullscreen() {
+    if (document.fullscreenElement) {
+        document.getElementById('homebutton').style.display = 'none';
+        document.getElementById('fullscreenbutton').style.display = 'none';
+    } else {
+        document.getElementById('homebutton').style.display = 'flex';
+        document.getElementById('fullscreenbutton').style.display = 'flex';
+    }
 }
 
 function fullScreen() {
@@ -116,7 +126,6 @@ function switchStylesForFullscreen(styles) {
     }
 }
 
-
 function ingameSwitchButtons(ingameSwitch) {
     if (ingameSwitch === 'fullscreenON') {
         document.getElementById('homebutton').style.display = 'none';
@@ -143,18 +152,38 @@ function canvasWinAndLoseWindow(window) {
 
 function toggleMute() {
     toggleNoSoundBtn();
+    muteBackGroundMusic();
+    muteAnimationSounds();
+    muteCollectableItems();
+    muteAttackSounds();
+    muteCreditSound();   
+}
+
+function muteBackGroundMusic() {
     game_Sound.muted = !game_Sound.muted;
     ambient_Sound.muted = !ambient_Sound.muted;
     bossAnthem.muted = !bossAnthem.muted;
+}
+
+function muteAnimationSounds() {
+    bubble_sound.muted = !bubble_sound.muted;
+    swimming_sound.muted = !swimming_sound.muted;
+    splashJump.muted = !splashJump.muted;
+}
+
+function muteCollectableItems() {
     coin_sound.muted = !coin_sound.muted;
+    bottle_sound.muted = !bottle_sound.muted;
+}
+
+function muteAttackSounds() {
     slap_sound.muted = !slap_sound.muted;
     characterHitByPufferFish.muted = !characterHitByPufferFish.muted;
     characterHitByJellyFish.muted = !characterHitByJellyFish.muted;
-    bubble_sound.muted = !bubble_sound.muted;
-    bottle_sound.muted = !bottle_sound.muted;
-    swimming_sound.muted = !swimming_sound.muted;
-    splashJump.muted = !splashJump.muted;
     biteAttack.muted = !biteAttack.muted;
+}
+
+function muteCreditSound() {
     youWinSound.muted = !youWinSound.muted;
     awww.muted = !awww.muted;
 }
@@ -167,13 +196,11 @@ function reloadMusic() {
 
 function toggleNoSoundBtn() {
     let img = document.getElementById('mute').src; //= 'img/laut-40.png';
-
     if (img.indexOf('laut-40.png') != -1) {
         document.getElementById('mute').src = 'img/kein-ton-40.png';
     } else {
         document.getElementById('mute').src = 'img/laut-40.png';
     }
-
 }
 
 function showMobileBtn() {
@@ -192,33 +219,33 @@ function stopGame() {
 
 function loseGame() {
     hideMobileBtn();
+    winOrLose();
+    document.getElementById('lose').style.display = 'flex';
     ambient_Sound.pause();
     game_Sound.pause();
-    bossAnthem.pause();
-    document.getElementById('title').style.display = 'none';
-    document.getElementById('canvas').style.display = 'none';
-    document.getElementById('lose').style.display = 'flex';
-    document.getElementById('homebutton').style.display = 'none';
-    document.getElementById('fullscreenbutton').style.display = 'none';
-    document.getElementById('mute').style.display = 'none';
-    document.getElementById('ingameMoveOrders').style.display = 'none';
-    document.getElementById('mobileLeftBtn').classList.add('d-none'); 
+    bossAnthem.pause();    
     awww.play();
 }
 
 function winGame() {
     hideMobileBtn();
+    winOrLose();
+    document.getElementById('win').style.display = 'flex';
     ambient_Sound.pause();
     game_Sound.pause();
-    bossAnthem.pause();
+    bossAnthem.pause();    
+    youWinSound.play();
+}
+
+function winOrLose() {
     document.getElementById('title').style.display = 'none';
-    document.getElementById('canvas').style.display = 'none';
-    document.getElementById('win').style.display = 'flex';
+    document.getElementById('canvas').style.display = 'none';    
     document.getElementById('homebutton').style.display = 'none';
     document.getElementById('fullscreenbutton').style.display = 'none';
     document.getElementById('mute').style.display = 'none';
     document.getElementById('ingameMoveOrders').style.display = 'none'; 
-    youWinSound.play();
+    document.getElementById('mobileLeftBtn').classList.add('d-none'); 
+    document.getElementById('mobileRightBtn').classList.add('d-none'); 
 }
 
 function playBackgroundSound() {
