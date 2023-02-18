@@ -31,7 +31,7 @@ class PufferFishPurple extends MovableObject {
     IMAGES_DEAD = [
         'img/2.Enemy/1.Puffer fish (3 color options)/4.DIE/3.png',
         
-    ]
+    ];
 
 
     constructor(world) {
@@ -41,7 +41,7 @@ class PufferFishPurple extends MovableObject {
         this.loadImages(this.IMAGES_TRANSITION);
         this.loadImages(this.IMAGES_BUBBLESWIM);
         this.loadImages(this.IMAGES_DEAD);
-        this.x = 1500 + Math.random() * 500;
+        this.x = 1300 + Math.random() * 500;
         this.y = this.min_Y + 55 + Math.random() * 280;
         this.speed = 0.2 + Math.random() * 0.35;
         this.animate();
@@ -49,18 +49,16 @@ class PufferFishPurple extends MovableObject {
   
 
 
-    animate() {
-        
+    animate() {        
         setStoppableInterval(() => {
             this.swimLeft();
         }, 1000 / 60);
-
         let i = 0;
         setStoppableInterval(() => {
             this.playAnimation(this.IMAGES_SWIM);
             if (this.pufferFishEnergy == 0) {
                 this.PufferIsKilledByCharacter();
-            } else if(world.character.x + 200 > this.x && world.character.y + 200 > this.y && world.character.x - 200 < this.x && world.character.y - 50 < this.y) {
+            } else if (this.characterIsNear()) {
                 if (i < 5) {
                     this.playAnimation(this.IMAGES_TRANSITION);               
                 } else {

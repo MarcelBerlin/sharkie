@@ -2,6 +2,7 @@ class MovableObject extends DrawableObject {
 
     speed = 0.1;
     otherDirection = false;
+    hadFirstContact = false; 
     min_Y = 30;
     max_Y = 325;
     speedY = 0.15;
@@ -55,13 +56,13 @@ class MovableObject extends DrawableObject {
     }
 
     playAnimation(images) {
-        let i = this.currentImage % images.length; // let i = 0 % 6; => 0, Rest 1 // 0, 1, 2, 3, 4, 5, 6, 0, 1, 2... etc
+        let i = this.currentImage % images.length; 
         let path = images[i];
         this.img = this.imageCache[path];
         this.currentImage++;
     }
 
-
+    
     // Collision Detection #####################
 
     isColliding(movableObject) {
@@ -93,7 +94,7 @@ class MovableObject extends DrawableObject {
 
     removePoisonFromBar() {
         this.poison -= 1;
-    }
+    }    
 
     hit() {
         this.energy -= 5;
@@ -122,6 +123,10 @@ class MovableObject extends DrawableObject {
     isDead() {
         return this.energy == 0;
 
+    }
+
+    characterIsNear() {
+        return world.character.x + 200 > this.x && world.character.y + 200 > this.y && world.character.x - 200 < this.x && world.character.y - 50 < this.y;
     }
 
     hitPufferFish() {
@@ -164,6 +169,14 @@ class MovableObject extends DrawableObject {
         return this.superJellyFishEnergy == 0;
     }
 
+    hitEndbossWithNormalBubble() {
+        this.bossEnergy -= 5;
+        if (this.bossEnergy <= 0) {
+            this.bossEnergy = 0;
+        } else {
+            this.lastHit = new Date().getTime();
+        }
+    }
 
     hitEndboss() {
         this.bossEnergy -= 10;

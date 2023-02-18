@@ -42,26 +42,23 @@ class PufferFishRed extends MovableObject {
         this.loadImages(this.IMAGES_TRANSITION);
         this.loadImages(this.IMAGES_BUBBLESWIM);
         this.loadImages(this.IMAGES_DEAD);
-        this.x = 1200 + Math.random() * 500;
+        this.x = 700 + Math.random() * 500;
         this.y = this.min_Y + 55 + Math.random() * 300;
         this.speed = 0.2 + Math.random() * 0.35;         
         this.animate();
     } 
   
 
-
-    animate() {
-       
+    animate() {       
         setStoppableInterval(() => {
             this.swimLeft();            
-        }, 1000 / 60);
-        
+        }, 1000 / 60);        
         let i = 0;
         setStoppableInterval(() => {
             this.playAnimation(this.IMAGES_SWIM);
             if (this.pufferFishEnergy == 0) {
                 this.PufferIsKilledByCharacter();
-            } else if(this.characterIsInRange()) {
+            } else if (this.characterIsNear()) {
                 if (i < 5) {
                     this.playAnimation(this.IMAGES_TRANSITION);               
                 } else {
@@ -77,8 +74,5 @@ class PufferFishRed extends MovableObject {
         this.y -= 15;
         this.playAnimation(this.IMAGES_DEAD);
     }
-
-    characterIsInRange() {
-        return world.character.x + 200 > this.x && world.character.y + 200 > this.y && world.character.x - 200 < this.x && world.character.y - 50 < this.y;
-    }
+    
 }

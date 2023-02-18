@@ -6,18 +6,18 @@ let gameSpeed = 10;
 
 let youWinSound = new Audio('audio/winsound.mp3');
 let awww = new Audio('audio/aww.mp3');
-let ambient_Sound = new Audio('audio/underwater.wav');
+let ambient_Sound = new Audio('audio/underwater.mp3');
 let game_Sound = new Audio('audio/sharkieanthem_short.mp3');
 let bossAnthem = new Audio('audio/bossanthem.mp3');
 let swimming_sound = new Audio('audio/swim.mp3');
-let coin_sound = new Audio('audio/coins.wav');
-let slap_sound = new Audio('audio/slap.wav');
-let characterHitByPufferFish = new Audio('audio/hit.wav');
-let characterHitByJellyFish = new Audio('audio/electroshock.wav');
-let bubble_sound = new Audio('audio/bubble.wav');
-let bottle_sound = new Audio('audio/bottle.wav');
-let biteAttack = new Audio('audio/bite.wav');
-let splashJump = new Audio('audio/splash.wav');
+let coin_sound = new Audio('audio/coins.mp3');
+let slap_sound = new Audio('audio/slap.mp3');
+let characterHitByPufferFish = new Audio('audio/hit.mp3');
+let characterHitByJellyFish = new Audio('audio/electroshock.mp3');
+let bubble_sound = new Audio('audio/bubble.mp3');
+let bottle_sound = new Audio('audio/bottle.mp3');
+let biteAttack = new Audio('audio/bite.mp3');
+let splashJump = new Audio('audio/splash.mp3');
 
 
 
@@ -259,7 +259,7 @@ function playBackgroundSound() {
 
 window.addEventListener('keydown', (event) => {
     if (event.key == 'ArrowRight') {
-        keyboard.RIGHT = true;
+        keyboard.RIGHT = true;        
     }
     if (event.key == 'ArrowLeft') {
         keyboard.LEFT = true;

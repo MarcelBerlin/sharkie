@@ -13,6 +13,7 @@ class Keyboard {
         this.eventTouchpadBtns();
     }
 
+   
     
     eventTouchpadBtns() {
         setTimeout(() => {

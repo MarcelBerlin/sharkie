@@ -32,17 +32,14 @@ class Character extends MovableObject {
         'img/1.Sharkie/2.Long_IDLE/i8.png',
         'img/1.Sharkie/2.Long_IDLE/i9.png',
         'img/1.Sharkie/2.Long_IDLE/i10.png'
-
     ];
 
     IMAGES_LONGIDLE = [
-
         'img/1.Sharkie/2.Long_IDLE/i11.png',
         'img/1.Sharkie/2.Long_IDLE/i12.png',
         'img/1.Sharkie/2.Long_IDLE/i13.png',
         'img/1.Sharkie/2.Long_IDLE/i14.png'
     ];
-
 
     IMAGES_SWIM = [
         'img/1.Sharkie/3.Swim/1.png',
@@ -55,7 +52,9 @@ class Character extends MovableObject {
 
     IMAGES_BUBBLE_ATTACK = [
         'img/1.Sharkie/4.Attack/Bubble trap/op1/1.png',
-        'img/1.Sharkie/4.Attack/Bubble trap/op1/2.png',        
+        'img/1.Sharkie/4.Attack/Bubble trap/op1/2.png',    
+        'img/1.Sharkie/4.Attack/Bubble trap/op1/3.png', 
+        'img/1.Sharkie/4.Attack/Bubble trap/op1/4.png',     
         'img/1.Sharkie/4.Attack/Bubble trap/op1/5.png',
         'img/1.Sharkie/4.Attack/Bubble trap/op1/6.png',
         'img/1.Sharkie/4.Attack/Bubble trap/op1/7.png',
@@ -64,12 +63,24 @@ class Character extends MovableObject {
 
     IMAGES_POISON_BUBBLE = [
         'img/1.Sharkie/4.Attack/Bubble trap/For Whale/1.png',
-        'img/1.Sharkie/4.Attack/Bubble trap/For Whale/2.png',        
+        'img/1.Sharkie/4.Attack/Bubble trap/For Whale/2.png',
+        'img/1.Sharkie/4.Attack/Bubble trap/For Whale/3.png',
+        'img/1.Sharkie/4.Attack/Bubble trap/For Whale/4.png',        
         'img/1.Sharkie/4.Attack/Bubble trap/For Whale/5.png',
         'img/1.Sharkie/4.Attack/Bubble trap/For Whale/6.png',
         'img/1.Sharkie/4.Attack/Bubble trap/For Whale/7.png',
         'img/1.Sharkie/4.Attack/Bubble trap/For Whale/8.png',
 
+    ];
+
+    IMAGES_WITHOUT_BUBBLE = [
+        'img/1.Sharkie/4.Attack/Bubble trap/Op2/1.png',
+        'img/1.Sharkie/4.Attack/Bubble trap/Op2/2.png',
+        'img/1.Sharkie/4.Attack/Bubble trap/Op2/3.png',
+        'img/1.Sharkie/4.Attack/Bubble trap/Op2/4.png',
+        'img/1.Sharkie/4.Attack/Bubble trap/Op2/5.png',
+        'img/1.Sharkie/4.Attack/Bubble trap/Op2/6.png',
+        'img/1.Sharkie/4.Attack/Bubble trap/Op2/7.png',
     ];
 
     IMAGES_FINSLAP = [
@@ -126,16 +137,15 @@ class Character extends MovableObject {
         'img/1.Sharkie/6.dead/2.Electro_shock/10.png',
     ];
 
-
+    world;
     speed = 3.5;
     width = 170;
     height = 200;
-    y = 100;
-    world;
+    y = 100;    
     lastMovement = 0;
-    finSlap = false;
-    bubbleBlow = false;
-    poisonBubbleBlow = false;
+    firstAttack = false;
+    spacePressed = false;
+
 
     offset = {
         top: 120,
@@ -153,6 +163,7 @@ class Character extends MovableObject {
         this.loadImages(this.IMAGES_FINSLAP);
         this.loadImages(this.IMAGES_BUBBLE_ATTACK);
         this.loadImages(this.IMAGES_POISON_BUBBLE);
+        this.loadImages(this.IMAGES_WITHOUT_BUBBLE);
         this.loadImages(this.IMAGES_HURT_POISONED);
         this.loadImages(this.IMAGES_HURT_SHOCKED);
         this.loadImages(this.IMAGES_DEAD_POISON);
@@ -178,21 +189,18 @@ class Character extends MovableObject {
             this.loadImageArray();
             if (this.isHurt()) {
                 this.collisionWithEnemy();
-            } else if (this.canCharacterSwim()) {
-                this.characterMoveOrders();
+            } else if (this.canAttack() ) {
+                this.characterAttackEnemies();                
             } else if (this.isDead()) {
                 this.characterIsDead();
-            } else if (this.characterLongIdle()) {
+            } else if (this.canCharacterSwim()) {
+                this.characterMoveOrders();
+            } else if (this.characterLongIdle()) {                
                 this.playLongIdleAnimation();
-            } else if (this.canAttack()) {
-                this.characterAttackEnemies();
             } 
-        }, 100);
+        }, 1000 / 10);
     }
     
-    
-    
-
     swimAnimate() {
         setStoppableInterval(() => {
             if (this.canSwimRight()) {
@@ -207,7 +215,7 @@ class Character extends MovableObject {
         }, 1000 / 60);
     }
 
-
+    
     // excluded functions -------------------------------- #
 
     characterCamPosition() {
@@ -266,7 +274,7 @@ class Character extends MovableObject {
     }
 
     characterAttackEnemies() {
-        if (this.world.keyboard.SPACE) {
+        if (this.world.keyboard.SPACE) {           
             this.meleeAttack();
         } else if (this.world.keyboard.D) {
             this.standardBubble();
@@ -274,9 +282,13 @@ class Character extends MovableObject {
             this.poisonBubble();
         } 
     }
+    
 
     meleeAttack() {
+        this.activateFinslapAttack();
         this.playAnimation(this.IMAGES_FINSLAP);
+        this.firstAttack = true;
+        this.spacePressed = true;
         this.getMovementTimeStamp();
     }
 
@@ -287,12 +299,16 @@ class Character extends MovableObject {
     }
 
     standardBubble() {
+        this.activateBubbleAttack();
         this.playAnimation(this.IMAGES_BUBBLE_ATTACK);
+        this.firstAttack = true;   
         this.getMovementTimeStamp();
     }
 
     poisonBubble() {
+        this.activatePoisonAttack();
         this.playAnimation(this.IMAGES_POISON_BUBBLE);
+        this.firstAttack = true;   
         this.getMovementTimeStamp();
     }
 
@@ -367,6 +383,56 @@ class Character extends MovableObject {
         let path = this.IMAGES_IDLE[i];
         this.img = this.imageCache[path];
         this.currentImage++;
+    }
+
+    activateBubbleAttack() {
+        if (!this.firstAttack) {
+            this.currentImage = 0;
+            let KeyDIsAlreadyPressed = setInterval(() => {
+                this.firstAttack = true;
+                this.world.keyboard.D = true;
+            }, 20)
+
+            setTimeout(() => {
+                clearInterval(KeyDIsAlreadyPressed);
+                this.firstAttack = false;
+                this.world.keyboard.D = false;                               
+            }, 400);
+        }
+    }
+
+    activatePoisonAttack() {
+        if (!this.firstAttack) {
+            this.currentImage = 0;
+            let KeyFIsAlreadyPressed = setInterval(() => {
+                this.firstAttack = true;
+                this.world.keyboard.F = true;
+            }, 20)
+
+            setTimeout(() => {
+                clearInterval(KeyFIsAlreadyPressed);
+                this.firstAttack = false;
+                this.world.keyboard.F = false;                              
+            }, 400);
+        }
+    }
+
+    activateFinslapAttack() {
+        if (!this.firstAttack && !this.spacePressed) {
+            this.currentImage = 0;
+            let KeySpaceIsAlreadyPressed = setInterval(() => {
+                this.firstAttack = true;
+                this.spacePressed = true;
+                this.world.keyboard.SPACE = true;
+            }, 20)
+
+            setTimeout(() => {
+                clearInterval(KeySpaceIsAlreadyPressed);
+                this.firstAttack = false;
+                this.spacePressed = false;
+                this.world.keyboard.SPACE = false;                              
+            }, 400);
+        }
     }
 
 

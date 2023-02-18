@@ -28,15 +28,15 @@ class HealthBarBoss extends DrawableObject {
     }
 
     showImageIndex(percentage) {
-        if (percentage == 50) {
+        if (percentage > 40) {
             return 5;
-        } else if (percentage >= 40) {
+        } else if (percentage > 30) {
             return 4;
-        } else if (percentage >= 30) {
+        } else if (percentage > 20) {
             return 3;
-        } else if (percentage >= 20) {
+        } else if (percentage > 10) {
             return 2;
-        } else if (percentage >= 10) {
+        } else if (percentage > 1) {
             return 1;
         } else {
             return 0;

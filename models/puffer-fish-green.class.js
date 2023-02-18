@@ -53,14 +53,12 @@ class PufferFishGreen extends MovableObject {
         setStoppableInterval(() => {
             this.swimLeft();
         }, 1000 / 60);
-
         let i = 0;
-
         setStoppableInterval(() => {
             this.playAnimation(this.IMAGES_SWIM);
             if (this.pufferFishEnergy == 0) {
                 this.PufferIsKilledByCharacter();
-            } else if (world.character.x + 200 > this.x && world.character.y + 200 > this.y && world.character.x - 200 < this.x && world.character.y - 50 < this.y) {
+            } else if (this.characterIsNear()) {
                 if (i < 5) {
                     this.playAnimation(this.IMAGES_TRANSITION);               
                 } else {

@@ -10,22 +10,23 @@ class World {
     poisonBubbles = 0;
     lastBubble = false;
     alreadyThrow = false;
-    level = createLevel1(world);
+    level = createLevel1(world);    
     percentage = 20;
     canvas;
     ctx;
     keyboard;
     camera_x = 0;
+    bossSpawnZone = 2200;
+
 
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
         this.keyboard = keyboard;
-        this.canvas = canvas;
+        this.canvas = canvas;        
         this.setWorld();
         this.swimCollectAndAttack();
         this.draw();
-        this.checkTimeBetweenBubble();
     }
 
     setWorld() {
@@ -42,7 +43,7 @@ class World {
             this.finSlapHit();
             this.poisonBubbleHit();
             this.CheckCollisions();
-        }, 300)
+        }, 200)
     }
 
     /**
@@ -92,10 +93,8 @@ class World {
         if (mo.otherDirection) {
             this.flipImage(mo);
         }
-
         mo.drawImage(this.ctx);
         mo.drawOutlines(this.ctx);
-
         if (mo.otherDirection) {
             this.flipImageBack(mo);
         }
@@ -115,15 +114,15 @@ class World {
 
     // ####################################################
 
-   
+
     /**
      * game logic (checks if objects collide and were hitten)
-     */ 
+     */
 
     checkThrowObjects() {
         if (this.characterCanThrowBubble()) {
             this.alreadyThrow = true;
-            this.ThrowStandardBubble();
+            this.ThrowStandardBubble();            
         }
         if (this.characterCanThrowPoisonBubble()) {
             this.alreadyThrow = true;
@@ -132,13 +131,12 @@ class World {
             this.bubbleDelay();
         }
     }
-    
+
     CheckCollisions() {
         this.CheckCollisionPufferFish();
         this.CheckCollisionJellyFish();
         this.CheckCollisionSuperJellyFish();
         this.CheckCollisionEndboss();
-
     }
 
     CheckCollisionPufferFish() {
@@ -214,35 +212,31 @@ class World {
             this.alreadyThrow = false;
             setTimeout(() => {
                 this.lastBubble = false;
-            }, 1000);
+            }, 500);
         }
     }
 
-    checkTimeBetweenBubble() {
-        setStoppableInterval(() => {
-            this.checkThrowObjects();
-        }, 1000 / 60);
-    }
 
     // ####################################################
 
 
     /**
      * excluded functions - (to compress logic code)
-     */ 
+     */
 
-    ThrowStandardBubble() {
+    ThrowStandardBubble() {       
         this.lastBubble = true;
         if (this.character.otherDirection == true) {
             let bubble = new ThrowableObject(this.character.x, this.character.y + 110, this.character.otherDirection);
             this.throwingBubble.push(bubble);
+
         } else {
             let bubble = new ThrowableObject(this.character.x + 140, this.character.y + 110, this.character.otherDirection);
             this.throwingBubble.push(bubble);
-        }
+        }           
     }
 
-    ThrowPoisonBubble() {
+    ThrowPoisonBubble() {        
         this.lastBubble = true;
         if (this.character.otherDirection == true) {
             let poisonBubble = new ThrowableObject(this.character.x, this.character.y + 110, this.character.otherDirection);
@@ -253,7 +247,7 @@ class World {
         }
         this.poisonBubbles--;
         this.character.removePoisonFromBar();
-        this.poisonbar.setPercentage(this.character.poison);
+        this.poisonbar.setPercentage(this.character.poison);  
     }
 
     DamageFromPufferfish() {
@@ -280,22 +274,51 @@ class World {
         this.healthbar.setPercentage(this.character.energy);
     }
 
-    pufferFishHitAndKill(pufferFish, i) {
-        slap_sound.play();
-        pufferFish.hitPufferFish();
-        pufferFish.pufferFishIsDead();
-    }
+    // pufferFishHitAndKill(pufferFish) {   
+    //     let i = this.level.pufferFish.indexOf(pufferFish);     
+    //     slap_sound.play();
+    //     pufferFish.hitPufferFish();        
+    //     pufferFish.pufferFishIsDead(); 
+    //     setTimeout(() => {
+    //         this.level.pufferFish.splice(i, 1);
+    //     }, 2500);  
+    //     console.log(pufferFish);                                                
+    // }
 
     jellyFishHitAndKill(jellyFish, i) {
+        let index = this.level.jellyFish.indexOf(jellyFish);
         bubble_sound.play();
         jellyFish.hitJellyFish();
-        jellyFish.hitSuperJellyFish();
         jellyFish.jellyFishIsDead();
-        jellyFish.superJellyFishIsDead();
         this.throwingBubble.splice(i, 1);
+        setTimeout(() => {
+            this.level.jellyFish.splice(index, 1);
+        }, 5000);
+        console.log(jellyFish); 
     }
 
-    endBossHitAndKill(endBoss, i) {
+    superJellyFishHitAndKill(superJellyFish, i) {
+        let index = this.level.superJellyFish.indexOf(superJellyFish);
+        bubble_sound.play();
+        superJellyFish.hitSuperJellyFish();
+        superJellyFish.superJellyFishIsDead();
+        this.throwingBubble.splice(i, 1);
+        setTimeout(() => {
+            this.level.superJellyFish.splice(index, 1);
+        }, 5000);
+        console.log(superJellyFish); 
+    }
+
+    endBossHitAndKillWithStandard(endBoss, i) {
+        bubble_sound.play();
+        endBoss.hitEndbossWithNormalBubble();
+        this.healthbarBoss.setPercentage(endBoss.bossEnergy);
+        endBoss.endBossIsDead();
+        this.throwingBubble.splice(i, 1);
+        console.log(endBoss); 
+    }
+
+    endBossHitAndKillWithPoison(endBoss, i) {
         bubble_sound.play();
         endBoss.hitEndboss();
         this.healthbarBoss.setPercentage(endBoss.bossEnergy);
@@ -317,7 +340,7 @@ class World {
         this.poisonbar.setPercentage(this.character.poison);
         this.level.flasks.splice(i, 1);
     }
-    
+
     characterCanThrowBubble() {
         return this.keyboard.D && !this.lastBubble;
     }
@@ -329,11 +352,14 @@ class World {
     characterAttackPufferFish(pufferFish) {
         return this.character.attackWithFinslap(pufferFish) && this.keyboard.SPACE;
     }
-   
-    CheckFinSlapHitPufferFish(i) {
-        this.level.pufferFish.forEach((pufferFish) => {
-            if (this.characterAttackPufferFish(pufferFish)) {
-                this.pufferFishHitAndKill(pufferFish);
+
+
+
+
+    CheckFinSlapHitPufferFish(i) {        
+        this.level.pufferFish.forEach((pufferFish) => {            
+            if (this.characterAttackPufferFish(pufferFish)) {                
+                this.pufferFishHitAndKill(pufferFish);                               
             }
             this.throwingBubble.forEach((bubble) => {
                 if (bubble.isColliding(pufferFish)) {
@@ -342,6 +368,22 @@ class World {
             })
         })
     }
+
+
+
+    pufferFishHitAndKill(pufferFish) {   
+        let i = this.level.pufferFish.indexOf(pufferFish);     
+        slap_sound.play();
+        pufferFish.hitPufferFish();        
+        pufferFish.pufferFishIsDead(); 
+        setTimeout(() => {
+            this.level.pufferFish.splice(i, 1);
+        }, 2500);  
+        console.log(pufferFish);                                                
+    }
+
+
+    
 
     CheckBubbleHitNormalJelly(i) {
         this.level.jellyFish.forEach((jellyFish) => {
@@ -357,21 +399,43 @@ class World {
         this.level.superJellyFish.forEach((superJellyFish) => {
             this.throwingBubble.forEach((bubble) => {
                 if (bubble.isColliding(superJellyFish)) {
-                    this.jellyFishHitAndKill(superJellyFish, i);
+                    this.superJellyFishHitAndKill(superJellyFish, i);
                 }
             })
         })
     }
 
     CheckPoisonBubbleHitEndboss(i) {
+        if (this.characterIsNotInRange()) {
+            return;
+        } 
+        this.character.hadFirstContact = true;
         this.level.endBoss.forEach((endBoss) => {
-            this.throwingPoisonBubble.forEach((poisonBubble) => {
-                if (poisonBubble.isColliding(endBoss)) {
-                    this.endBossHitAndKill(endBoss, i);
-                }
-            })
+            this.endBossHitWithStandardBubble(endBoss, i); 
+            this.endbossHitWithPoisonBubble(endBoss, i); 
         })
     }
+
+    characterIsNotInRange() {
+        return this.character.x <= 1800 && !this.character.hadFirstContact;
+    }
+
+    endBossHitWithStandardBubble(endBoss, i) {
+        this.throwingBubble.forEach((bubble) => {
+            if (bubble.isColliding(endBoss)) {
+                this.endBossHitAndKillWithStandard(endBoss, i);
+            }
+        })
+    }
+
+    endbossHitWithPoisonBubble(endBoss, i) {
+        this.throwingPoisonBubble.forEach((poisonBubble) => {
+            if (poisonBubble.isColliding(endBoss)) {
+                this.endBossHitAndKillWithPoison(endBoss, i);
+            }
+        })
+    }
+   
 
 
 }

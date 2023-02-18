@@ -26,26 +26,26 @@ class ThrowableObject extends MovableObject {
     }
 
     
-    BubbleBlow() {
+    BubbleBlow() {       
         if (world.keyboard.D) { 
             this.playAnimation(this.IMAGE_BUBBLE);            
             setStoppableInterval(() => {                
                 this.checkDirectionOfTheCharacter(); 
             }, 25);
-            this.getTimeForLastBubble();    
-        }             
+            this.getTimeForLastBubble();            
+        } 
     }
 
-    PoisonBubbleBlow() {
+    PoisonBubbleBlow() {        
+        let i = 0;
         if (world.keyboard.F) {
             this.playAnimation(this.IMAGE_BOSS_BUBBLE);            
             setStoppableInterval(() => {                
                this.checkDirectionOfTheCharacter(); 
             }, 25);
             this.getTimeForLastBubble(); 
-        }              
+        } 
     }
-
 
     /**
      * excluded functions

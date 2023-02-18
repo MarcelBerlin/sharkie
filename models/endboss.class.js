@@ -63,8 +63,7 @@ class EndBoss extends MovableObject {
         left: 30,
         right: 30
     }
-    world;
-    hadFirstContact = false;
+    world;       
     speedAfterHit = 30;
 
 
@@ -82,7 +81,7 @@ class EndBoss extends MovableObject {
         this.y = 0;
         this.speed = 30;
         this.animate();
-        
+
     }
 
 
@@ -90,16 +89,16 @@ class EndBoss extends MovableObject {
 
     animate() {
         let i = 0
-        setStoppableInterval(() => {
+        setStoppableInterval(() => {            
             if (this.charackterIsInRange()) {
-                i = 0;
+                i = 0;                
                 this.hadFirstContact = true;
                 this.activateBossSound();
                 setStoppableInterval(() => {
                     this.bossSpawnAndAttackCharackter(i);
                     i++;
                 }, 100);
-            }
+            }            
         }, 100);
     }
 
@@ -108,7 +107,7 @@ class EndBoss extends MovableObject {
             this.BossSpawning();
         } else {
             this.BossAttackAndSwim();
-        }        
+        }
     }
 
 
@@ -134,13 +133,13 @@ class EndBoss extends MovableObject {
 
     isDefeated() {
         if (this.bossEnergy == 0) {
-                this.playAnimation(this.IMAGES_DEAD);
-                setTimeout(() => {
-                    winGame();
-                    stopGame();
-                }, 500);
-                biteAttack.pause();
-            }   
+            this.playAnimation(this.IMAGES_DEAD);
+            setTimeout(() => {
+                winGame();
+                stopGame();
+            }, 500);
+            biteAttack.pause();
+        }
     }
 
     checkIfCharacterIsBehindBoss() {
@@ -157,7 +156,7 @@ class EndBoss extends MovableObject {
     charackterIsInRange() {
         return world.character.x > 1800 && !this.hadFirstContact;
     }
-
+       
     BossSpawning() {
         this.playAnimation(this.IMAGES_INTRODUCE);
         splashJump.play();
