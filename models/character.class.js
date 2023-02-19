@@ -391,7 +391,7 @@ class Character extends MovableObject {
             let KeyDIsAlreadyPressed = setInterval(() => {
                 this.firstAttack = true;
                 this.world.keyboard.D = true;
-            }, 20)
+            }, 10)
 
             setTimeout(() => {
                 clearInterval(KeyDIsAlreadyPressed);
@@ -407,7 +407,7 @@ class Character extends MovableObject {
             let KeyFIsAlreadyPressed = setInterval(() => {
                 this.firstAttack = true;
                 this.world.keyboard.F = true;
-            }, 20)
+            }, 10)
 
             setTimeout(() => {
                 clearInterval(KeyFIsAlreadyPressed);
@@ -418,18 +418,16 @@ class Character extends MovableObject {
     }
 
     activateFinslapAttack() {
-        if (!this.firstAttack && !this.spacePressed) {
+        if (!this.firstAttack) {
             this.currentImage = 0;
             let KeySpaceIsAlreadyPressed = setInterval(() => {
-                this.firstAttack = true;
-                this.spacePressed = true;
+                this.firstAttack = true;                
                 this.world.keyboard.SPACE = true;
-            }, 20)
+            }, 10)
 
             setTimeout(() => {
                 clearInterval(KeySpaceIsAlreadyPressed);
-                this.firstAttack = false;
-                this.spacePressed = false;
+                this.firstAttack = false;                
                 this.world.keyboard.SPACE = false;                              
             }, 400);
         }

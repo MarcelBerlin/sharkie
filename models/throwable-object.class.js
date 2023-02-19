@@ -36,8 +36,7 @@ class ThrowableObject extends MovableObject {
         } 
     }
 
-    PoisonBubbleBlow() {        
-        let i = 0;
+    PoisonBubbleBlow() {               
         if (world.keyboard.F) {
             this.playAnimation(this.IMAGE_BOSS_BUBBLE);            
             setStoppableInterval(() => {                

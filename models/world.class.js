@@ -10,20 +10,19 @@ class World {
     poisonBubbles = 0;
     lastBubble = false;
     alreadyThrow = false;
-    level = createLevel1(world);    
+    alreadyHitten = false;
+    level = createLevel1(world);
     percentage = 20;
     canvas;
     ctx;
     keyboard;
     camera_x = 0;
-    bossSpawnZone = 2200;
-
-
+    y = 30;
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
         this.keyboard = keyboard;
-        this.canvas = canvas;        
+        this.canvas = canvas;
         this.setWorld();
         this.swimCollectAndAttack();
         this.draw();
@@ -121,8 +120,8 @@ class World {
 
     checkThrowObjects() {
         if (this.characterCanThrowBubble()) {
-            this.alreadyThrow = true;
-            this.ThrowStandardBubble();            
+            this.alreadyThrow = true;            
+            this.ThrowStandardBubble();           
         }
         if (this.characterCanThrowPoisonBubble()) {
             this.alreadyThrow = true;
@@ -224,7 +223,7 @@ class World {
      * excluded functions - (to compress logic code)
      */
 
-    ThrowStandardBubble() {       
+    ThrowStandardBubble() {
         this.lastBubble = true;
         if (this.character.otherDirection == true) {
             let bubble = new ThrowableObject(this.character.x, this.character.y + 110, this.character.otherDirection);
@@ -233,10 +232,10 @@ class World {
         } else {
             let bubble = new ThrowableObject(this.character.x + 140, this.character.y + 110, this.character.otherDirection);
             this.throwingBubble.push(bubble);
-        }           
+        }
     }
 
-    ThrowPoisonBubble() {        
+    ThrowPoisonBubble() {
         this.lastBubble = true;
         if (this.character.otherDirection == true) {
             let poisonBubble = new ThrowableObject(this.character.x, this.character.y + 110, this.character.otherDirection);
@@ -247,7 +246,7 @@ class World {
         }
         this.poisonBubbles--;
         this.character.removePoisonFromBar();
-        this.poisonbar.setPercentage(this.character.poison);  
+        this.poisonbar.setPercentage(this.character.poison);
     }
 
     DamageFromPufferfish() {
@@ -274,48 +273,45 @@ class World {
         this.healthbar.setPercentage(this.character.energy);
     }
 
-    // pufferFishHitAndKill(pufferFish) {   
-    //     let i = this.level.pufferFish.indexOf(pufferFish);     
-    //     slap_sound.play();
-    //     pufferFish.hitPufferFish();        
-    //     pufferFish.pufferFishIsDead(); 
-    //     setTimeout(() => {
-    //         this.level.pufferFish.splice(i, 1);
-    //     }, 2500);  
-    //     console.log(pufferFish);                                                
-    // }
+    pufferFishHitAndKill(pufferFish, i) {
+        slap_sound.play();
+        pufferFish.hitPufferFish();
+        pufferFish.pufferFishIsDead();
+        setTimeout(() => {
+            this.level.pufferFish.splice(i, 1);
+        }, 1000);
+        console.log(pufferFish);
+    }
 
     jellyFishHitAndKill(jellyFish, i) {
-        let index = this.level.jellyFish.indexOf(jellyFish);
         bubble_sound.play();
         jellyFish.hitJellyFish();
         jellyFish.jellyFishIsDead();
         this.throwingBubble.splice(i, 1);
         setTimeout(() => {
-            this.level.jellyFish.splice(index, 1);
-        }, 5000);
-        console.log(jellyFish); 
+            this.level.jellyFish.splice(i, 1);
+        }, 2500);
+        console.log(jellyFish);
     }
 
     superJellyFishHitAndKill(superJellyFish, i) {
-        let index = this.level.superJellyFish.indexOf(superJellyFish);
         bubble_sound.play();
         superJellyFish.hitSuperJellyFish();
         superJellyFish.superJellyFishIsDead();
         this.throwingBubble.splice(i, 1);
         setTimeout(() => {
-            this.level.superJellyFish.splice(index, 1);
-        }, 5000);
-        console.log(superJellyFish); 
+            this.level.superJellyFish.splice(i, 1);
+        }, 2500);
+        console.log(superJellyFish);
     }
 
     endBossHitAndKillWithStandard(endBoss, i) {
         bubble_sound.play();
         endBoss.hitEndbossWithNormalBubble();
+        this.throwingBubble.splice(i, 1);
         this.healthbarBoss.setPercentage(endBoss.bossEnergy);
         endBoss.endBossIsDead();
-        this.throwingBubble.splice(i, 1);
-        console.log(endBoss); 
+        console.log(endBoss);
     }
 
     endBossHitAndKillWithPoison(endBoss, i) {
@@ -353,42 +349,25 @@ class World {
         return this.character.attackWithFinslap(pufferFish) && this.keyboard.SPACE;
     }
 
-
-
-
-    CheckFinSlapHitPufferFish(i) {        
-        this.level.pufferFish.forEach((pufferFish) => {            
-            if (this.characterAttackPufferFish(pufferFish)) {                
-                this.pufferFishHitAndKill(pufferFish);                               
+    CheckFinSlapHitPufferFish(i) {
+        this.level.pufferFish.forEach((pufferFish) => {
+            if (this.characterAttackPufferFish(pufferFish) && !this.level.pufferFish.alreadyHitten) {
+                this.resetAlreadyHittenPufferFish();
+                this.pufferFishHitAndKill(pufferFish, i);
             }
             this.throwingBubble.forEach((bubble) => {
                 if (bubble.isColliding(pufferFish)) {
                     this.throwingBubble.splice(i, 1);
                 }
             })
-        })
+        })        
     }
-
-
-
-    pufferFishHitAndKill(pufferFish) {   
-        let i = this.level.pufferFish.indexOf(pufferFish);     
-        slap_sound.play();
-        pufferFish.hitPufferFish();        
-        pufferFish.pufferFishIsDead(); 
-        setTimeout(() => {
-            this.level.pufferFish.splice(i, 1);
-        }, 2500);  
-        console.log(pufferFish);                                                
-    }
-
-
-    
 
     CheckBubbleHitNormalJelly(i) {
         this.level.jellyFish.forEach((jellyFish) => {
             this.throwingBubble.forEach((bubble) => {
-                if (bubble.isColliding(jellyFish)) {
+                if (bubble.isColliding(jellyFish) && !this.alreadyHitten) {
+                    this.resetAlreadyHittenJellyFish();
                     this.jellyFishHitAndKill(jellyFish, i);
                 }
             })
@@ -398,7 +377,8 @@ class World {
     CheckBubbleHitSuperJelly(i) {
         this.level.superJellyFish.forEach((superJellyFish) => {
             this.throwingBubble.forEach((bubble) => {
-                if (bubble.isColliding(superJellyFish)) {
+                if (bubble.isColliding(superJellyFish) && !this.alreadyHitten) {
+                    this.resetAlreadyHittenSuperJellyFish();
                     this.superJellyFishHitAndKill(superJellyFish, i);
                 }
             })
@@ -408,11 +388,11 @@ class World {
     CheckPoisonBubbleHitEndboss(i) {
         if (this.characterIsNotInRange()) {
             return;
-        } 
+        }
         this.character.hadFirstContact = true;
         this.level.endBoss.forEach((endBoss) => {
-            this.endBossHitWithStandardBubble(endBoss, i); 
-            this.endbossHitWithPoisonBubble(endBoss, i); 
+            this.endBossHitWithStandardBubble(endBoss, i);
+            this.endbossHitWithPoisonBubble(endBoss, i);
         })
     }
 
@@ -422,7 +402,7 @@ class World {
 
     endBossHitWithStandardBubble(endBoss, i) {
         this.throwingBubble.forEach((bubble) => {
-            if (bubble.isColliding(endBoss)) {
+            if (bubble.isColliding(endBoss) && !this.level.endBoss.alreadyHitten) {
                 this.endBossHitAndKillWithStandard(endBoss, i);
             }
         })
@@ -430,12 +410,32 @@ class World {
 
     endbossHitWithPoisonBubble(endBoss, i) {
         this.throwingPoisonBubble.forEach((poisonBubble) => {
-            if (poisonBubble.isColliding(endBoss)) {
+            if (poisonBubble.isColliding(endBoss) && !this.level.endBoss.alreadyHitten) {
                 this.endBossHitAndKillWithPoison(endBoss, i);
             }
         })
     }
-   
+
+    resetAlreadyHittenPufferFish() {
+        this.level.pufferFish.alreadyHitten = true;
+        setTimeout(() => {
+            this.level.pufferFish.alreadyHitten = false;
+        }, 400);
+    }  
+
+    resetAlreadyHittenJellyFish() {
+        this.level.jellyFish.alreadyHitten = true;
+        setTimeout(() => {
+            this.level.jellyFish.alreadyHitten = false;
+        }, 400);
+    }  
+
+    resetAlreadyHittenSuperJellyFish() {
+        this.level.superJellyFish.alreadyHitten = true;
+        setTimeout(() => {
+            this.level.superJellyFish.alreadyHitten = false;
+        }, 400);
+    }  
 
 
 }

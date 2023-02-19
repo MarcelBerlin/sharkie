@@ -170,7 +170,7 @@ class MovableObject extends DrawableObject {
     }
 
     hitEndbossWithNormalBubble() {
-        this.bossEnergy -= 5;
+        this.bossEnergy -= 2;
         if (this.bossEnergy <= 0) {
             this.bossEnergy = 0;
         } else {
