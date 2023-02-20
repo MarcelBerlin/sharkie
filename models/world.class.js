@@ -279,7 +279,7 @@ class World {
         pufferFish.pufferFishIsDead();
         setTimeout(() => {
             this.level.pufferFish.splice(i, 1);
-        }, 1000);
+        }, 3000);
         console.log(pufferFish);
     }
 
@@ -290,7 +290,7 @@ class World {
         this.throwingBubble.splice(i, 1);
         setTimeout(() => {
             this.level.jellyFish.splice(i, 1);
-        }, 2500);
+        }, 3000);
         console.log(jellyFish);
     }
 
@@ -301,7 +301,7 @@ class World {
         this.throwingBubble.splice(i, 1);
         setTimeout(() => {
             this.level.superJellyFish.splice(i, 1);
-        }, 2500);
+        }, 3000);
         console.log(superJellyFish);
     }
 
@@ -403,6 +403,7 @@ class World {
     endBossHitWithStandardBubble(endBoss, i) {
         this.throwingBubble.forEach((bubble) => {
             if (bubble.isColliding(endBoss) && !this.level.endBoss.alreadyHitten) {
+                this.resetAlreadyHittenEndboss();
                 this.endBossHitAndKillWithStandard(endBoss, i);
             }
         })
@@ -411,6 +412,7 @@ class World {
     endbossHitWithPoisonBubble(endBoss, i) {
         this.throwingPoisonBubble.forEach((poisonBubble) => {
             if (poisonBubble.isColliding(endBoss) && !this.level.endBoss.alreadyHitten) {
+                this.resetAlreadyHittenEndboss();
                 this.endBossHitAndKillWithPoison(endBoss, i);
             }
         })
@@ -437,5 +439,11 @@ class World {
         }, 400);
     }  
 
+    resetAlreadyHittenEndboss() {
+        this.level.endBoss.alreadyHitten = true;
+        setTimeout(() => {
+            this.level.endBoss.alreadyHitten = false;
+        }, 400);
+    }  
 
 }
