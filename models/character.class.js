@@ -239,7 +239,7 @@ class Character extends MovableObject {
     }
 
     canSwimDown() {
-        return this.world.keyboard.DOWN && this.y <= this.max_Y - 75;
+        return this.world.keyboard.DOWN && this.y <= this.max_Y - 55;
     }
 
     canAttack() {
